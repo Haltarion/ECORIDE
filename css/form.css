@@ -73,7 +73,7 @@ label {
 }
 
 .covoiturages__button {
-  width: 100%;
+  width: auto;
   display: flex;
   flex-direction: row-reverse;
 }
