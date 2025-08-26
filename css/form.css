@@ -45,11 +45,11 @@ label {
 .component__input-date__container div {
   display: grid;
   grid-template-rows: 1fr 2fr;
-  grid-template-columns: 1fr;
   background-color: green;
 }
 .component__input-date__container input {
   width: auto;
+  min-width: 0;
 }
 
 /* Style pour le message d'erreur -------------------------------*/
