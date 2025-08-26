@@ -55,6 +55,7 @@ button {
   color: var(--white-color);
   background-color: var(--main-color);
   font-size: 18px;
+  cursor: pointer;
 }
 
 /* Style pour les inputs */
