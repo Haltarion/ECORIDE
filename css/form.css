@@ -78,13 +78,13 @@ label {
   flex-direction: row-reverse;
 }
 
-/* Input pour les écrans mobile ------------------------------- */
+/* Style pour les écrans mobile ------------------------------- */
 @media screen and (max-width: 699px) {
   input {
     width: -webkit-fill-available;
   }
 }
-/* Input pour les écrans desktop ----------------------------------- */
+/* Style pour les écrans desktop ----------------------------------- */
 @media screen and (min-width: 700px) {
   input {
     width: 300px;
