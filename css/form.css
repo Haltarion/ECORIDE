@@ -74,6 +74,7 @@ label {
 
 .covoiturages__button {
   width: 350px;
+  padding: 16px;
   display: flex;
   flex-direction: row-reverse;
 }
