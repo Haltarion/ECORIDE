@@ -53,6 +53,6 @@
     </div>
     <div class="covoiturages__button">
             <?php include '../components/clicable/button.php' ?>
-        </div>
+    </div>
     
 <?php include '../common/footer.php'; ?>
