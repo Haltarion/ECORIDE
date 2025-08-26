@@ -3,7 +3,7 @@ fieldset {
   border: 1px solid var(--grey-color);
   border-radius: 8px;
   padding: 16px;
-  width: 350px;
+  width: 400px;
   gap: 30px;
   display: flex;
   flex-direction: column;
