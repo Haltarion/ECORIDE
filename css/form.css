@@ -37,7 +37,7 @@ legend {
 .component__input-text {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 /* Style pour les inputs date -----------------------------------*/
