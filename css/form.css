@@ -13,7 +13,9 @@ legend {
   font-size: var(--font-h2);
   font-weight: bold;
 }
-
+label {
+  margin-bottom: 8px;
+}
 /* Style pour les inputs text -----------------------------------*/
 .component__input-text {
   display: flex;
