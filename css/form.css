@@ -1,3 +1,4 @@
+/* Style pour les fieldsets -----------------------------------*/
 fieldset {
   border: 1px solid var(--grey-color);
   border-radius: 8px;
@@ -13,7 +14,8 @@ legend {
   font-size: var(--font-h2);
   font-weight: bold;
 }
-label {
+
+Style pour les commponents de formulaire ------------------------*/ label {
   margin-bottom: 8px;
 }
 /* Style pour les inputs text -----------------------------------*/
