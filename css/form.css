@@ -6,6 +6,20 @@
     padding: 16px;
     margin-bottom: 16px;
     width: fit-content;
+    display: grid;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 30px;
+  }
+}
+/* Affichage pour les écrans desktop ----------------------------------- */
+@media screen and (min-width: 700px) {
+  fieldset {
+    border: 1px solid var(--grey-color);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    width: fit-content;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
