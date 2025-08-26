@@ -7,7 +7,7 @@
     margin-bottom: 16px;
     width: fit-content;
     display: grid;
-
+    grid-template-rows: 1fr 1fr;
     justify-content: flex-start;
     gap: 30px;
   }
