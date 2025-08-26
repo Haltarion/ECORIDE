@@ -67,7 +67,7 @@ input {
 
 /* Style pour la page de covoiturage */
 .covoiturages {
-  width: 100%;
+  width: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
