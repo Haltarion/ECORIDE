@@ -44,10 +44,8 @@ label {
 }
 
 .component__input-date__container div {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 0; /* Chaque div prend une part égale de l'espace */
-  min-width: 0; /* Permet le rétrécissement si nécessaire */
+  display: grid;
+  grid-template-rows: 1fr 2fr;
 }
 .component__input-date__container input {
   width: auto;
