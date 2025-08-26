@@ -37,7 +37,7 @@ label {
 
 .component__input-date__container {
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 8px;
   width: 100%; /* Prend toute la largeur du parent */
   box-sizing: border-box; /* Inclut le padding/border dans la largeur */
