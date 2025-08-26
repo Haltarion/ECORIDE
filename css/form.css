@@ -73,7 +73,7 @@ label {
 }
 
 button {
-  background-color: var(--green-color);
+  background-color: var(--main-color);
 }
 
 /* Affichage pour les écrans mobile ------------------------------- */
