@@ -15,7 +15,8 @@ legend {
   font-weight: bold;
 }
 
-Style pour les commponents de formulaire ------------------------*/ label {
+/* Style pour les commponents de formulaire ---------------------*/
+label {
   margin-bottom: 8px;
 }
 /* Style pour les inputs text -----------------------------------*/
@@ -35,9 +36,8 @@ Style pour les commponents de formulaire ------------------------*/ label {
 }
 
 .component__input-date__container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
   gap: 8px;
   width: 100%; /* Prend toute la largeur du parent */
   box-sizing: border-box; /* Inclut le padding/border dans la largeur */
