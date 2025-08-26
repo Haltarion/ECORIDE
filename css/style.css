@@ -38,7 +38,7 @@ body {
   flex-direction: column;
   gap: 20px;
   align-items: center;
-  margin: 60px 0px 30px 0px;
+  margin: 60px 0px 58px 0px;
   padding: 30px 30px;
   position: relative;
 }
@@ -106,26 +106,4 @@ p {
 
 a {
   color: var(--link-color);
-}
-
-/* Style pour les écrans mobile ------------------------------- */
-@media screen and (max-width: 699px) {
-  /* Style pour la page de covoiturage */
-  .covoiturages {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-/* Style pour les écrans desktop ----------------------------------- */
-@media screen and (min-width: 700px) {
-  /* Style pour la page de covoiturage */
-  .covoiturages {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
 }

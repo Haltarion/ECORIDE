@@ -1,6 +1,6 @@
 /* Style pour la page de covoiturage */
 .covoiturages {
-  width: auto;
+  width: 100%;
   gap: 15px;
   padding: 15px;
 }
@@ -46,8 +46,7 @@ label {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 8px;
-  width: 100%; /* Prend toute la largeur du parent */
-  box-sizing: border-box; /* Inclut le padding/border dans la largeur */
+  width: 100%;
 }
 .component__input-date__container div {
   display: flex;
@@ -60,15 +59,16 @@ label {
 
 /* Style pour le message d'erreur -------------------------------*/
 .component__alerte__icon svg {
-  width: 12px;
-  height: 12px;
+  width: 15px;
+  height: 15px;
   stroke: var(--red-color);
+  margin-top: 3px;
 }
 
 .component__alerte {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   gap: 4px;
   color: var(--red-color);
   margin-top: 4px;
@@ -78,6 +78,10 @@ label {
 .component__alerte p {
   margin-block: 0;
 }
+.component__alerte ul {
+  margin-block: 0;
+  margin-left: 20px;
+}
 
 .container__button {
   width: 100%;
@@ -86,14 +90,30 @@ label {
   padding: 0px 15px;
 }
 
-/* Style pour les écrans mobile ------------------------------- */
-@media screen and (max-width: 699px) {
+/* Style pour les écrans mobile ------------------------------------ */
+@media screen and (max-width: 749px) {
+  /* Style pour la page de covoiturage */
+  .covoiturages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   input {
     width: -webkit-fill-available;
   }
 }
 /* Style pour les écrans desktop ----------------------------------- */
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 750px) {
+  /* Style pour la page de covoiturage */
+  .covoiturages {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
   input {
     width: 300px;
   }
