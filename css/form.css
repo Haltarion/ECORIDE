@@ -16,7 +16,7 @@ legend {
 .component__input-text {
   display: flex;
   flex-direction: column;
-
+  justify-content: end;
   align-items: flex-start;
 }
 
