@@ -49,10 +49,10 @@
             include '../components/form/input-date.php';
             ?>
         </fieldset>
-        
-    </div>
-    <div class="container__button">
+        <div class="container__button">
             <?php include '../components/clicable/button.php' ?>
     </div>
+    </div>
+    
     
 <?php include '../common/footer.php'; ?>
