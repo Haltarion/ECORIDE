@@ -12,7 +12,9 @@ fieldset {
 /* Input pour les écrans mobile ------------------------------- */
 @media screen and (max-width: 699px) {
   fieldset {
-    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
