@@ -53,6 +53,11 @@ input {
   padding: 15px;
 }
 
+.covoiturages div {
+  display: grid;
+  grid-template-row: 1fr 2fr 1fr;
+}
+
 /* Style pour le pied de page */
 footer {
   bottom: 0px;
