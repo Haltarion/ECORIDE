@@ -5,22 +5,10 @@ fieldset {
   padding: 16px;
   width: 100%;
   gap: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
-/* Fieldset pour les écrans mobile ------------------------------- */
-@media screen and (max-width: 699px) {
-  fieldset {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-/* Fieldset pour les écrans desktop ----------------------------------- */
-@media screen and (min-width: 700px) {
-  fieldset {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-  }
 
 legend {
   font-size: var(--font-h2);
