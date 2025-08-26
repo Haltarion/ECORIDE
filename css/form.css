@@ -5,7 +5,7 @@ fieldset {
   width: 100%;
   gap: 30px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   align-items: flex-end;
   justify-content: flex-start;
