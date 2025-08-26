@@ -41,13 +41,11 @@ label {
   gap: 8px;
   width: 100%; /* Prend toute la largeur du parent */
   box-sizing: border-box; /* Inclut le padding/border dans la largeur */
+  background-color: green;
 }
 .component__input-date__container div {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 0; /* Chaque div prend une part égale de l'espace */
-  min-width: 0; /* Permet le rétrécissement si nécessaire */
-  background-color: green;
+  display: grid;
+  grid-template-rows: 1fr 2fr;
 }
 .component__input-date__container input {
   width: auto;
