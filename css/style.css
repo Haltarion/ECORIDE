@@ -62,7 +62,7 @@ input {
   border: 1px solid var(--grey-color);
   border-radius: 4px;
   font-size: var(--font-p);
-  padding: 10px;
+  padding: 8px 10px;
 }
 
 /* Style pour la page de covoiturage */
