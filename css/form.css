@@ -4,11 +4,16 @@ fieldset {
   border-radius: 8px;
   padding: 16px;
   width: 100%;
-  max-width: 420px;
   gap: 30px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+/* Input pour les écrans mobile ------------------------------- */
+@media screen and (max-width: 699px) {
+  fieldset {
+    max-width: 420px;
+  }
 }
 
 legend {
