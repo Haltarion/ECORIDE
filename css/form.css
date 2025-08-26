@@ -4,6 +4,11 @@ fieldset {
   padding: 16px;
   width: fit-content;
   gap: 30px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: flex-start;
 }
 
 legend {
@@ -67,11 +72,6 @@ legend {
 
 /* Affichage pour les écrans mobile ------------------------------- */
 @media screen and (max-width: 699px) {
-  fieldset {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-  }
-
   input {
     width: -webkit-fill-available;
   }
@@ -83,10 +83,6 @@ legend {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-end;
-    justify-content: flex-start;
-  }
-
-  .component__input-text > :first-child {
     justify-content: flex-start;
   }
 
