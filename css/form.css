@@ -6,6 +6,65 @@ fieldset {
   width: fit-content;
   gap: 30px;
 }
+
+legend {
+  font-size: var(--font-h2);
+  font-weight: bold;
+}
+
+/* Style pour les inputs text -----------------------------------*/
+.component__input-text {
+  display: grid;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Style pour les inputs date -----------------------------------*/
+.component__input-date {
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
+}
+
+.component__input-date__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  width: 100%; /* Prend toute la largeur du parent */
+  box-sizing: border-box; /* Inclut le padding/border dans la largeur */
+}
+
+.component__input-date__container div {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0; /* Chaque div prend une part égale de l'espace */
+  min-width: 0; /* Permet le rétrécissement si nécessaire */
+}
+.component__input-date__container input {
+  width: auto;
+}
+
+/* Style pour le message d'erreur -------------------------------*/
+.component__alerte__icon svg {
+  width: 12px;
+  height: 12px;
+  stroke: var(--red-color);
+}
+
+.component__alerte {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  color: var(--red-color);
+  margin-top: 4px;
+  visibility: visible; /* Masqué par défaut */
+}
+
+.component__alerte p {
+  margin-block: 0;
+}
+
 /* Affichage pour les écrans mobile ------------------------------- */
 @media screen and (max-width: 699px) {
   fieldset {
@@ -29,59 +88,4 @@ fieldset {
   input {
     width: 300px;
   }
-}
-
-legend {
-  font-size: var(--font-h2);
-  font-weight: bold;
-}
-
-/* Style pour les inputs text -----------------------------------*/
-.component__input-text {
-  display: grid;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-/* Style pour les inputs date -----------------------------------*/
-.component__input-date {
-  display: grid;
-  grid-template-rows: 1fr 2fr 1fr;
-}
-.component__input-date__container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-  width: 100%; /* Prend toute la largeur du parent */
-  box-sizing: border-box; /* Inclut le padding/border dans la largeur */
-}
-.component__input-date__container div {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 0; /* Chaque div prend une part égale de l'espace */
-  min-width: 0; /* Permet le rétrécissement si nécessaire */
-}
-.component__input-date__container input {
-  width: auto;
-}
-/* Style pour le message d'erreur -------------------------------*/
-.component__alerte__icon svg {
-  width: 12px;
-  height: 12px;
-  stroke: var(--red-color);
-}
-
-.component__alerte {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 4px;
-  color: var(--red-color);
-  margin-top: 4px;
-  visibility: visible; /* Masqué par défaut */
-}
-
-.component__alerte p {
-  margin-block: 0;
 }
