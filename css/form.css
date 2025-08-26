@@ -2,7 +2,6 @@ fieldset {
   border: 1px solid var(--grey-color);
   border-radius: 8px;
   padding: 16px;
-  margin-bottom: 16px;
   width: fit-content;
   gap: 30px;
 }
@@ -86,6 +85,7 @@ legend {
     align-items: flex-end;
     justify-content: flex-start;
   }
+
   input {
     width: 300px;
   }
