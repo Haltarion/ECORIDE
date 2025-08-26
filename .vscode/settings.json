@@ -2,6 +2,7 @@
   "php.validate.executablePath": "C:\\php\\php.exe",
   "workbench.colorTheme": "GitHub Dark Colorblind (Beta)",
   "workbench.iconTheme": "material-icon-theme",
+  "editor.detectIndentation": false,
   "editor.tabSize": 1,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
