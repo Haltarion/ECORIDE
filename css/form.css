@@ -43,7 +43,7 @@ label {
   box-sizing: border-box; /* Inclut le padding/border dans la largeur */
 }
 .component__input-date__container div {
-  display: grid;
+  display: flex;
   flex-direction: column;
   flex: 1 1 0; /* Chaque div prend une part égale de l'espace */
   min-width: 0; /* Permet le rétrécissement si nécessaire */
