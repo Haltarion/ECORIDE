@@ -7,7 +7,7 @@
     margin-bottom: 16px;
     width: fit-content;
     display: grid;
-    align-items: flex-end;
+
     justify-content: flex-start;
     gap: 30px;
   }
