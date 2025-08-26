@@ -40,9 +40,12 @@ body {
 button {
   display: flex;
   flex-direction: row;
-
+  align-items: center;
   height: 40px;
   padding: 0px 20px;
+  border: none;
+  border-radius: 20%;
+  color: var(--white-color);
   background-color: var(--main-color);
 }
 
