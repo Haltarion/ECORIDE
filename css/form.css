@@ -72,12 +72,6 @@ label {
   margin-block: 0;
 }
 
-button {
-  height: 40px;
-  padding: 20px 0px;
-  background-color: var(--main-color);
-}
-
 /* Affichage pour les écrans mobile ------------------------------- */
 @media screen and (max-width: 699px) {
   input {
