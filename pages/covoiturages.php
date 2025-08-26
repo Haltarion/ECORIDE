@@ -49,7 +49,7 @@
             include '../components/form/input-date.php';
             ?>
         </fieldset>
-        <button>Valider</button>
+        
     </div>
     
 <?php include '../common/footer.php'; ?>
