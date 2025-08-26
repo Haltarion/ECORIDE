@@ -43,10 +43,6 @@ label {
   box-sizing: border-box; /* Inclut le padding/border dans la largeur */
 }
 
-.component__input-date__container div {
-  display: grid;
-  grid-template-rows: 1fr 2fr;
-}
 .component__input-date__container input {
   width: auto;
 }
