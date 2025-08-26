@@ -47,6 +47,7 @@ button {
   border-radius: 20px;
   color: var(--white-color);
   background-color: var(--main-color);
+  font-size: 18px;
 }
 
 /* Style pour les inputs */
