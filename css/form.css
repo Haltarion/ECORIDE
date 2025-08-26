@@ -42,9 +42,8 @@ legend {
 
 /* Style pour les inputs date -----------------------------------*/
 .component__input-date {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
   width: 100%; /* Prend toute la largeur disponible */
   max-width: 500px; /* Optionnel : limite la largeur sur desktop */
   box-sizing: border-box;
