@@ -36,6 +36,16 @@ body {
   position: relative;
 }
 
+/* Style pour les boutons */
+button {
+  display: flex;
+  flex-direction: row;
+
+  height: 40px;
+  padding: 0px 20px;
+  background-color: var(--main-color);
+}
+
 /* Style pour les inputs */
 input {
   border: 1px solid var(--grey-color);
