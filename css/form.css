@@ -86,6 +86,10 @@ legend {
     justify-content: flex-start;
   }
 
+  .component__input-text > :first-child {
+    justify-content: flex-start;
+  }
+
   input {
     width: 300px;
   }
