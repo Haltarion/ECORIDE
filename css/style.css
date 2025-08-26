@@ -119,13 +119,10 @@ a {
 @media screen and (max-width: 699px) {
   /* Style pour la page de covoiturage */
   .covoiturages {
-    width: auto;
     display: flex;
     flex-direction: column;
-    gap: 15px;
     align-items: center;
     justify-content: center;
-    padding: 15px;
   }
 }
 
@@ -133,12 +130,9 @@ a {
 @media screen and (min-width: 700px) {
   /* Style pour la page de covoiturage */
   .covoiturages {
-    width: auto;
     display: flex;
     flex-direction: row;
-    gap: 15px;
     align-items: center;
     justify-content: center;
-    padding: 15px;
   }
 }
