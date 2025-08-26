@@ -1,0 +1,89 @@
+/* Définition des variables de couleur et de police */
+:root {
+  --main-color: #1d4e19;
+  --border-color: #704021;
+  --background-button: #70412125;
+  --link-color: #526b94;
+  --white-color: #fef5ef;
+  --nav-color: #fef5ef;
+  --red-color: #810505;
+  --grey-color: #b9b7b7;
+  --black-color: #000000;
+  --font-h1: 24px;
+  --font-h2: 16px;
+  --font-p: 14px;
+  --font-nav: 18px;
+}
+
+/* Style général de la page */
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--black-color);
+  background-color: var(--white-color);
+  padding: 0%;
+  margin: 0%;
+}
+
+/* Style pour le corps de la page */
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin: 80px 0px 30px 0px;
+  padding: 30px 30px;
+  position: relative;
+}
+
+/* Style pour la page de covoiturage */
+.covoiturages {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: flex-start;
+  padding: 15px;
+}
+
+/* Style pour le pied de page */
+footer {
+  bottom: 0px;
+  padding: 20px 30px;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: auto;
+}
+
+.footer {
+  color: var(--white-color);
+}
+
+/* Style pour le logo */
+.logo {
+  border-radius: 50px;
+  width: 45px;
+  height: 45px;
+}
+
+/* Style pour les titres et les paragraphes */
+h1 {
+  font-size: var(--font-h1);
+  font-weight: bold;
+  text-align: center;
+}
+
+h2 {
+  font-size: var(--font-h2);
+  font-weight: bold;
+}
+
+p {
+  font-size: var(--font-p);
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+a {
+  color: var(--link-color);
+}

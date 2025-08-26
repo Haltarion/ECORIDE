@@ -1,0 +1,86 @@
+fieldset {
+  border: 1px solid var(--grey-color);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 30px;
+}
+
+legend {
+  font-size: var(--font-h2);
+  font-weight: bold;
+}
+
+/* Style pour les inputs text -----------------------------------*/
+.component__input-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Style pour les inputs date -----------------------------------*/
+.component__input-date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%; /* Prend toute la largeur disponible */
+  max-width: 500px; /* Optionnel : limite la largeur sur desktop */
+  box-sizing: border-box;
+}
+.component__input-date__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  width: 100%; /* Prend toute la largeur du parent */
+  box-sizing: border-box; /* Inclut le padding/border dans la largeur */
+}
+.component__input-date__container div {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0; /* Chaque div prend une part égale de l'espace */
+  min-width: 0; /* Permet le rétrécissement si nécessaire */
+}
+.component__input-date__container input {
+  width: auto;
+}
+/* Style pour le message d'erreur -------------------------------*/
+.component__alerte__icon svg {
+  width: 12px;
+  height: 12px;
+  stroke: var(--red-color);
+}
+
+.component__alerte {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  color: var(--red-color);
+  margin-top: 4px;
+  visibility: visible; /* Masqué par défaut */
+}
+
+.component__alerte p {
+  margin-block: 0;
+}
+
+/* Style pour les écrans mobile ----------------------------------- */
+@media screen and (max-width: 699px) {
+  input {
+    width: -webkit-fill-available;
+  }
+}
+
+/* Style pour les écrans desktop ----------------------------------- */
+@media screen and (min-width: 700px) {
+  input {
+    width: 300px;
+  }
+}
