@@ -24,8 +24,10 @@ legend {
 
 /* Style pour les inputs date -----------------------------------*/
 .component__input-date {
-  display: grid;
-  grid-template-rows: 1fr 2fr 1fr;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .component__input-date__container {
