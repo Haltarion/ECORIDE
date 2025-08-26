@@ -51,7 +51,7 @@
         </fieldset>
         
     </div>
-    <div class="covoiturages__button">
+    <div class="container__button">
             <?php include '../components/clicable/button.php' ?>
     </div>
     
