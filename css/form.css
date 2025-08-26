@@ -6,7 +6,6 @@ fieldset {
   gap: 30px;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   align-items: flex-end;
   justify-content: flex-start;
 }
