@@ -12,6 +12,10 @@ fieldset {
     display: grid;
     grid-template-rows: 1fr 1fr;
   }
+
+  input {
+    width: -webkit-fill-available;
+  }
 }
 /* Affichage pour les écrans desktop ----------------------------------- */
 @media screen and (min-width: 700px) {
@@ -21,6 +25,9 @@ fieldset {
     flex-wrap: wrap;
     align-items: flex-end;
     justify-content: flex-start;
+  }
+  input {
+    width: 300px;
   }
 }
 
@@ -77,18 +84,4 @@ legend {
 
 .component__alerte p {
   margin-block: 0;
-}
-
-/* Style pour les écrans mobile ----------------------------------- */
-@media screen and (max-width: 699px) {
-  input {
-    width: -webkit-fill-available;
-  }
-}
-
-/* Style pour les écrans desktop ----------------------------------- */
-@media screen and (min-width: 700px) {
-  input {
-    width: 300px;
-  }
 }
