@@ -51,6 +51,7 @@ input {
   gap: 15px;
   align-items: center;
   padding: 15px;
+  background-color: red;
 }
 
 /* Style pour le pied de page */
