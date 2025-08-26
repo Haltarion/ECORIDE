@@ -79,13 +79,13 @@ label {
   padding: 0px 16px;
 }
 
-/* Affichage pour les écrans mobile ------------------------------- */
+/* Input pour les écrans mobile ------------------------------- */
 @media screen and (max-width: 699px) {
   input {
     width: -webkit-fill-available;
   }
 }
-/* Affichage pour les écrans desktop ----------------------------------- */
+/* Input pour les écrans desktop ----------------------------------- */
 @media screen and (min-width: 700px) {
   input {
     width: 300px;
