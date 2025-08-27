@@ -1,6 +1,7 @@
 /* Style pour la page de covoiturage */
 .covoiturages {
   width: 100%;
+  width: -webkit-fill-available;
   gap: 15px;
   padding: 15px;
 }
@@ -11,6 +12,7 @@ fieldset {
   border-radius: 8px;
   padding: 16px;
   width: 100%;
+  width: -webkit-fill-available;
   gap: 30px;
   display: flex;
   flex-direction: column;
@@ -18,7 +20,7 @@ fieldset {
 }
 
 legend {
-  font-size: var(--font-h2);
+  font-size: var(--fs-h2);
   font-weight: bold;
 }
 
@@ -32,6 +34,7 @@ label {
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+  width: -webkit-fill-available;
 }
 
 /* Style pour les inputs date -----------------------------------*/
@@ -40,6 +43,7 @@ label {
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+  width: -webkit-fill-available;
 }
 
 .component__input-date__container {
@@ -47,6 +51,7 @@ label {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 8px;
   width: 100%;
+  width: -webkit-fill-available;
 }
 .component__input-date__container div {
   display: flex;
@@ -83,8 +88,9 @@ label {
   margin-left: 20px;
 }
 
-.container__button {
+.covoiturages__container__button {
   width: 100%;
+  width: -webkit-fill-available;
   display: flex;
   flex-direction: row-reverse;
   padding: 0px 15px;
@@ -101,6 +107,7 @@ label {
   }
 
   input {
+    width: 100%;
     width: -webkit-fill-available;
   }
 }

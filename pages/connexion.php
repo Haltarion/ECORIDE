@@ -5,4 +5,7 @@
       include '../components/form/input-email.php';
     ?>
     <?php include '../components/form/input-mdp.php'; ?>
+    <div class="container__button">
+        <?php include '../components/clicable/button.php' ?>
+    </div>
 <?php include '../common/footer.php'; ?>

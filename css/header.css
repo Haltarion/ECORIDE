@@ -4,6 +4,7 @@ footer {
   position: fixed;
   left: 0%;
   width: 100%;
+  width: -webkit-fill-available;
   background-color: var(--main-color);
   display: flex;
   flex-direction: row;
@@ -82,7 +83,7 @@ header {
     color: var(--main-color);
     text-decoration: none;
     font-weight: bold;
-    font-size: var(--font-nav);
+    font-size: var(--fs-nav);
   }
 
   .header__burger svg {
@@ -120,7 +121,7 @@ header {
   }
 
   .header__nav__menu__link {
-    margin-right: 12px;
+    margin-right: 2em;
   }
 
   .header__nav__menu__link:last-of-type {
@@ -149,6 +150,7 @@ header {
 
   .header__nav__menu__link a:hover::after {
     width: 100%;
+    width: -webkit-fill-available;
     left: 0;
   }
 
@@ -160,6 +162,7 @@ header {
   /* Style pour l'image de la page d'accueil */
   .index__image-accueil {
     width: 100%;
+    width: -webkit-fill-available;
     max-width: 600px;
     height: auto;
     border-radius: 10px;
