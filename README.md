@@ -6,7 +6,7 @@ J’utilise **Git** pour suivre l’évolution de mon code, versionner les diff�
 
 Je travaille principalement sur **GitHub**, où je suis une stratégie de branches simple mais efficace :
 
-- La branche **`Dev`** est celle sur laquelle je développe de nouvelles fonctionnalités.
+- La branche **`developpement`** est celle sur laquelle je développe de nouvelles fonctionnalités.
 - Une fois qu’une fonctionnalité est testée et fonctionnelle, je la **merge** manuellement dans la branche **`main`**, qui représente la version stable du projet.
 
 ## 🖥️ Éditeur de code
@@ -16,7 +16,11 @@ J’utilise **Visual Studio Code (VSCode)** comme éditeur principal. Il est lé
 - **Color Highlight** : met en surbrillance les couleurs écrites en hexadécimal ou en nom (utile pour le CSS).
 - **Auto Rename Tag** : modifie automatiquement la balise de fermeture lorsqu’on change la balise d’ouverture (et inversement).
 - **GitLens** : améliore l'intégration Git dans VSCode en affichant l’historique des modifications ligne par ligne.
-- **Copilot** : m’aide à gagner du temps en suggérant du code en fonction de ce que j’écris.
+- **GitHub Copilot** : m’aide à gagner du temps en suggérant du code en fonction de ce que j’écris.
+- **ESLint** : permet d'afficher les erreurs directement dans l'application
+- **Error Lens** : affiche les erreurs en surligné
+- **Material Icon Theme** : pour le confort visuel
+- **Prettier** : pour le confort visuel
 
 ## 💾 Installation et utilisation
 
@@ -25,6 +29,7 @@ J’utilise **Visual Studio Code (VSCode)** comme éditeur principal. Il est lé
 - Installer [Git](https://git-scm.com/)
 - Créer un compte [GitHub](https://github.com/)
 - Installer [Visual Studio Code](https://code.visualstudio.com/)
+- Installer [Node.js](https://nodejs.org/fr)
 
 ### Installation de l’environnement
 
@@ -42,3 +47,7 @@ J’utilise **Visual Studio Code (VSCode)** comme éditeur principal. Il est lé
     git checkout main
     git merge Dev
     git push origin main
+## 👅 Langages utilisés
+- HTML / PHP
+- CSS
+- TypeScript / JavaScript
