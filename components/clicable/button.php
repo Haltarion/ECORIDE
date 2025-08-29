@@ -1,1 +1,1 @@
-<button class="component__button">Valider</button>
+<button class="component__button"><?= $buttonText ?></button>

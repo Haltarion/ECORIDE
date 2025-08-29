@@ -1,5 +1,6 @@
-
-<?php include './common/header.php'; ?>
+<?php include './common/head.php'; ?>
+<body class="index_body">
+  <?php include './common/header.php'; ?>
   <h1>Accueil</h1>
   <div class="index__barre-recherche">
     <input type="text" placeholder="Rechercher un covoiturage...">
@@ -15,9 +16,10 @@
     <p>En choisissant ECORIDE, vous participez à un covoiturage nouvelle génération, où chaque kilomètre parcouru est une petite victoire pour la planète.</p>
     <p>Mais ECORIDE, ce n’est pas seulement une question de transport.C’est aussi l’occasion de rencontrer de nouvelles personnes, d’échanger un sourire, une discussion… et parfois même de créer des liens durables.</p>
 
-Parce que se déplacer peut rimer avec respect et convivialité, nous vous invitons à rejoindre la communauté ECORIDE dès aujourd’hui.
+    <p>Parce que se déplacer peut rimer avec respect et convivialité, nous vous invitons à rejoindre la communauté ECORIDE dès aujourd’hui.</p>
 
-Roulez vert, roulez ensemble ! 🌍</div>
-
+    <p>Roulez vert, roulez ensemble ! 🌍</p>
+  </div>
+</body>
 <?php include './common/footer.php'; ?>
 

@@ -30,7 +30,7 @@
 /* Style pour les écrans desktop ----------------------------------- */
 @media screen and (min-width: 750px) {
   :root {
-    --fs-h1: 68px;
+    --fs-h1: 60px;
     --fs-h2: 35px;
     --fs-p: 18px;
     --fs-p2: 16px;

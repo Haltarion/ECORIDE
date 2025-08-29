@@ -1,4 +1,8 @@
-<?php include '../common/header.php'; ?>
+<?php include '../common/head.php'; ?>
+
+<body class="covoiturages__body">
+  
+  <?php include '../common/header.php'; ?>
 
   <h1>Rechercher un covoiturages</h1>
 
@@ -48,12 +52,15 @@
         $inputId = "dateArrivee";
         include '../components/form/input-date.php';
       ?>
-      </fieldset>
-      
-    </div>
-    <div class="covoiturages__container__button">
-        <?php include '../components/clicable/button.php' ?>
-    </div>
+    </fieldset>
     
-    
+  </div>
+  <div class="covoiturages__container__button">
+    <?php
+      $buttonText = "Valider";
+      include '../components/clicable/button.php'
+    ?>
+  </div>
+  
+</body>
 <?php include '../common/footer.php'; ?>
