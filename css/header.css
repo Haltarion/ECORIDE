@@ -91,16 +91,6 @@ header {
     width: 24px;
     height: 24px;
   }
-  /* Style pour le texte de la page d'accueil */
-  .index__text-accueil {
-    text-align: center;
-  }
-  /* Style pour l'image de la page d'accueil */
-  .index__image-accueil {
-    width: 290px;
-    height: 210px;
-    border-radius: 10px;
-  }
 }
 
 /* Affichage pour les écrans desktop ----------------------------------- */
@@ -152,19 +142,5 @@ header {
     width: 100%;
     width: -webkit-fill-available;
     left: 0;
-  }
-
-  /* Style pour le texte de la page d'accueil */
-  .index__text-accueil {
-    text-align: left;
-  }
-
-  /* Style pour l'image de la page d'accueil */
-  .index__image-accueil {
-    width: 100%;
-    width: -webkit-fill-available;
-    max-width: 600px;
-    height: auto;
-    border-radius: 10px;
   }
 }

@@ -6,13 +6,6 @@
 
   <h1 class="contact__title">Contact</h1>
 
-  <div class="contact">
-    <h2>Téléphone</h2>
-    <a href="tel:0432425262">04.32.42.52.62</a>
-    <h2>Email</h2>
-    <a href="mailto:contact@ecoride.fr">contact@ecoride.fr</a>
-  </div>
-
 </body>
 
 <?php include '../common/footer.php'; ?>

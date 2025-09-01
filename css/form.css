@@ -32,6 +32,9 @@
 .connexion__newCount {
   width: 100%;
   width: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .connexion__newCount button {
   background-color: initial;
@@ -46,6 +49,7 @@
 .connexion__separateur {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 20px;
   width: 100%;
   width: -webkit-fill-available;
@@ -53,7 +57,6 @@
 .connexion__separateur::before,
 .connexion__separateur::after {
   display: block;
-  margin: 0px 20px;
   background: var(--black-color);
   content: "";
 }
@@ -68,6 +71,7 @@ fieldset {
   gap: 30px;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   align-items: flex-start;
 }
 
@@ -199,7 +203,7 @@ input {
   .connexion {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
   }
   .connexion__separateur::before,

@@ -26,6 +26,18 @@
     --fs-p2: 14px;
     --fs-nav: 18px;
   }
+
+  /* Style pour le texte de la page d'accueil */
+  .index__text-accueil {
+    text-align: center;
+  }
+
+  /* Style pour l'image de la page d'accueil */
+  .index__image-accueil {
+    width: auto;
+    height: 210px;
+    border-radius: 10px;
+  }
 }
 /* Style pour les écrans desktop ----------------------------------- */
 @media screen and (min-width: 750px) {
@@ -35,6 +47,20 @@
     --fs-p: 18px;
     --fs-p2: 16px;
     --fs-nav: 18px;
+  }
+
+  /* Style pour le texte de la page d'accueil */
+  .index__text-accueil {
+    text-align: left;
+  }
+
+  /* Style pour l'image de la page d'accueil */
+  .index__image-accueil {
+    width: 100%;
+    width: -webkit-fill-available;
+    max-width: 600px;
+    height: auto;
+    border-radius: 10px;
   }
 }
 /* Style général de la page */
@@ -63,6 +89,7 @@ button {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   height: 35px;
   padding: 0px 20px;
   border: none;
@@ -130,4 +157,50 @@ label {
 }
 a {
   color: var(--link-color);
+}
+
+/* Style pour barre de recherche */
+.searchForm {
+  background: var(--white-color);
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: row;
+}
+
+.searchText {
+  color: var(--black-color);
+  background: transparent;
+  border: none;
+  flex-grow: 1;
+  padding: 0.25em 0.25em 0.25em 1em;
+  outline: none;
+}
+
+.searchButton {
+  padding: 0.25em 0.5em 0.25em 0.5em;
+  background: transparent;
+  stroke: var(--black-color);
+  color: var(--black-color);
+  width: 50px;
+  height: auto;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.offSrean {
+  position: absolute;
+  left: -10000px;
+}
+
+.contact {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
 }

@@ -20,5 +20,5 @@
         </div>
     </div>
     <!-- Message d'alerte --------------------------------------------->
-    <?php include '../components/form/error-alerte.php'; ?>
+    <?php include 'C:/Users/micha/OneDrive/Documents/GitHub/ECORIDE/components/form/error-alerte.php'; ?>
 </div>
