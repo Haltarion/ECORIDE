@@ -30,6 +30,7 @@ J’utilise **Visual Studio Code (VSCode)** comme éditeur principal. Il est lé
 - Créer un compte [GitHub](https://github.com/)
 - Installer [Visual Studio Code](https://code.visualstudio.com/)
 - Installer [Node.js](https://nodejs.org/fr)
+- Installer [chart.js](https://www.chartjs.org/docs/latest/getting-started/installation.html)
 
 ### Installation de l’environnement
 
@@ -51,3 +52,6 @@ J’utilise **Visual Studio Code (VSCode)** comme éditeur principal. Il est lé
 - HTML / PHP
 - CSS
 - TypeScript / JavaScript
+
+## 📚 Bibliothèques utilisées
+- chart.js : pour les graphiques de la page administrateur
