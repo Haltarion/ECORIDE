@@ -1,0 +1,30 @@
+.stars {
+  margin: 50px;
+}
+
+.stars__list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 5px;
+  text-align: center;
+  list-style: none;
+  width: 100%;
+}
+
+.stars__list__stargrey {
+  width: 15px;
+  height: 15px;
+}
+
+.stars__list__stargrey {
+  color: var(--grey-color);
+}
+
+.stars__list__staryellow {
+  color: var(--main-color);
+}
+
+.stars:hover {
+  cursor: pointer;
+}

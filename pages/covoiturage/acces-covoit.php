@@ -4,9 +4,10 @@
 
   <?php include '../../common/header.php'; ?>
 
-  <div class=acces-covoit__filtre>
-    <h1 class="acces-covoit__title">Voyages proposés</h1>
+  <div class=acces-covoit__title>
+    <h1 class="acces-covoit__title__title">Voyages proposés</h1>
   </div>
+  <?php include '../../components/clicable/filtre.php'; ?>
 
 </body>
 
