@@ -7,6 +7,7 @@
   <div class=acces-covoit__title>
     <h1 class="acces-covoit__title__title">Voyages proposés</h1>
   </div>
+  
   <?php include '../../components/clicable/filtre.php'; ?>
 
 </body>
