@@ -8,6 +8,7 @@
 /* Définition des variables de couleur et de police */
 :root {
   --main-color: #1d4e19;
+  --secondary-color: #704021;
   --border-color: #704021;
   --background-button: #70412125;
   --link-color: #526b94;
@@ -206,66 +207,18 @@ a {
   gap: 20px;
 }
 
-/* Style pour la page d'acces aux covoiturages */
-.body__acces-covoit {
-  padding: 0px 0px 30px 0px;
-  width: 100%;
-  gap: 0px;
+.body__plan_du_site ul {
+  padding-left: 20px;
 }
 
-.acces-covoit__title {
+.note {
   display: flex;
   flex-direction: row;
-  width: 100%;
-  height: 150px;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--background-color);
-}
-
-.filtre {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0px 30px;
-  background-color: var(--background-color);
-  gap: 10px;
-}
-.filtre__form {
-  width: 100%;
-}
-
-.filtre__form__list {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
-}
-
-.filtre__form__list__button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
   gap: 5px;
-  border-radius: 10px;
-  padding: 10px;
-  height: 100%;
-  height: -webkit-fill-available;
-  width: fit-content;
+  height: 25px;
 }
 
-.filtre__form__list__button input {
-  width: fit-content;
-  max-width: 150px;
-  background: none;
-  border: none;
-}
-
-.filtre__form__list__button__icon {
-  width: 30px;
-  height: 30px;
+.note__text {
+  font-size: 25px;
+  margin-top: -5px;
 }

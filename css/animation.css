@@ -1,7 +1,6 @@
 .stars {
-  margin: 50px;
+  padding: 8px 0px;
 }
-
 .stars__list {
   display: flex;
   flex-direction: row;

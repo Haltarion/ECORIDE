@@ -10,6 +10,8 @@
   
   <?php include '../../components/clicable/filtre.php'; ?>
 
+  <?php include '../../components/covoiturage/card-covoit.php'; ?>
+
 </body>
 
 <?php include '../../common/footer.php'; ?>

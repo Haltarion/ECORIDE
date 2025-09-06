@@ -1,0 +1,99 @@
+/* Style pour les cartes de covoiturages ------------------------- */
+.card-covoit {
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
+  padding: 18px 0px;
+  width: 90%;
+  margin: 30px auto;
+  gap: 10px;
+}
+
+.infos-voyage {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 25px;
+}
+
+.infos-voyage__depart-arrivee {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.infos-voyage__depart-arrivee__fleche {
+  /* largeur responsive : entre 120px et 800px, 40% de la largeur viewport au milieu */
+  --w: 100%;
+  /* épaisseur */
+  --h: 2px;
+  --head: 12px;
+
+  width: var(--w);
+  height: var(--h);
+  position: relative;
+  background: black;
+  border-radius: calc(var(--h) / 2);
+  z-index: 0;
+}
+
+/* pointe de la flèche (triangle à droite) */
+.infos-voyage__depart-arrivee__fleche::after {
+  content: "";
+  position: absolute;
+  right: calc(-1 * var(--head));
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--head);
+  height: var(--head);
+  background: black;
+  /* forme triangulaire */
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.infos-voyage__depart,
+.infos-voyage__arrivee {
+  display: flex;
+  flex-direction: column;
+}
+
+.infos-voyage__depart {
+  align-items: flex-start;
+}
+.infos-voyage__arrivee {
+  align-items: flex-end;
+}
+#villeDepart {
+  font-weight: bold;
+}
+#villeArrivee {
+  font-weight: bold;
+}
+
+.infos-voyage__prix {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  color: var(--secondary-color);
+  gap: 5px;
+}
+.infos-voyage__prix__montant,
+.infos-voyage__prix__unite {
+  font-weight: bold;
+}
+.infos-voyage__prix__montant {
+  font-size: 36px;
+}
+.infos-voyage__prix__unite {
+  font-size: 18px;
+}
+
+.infos-voyage__separator {
+  width: 100%;
+  height: 1px;
+  background: var(--border-color);
+}

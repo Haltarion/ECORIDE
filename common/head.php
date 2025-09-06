@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../../css/header.css" />
     <link rel="stylesheet" href="../../css/form.css" />
     <link rel="stylesheet" href="../../css/animation.css" />
+    <link rel="stylesheet" href="../../css/filtre.css" />
+    <link rel="stylesheet" href="../../css/card.css" />
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 
   </head>

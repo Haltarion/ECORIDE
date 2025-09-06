@@ -7,7 +7,8 @@
     
     <footer>
       <a href="mailto:contact@ecoride.fr" class=footer>contact@ecoride.fr</a> |
-      <a href="/mentions-legales.php" class=footer>Mentions légales</a>
+      <a href="../../mentions-legales.php" class=footer>Mentions légales</a> |
+      <a href="../../pages/plan_du_site.php" class=footer>Plan du site</a>
     </footer>
   </body>
 </html>
