@@ -17,6 +17,7 @@
   gap: 25px;
 }
 
+/* Conteneur des infos de départ et d'arrivée */
 .infos-voyage__depart-arrivee {
   display: flex;
   flex-direction: row;
@@ -24,8 +25,10 @@
   gap: 15px;
   flex-grow: 1;
   width: 100%;
+  max-width: 560px;
 }
 
+/* ligne avec flèche entre les deux villes */
 .infos-voyage__depart-arrivee__fleche {
   /* largeur responsive : entre 120px et 800px, 40% de la largeur viewport au milieu */
   --w: 100%;
@@ -55,6 +58,7 @@
   clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
 
+/* Conteneur des infos de départ et d'arrivée */
 .infos-voyage__depart,
 .infos-voyage__arrivee {
   display: flex;
@@ -74,6 +78,7 @@
   font-weight: bold;
 }
 
+/* Conteneur des infos du prix */
 .infos-voyage__prix {
   display: flex;
   flex-direction: row;
@@ -96,4 +101,49 @@
   width: 100%;
   height: 1px;
   background: var(--border-color);
+}
+
+.infos-voiture {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  padding: 0px 20px;
+}
+
+.infos-voiture__conducteur {
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.infos-voiture__photo {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.infos-voiture__nom {
+  color: var(--secondary-color);
+  font-weight: bold;
+}
+
+.infos-voiture__star {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  height: 25px;
+}
+.infos-voiture__star svg {
+  fill: var(--main-color);
+}
+
+.infos-voiture__text {
+  font-size: 25px;
+  margin-top: -5px;
+  color: var(--secondary-color);
 }

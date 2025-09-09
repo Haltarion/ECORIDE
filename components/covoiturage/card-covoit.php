@@ -26,11 +26,15 @@
 
   <div class="infos-voiture">
     <div class="infos-voiture__conducteur">
-      <img class="infos-voiture__photo" src="../../assets/images/voiture.jpg" alt="Photo du voiture">
-      <p class="infos-voiture__nom">Jean Dupont</p>
+      <img class="infos-voiture__photo" src="../../media/Photo de profil.jpg" alt="Photo de profil du conducteur">
+      <p class="infos-voiture__nom">Bonport</p>
     </div>
 
-    <?php include '../../components/icone/note.php'; ?>
+    <?php
+      $starClass = "infos-voiture__star";
+      $textClass = "infos-voiture__text";
+      include '../../components/icone/note.php';
+    ?>
 
     <?php include '../../components/icone/electricalCar.php'; ?>
 

@@ -193,7 +193,7 @@ a {
   cursor: pointer;
 }
 
-.offSrean {
+.offScrean {
   position: absolute;
   left: -10000px;
 }
@@ -209,16 +209,4 @@ a {
 
 .body__plan_du_site ul {
   padding-left: 20px;
-}
-
-.note {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  height: 25px;
-}
-
-.note__text {
-  font-size: 25px;
-  margin-top: -5px;
 }

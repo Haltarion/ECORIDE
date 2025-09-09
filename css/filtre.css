@@ -92,3 +92,19 @@
   font-size: 25px;
   margin-top: -5px;
 }
+
+.filtre__form__list__button__note__star {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  height: 25px;
+}
+.filtre__form__list__button__note__star svg {
+  fill: var(--white-color);
+}
+
+.filtre__form__list__button__note__text {
+  font-size: 25px;
+  margin-top: -5px;
+  color: var(--white-color);
+}
