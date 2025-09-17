@@ -209,3 +209,9 @@ a {
 .body__plan_du_site ul {
   padding-left: 20px;
 }
+
+/* Taille 6 des icones */
+.size-6 {
+  width: 25px;
+  height: 25px;
+}
