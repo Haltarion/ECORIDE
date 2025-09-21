@@ -1,17 +1,42 @@
-# Environnement de Travail – Développement
+# EcoRide
 
-## 🌱 Gestion de version
+## Pour commencer
 
-J’utilise **Git** pour suivre l’évolution de mon code, versionner les différentes étapes du projet, et revenir à un état antérieur si besoin.
+### Pré-requis :
+- [Git](https://git-scm.com/)
+- [GitHub](https://github.com/)
+- [Node.js](https://nodejs.org/fr)
+- [chart.js](https://www.chartjs.org/docs/latest/getting-started/installation.html)
 
-Je travaille principalement sur **GitHub**, où je suis une stratégie de branches simple mais efficace :
+### Installation
 
-- La branche **`developpement`** est celle sur laquelle je développe de nouvelles fonctionnalités.
-- Une fois qu’une fonctionnalité est testée et fonctionnelle, je la **merge** manuellement dans la branche **`main`**, qui représente la version stable du projet.
+## Démarrage
+1. Initialiser un repository
+Ouvrir le terminal ou l'invite de commande sur votre système d'exploitation.
+Naviguer vers le répertoire du projet dans lequel vous souhaitez créer le dépôt Git.
+Par exemple, si votre projet est situé dans le dossier « mon_projet », utilisez la commande suivante :
+   ```bash
+   cd mon_projet
+2. Initialiser le repository git :
+   ```bash
+   git init
+3. Cloner le dépôt :
+   ```bash
+   git clone https://github.com/Haltarion/ECORIDE.git
+4. Se placer dans la branche dev :
+    ```bash
+    git checkout dev
+5. Faire des commit régulier avec un message explicite:
+    ```bash
+    git commit -m “Message de votre commit”
+6. Avant de quitter le projet, renvoyer votre travail sur le dépot distant :
+    ```bash
+    git push -u origin Dev
+7. Une fois qu'une fonctionnalité est prète, merger la branch `dev` dans `main`
 
-## 🖥️ Éditeur de code
+## Fabriqué avec
 
-J’utilise **Visual Studio Code (VSCode)** comme éditeur principal. Il est léger, rapide et personnalisable. J’y ai installé plusieurs **extensions** pour optimiser mon confort de travail et la qualité de mon code :
+J’utilise [Visual Studio Code](https://code.visualstudio.com/) comme éditeur principal. Il est léger, rapide et personnalisable. J’y ai installé plusieurs **extensions** pour optimiser mon confort de travail et la qualité de mon code :
 
 - **Color Highlight** : met en surbrillance les couleurs écrites en hexadécimal ou en nom (utile pour le CSS).
 - **Auto Rename Tag** : modifie automatiquement la balise de fermeture lorsqu’on change la balise d’ouverture (et inversement).
@@ -22,36 +47,5 @@ J’utilise **Visual Studio Code (VSCode)** comme éditeur principal. Il est lé
 - **Material Icon Theme** : pour le confort visuel
 - **Prettier** : pour le confort visuel
 
-## 💾 Installation et utilisation
-
-### Prérequis
-
-- Installer [Git](https://git-scm.com/)
-- Créer un compte [GitHub](https://github.com/)
-- Installer [Visual Studio Code](https://code.visualstudio.com/)
-- Installer [Node.js](https://nodejs.org/fr)
-- Installer [chart.js](https://www.chartjs.org/docs/latest/getting-started/installation.html)
-
-### Installation de l’environnement
-
-1. Cloner le dépôt :
-   ```bash
-   git clone https://github.com/Haltarion/ECORIDE.git
-2. Se placer dans le projet :
-    ```bash
-    cd ECORIDE
-## ⌨️ Utilisation
-- Développer sur la branche Dev
-- Tester les modifications
-- Merger vers main lorsque tout est fonctionnel :
-    ```bash
-    git checkout main
-    git merge Dev
-    git push origin main
-## 👅 Langages utilisés
-- HTML / PHP
-- CSS
-- TypeScript / JavaScript
-
-## 📚 Bibliothèques utilisées
+## Bibliothèques utilisées
 - chart.js : pour les graphiques de la page administrateur
