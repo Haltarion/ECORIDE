@@ -7,7 +7,7 @@
   <h1>Accueil</h1>
 
   <form id="searchForm" class="searchForm" role="search">
-    <label class="offSrean" for="searchText">
+    <label class="offScreen" for="searchText">
       Tappez votre recherche
     </label>
     <input

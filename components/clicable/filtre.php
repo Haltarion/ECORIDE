@@ -14,17 +14,17 @@
       </button>
       <button type="button" class="filtre__form__list__button" onclick="actionPrix()">
         <span class="filtre__form__list__button__text">Prix max</span>
-        <label for="prixMax" class="offScrean">Prix maximal</label>
+        <label for="prixMax" class="offScreen">Prix maximal</label>
         <input type="text" id="prixMax" placeholder="10 c" required>
       </button>
       <button type="button" class="filtre__form__list__button" onclick="actionDuree()">
         <span class="filtre__form__list__button__text">Durée max</span>
-        <label for="dureeMax" class="offScrean">Durée maximal</label>
+        <label for="dureeMax" class="offScreen">Durée maximal</label>
         <input type="text" id="dureeMax" placeholder="1h" required>
       </button>
       <button type="button" class="filtre__form__list__button" onclick="actionNote()">
         <span class="filtre__form__list__button__text">Note minimale</span>
-        <label for="noteMin" class="offScrean">Note minimale</label>
+        <label for="noteMin" class="offScreen">Note minimale</label>
         <?php
           $starClass = "filtre__form__list__button__note__star";
           $textClass = "filtre__form__list__button__note__text";
