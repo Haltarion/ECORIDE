@@ -47,4 +47,5 @@
     <?php include '../../components/icone/nbPlacesRestantes.php'; ?>
     <!-- Bouton détail -->
     <button class="infos-voiture__button-detail">Détail</button>
+  </div>
 </div>

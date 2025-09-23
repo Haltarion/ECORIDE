@@ -16,7 +16,7 @@
 .card-covoit {
   border: 1px solid var(--border-color);
   border-radius: 15px;
-  margin: 30px auto;
+  margin: 30px auto 0px auto;
   gap: 10px;
 }
 

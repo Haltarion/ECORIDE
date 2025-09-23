@@ -206,6 +206,10 @@ input {
     align-items: stretch;
     justify-content: center;
   }
+  .covoiturages,
+  .covoiturages__container__button {
+    max-width: 1200px;
+  }
   .connexion__separateur::before,
   .connexion__separateur::after {
     height: 150px;

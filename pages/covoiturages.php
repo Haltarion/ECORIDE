@@ -1,7 +1,7 @@
 <?php include '../common/head.php'; ?>
 
 <body class="covoiturages__body">
-  
+
   <?php include '../common/header.php'; ?>
 
   <h1>Rechercher un covoiturages</h1>
@@ -16,7 +16,7 @@
         $inputId = "adresseDepart";
         include '../components/form/input-text.php';
       ?>
-      
+
       <?php
         $labelMain = "Quelle est votre date de départ ?";
         $labelDay = "Jour";
@@ -37,9 +37,10 @@
         $placeholder = "Adresse d'arrivée";
         $alertMessage = "Veuillez entrer une adresse d'arrivée valide.";
         $inputId = "adresseArrivee";
+        // $value = htmlspecialchars($_POST['searchTextDestination']);
         include '../components/form/input-text.php';
       ?>
-      
+
       <?php
         $labelMain = "Quelle est votre date d'arrivée ?";
         $labelDay = "Jour";
@@ -53,7 +54,7 @@
         include '../components/form/input-date.php';
       ?>
     </fieldset>
-    
+
   </div>
   <div class="covoiturages__container__button">
     <?php
@@ -61,6 +62,6 @@
       include '../components/clicable/button.php'
     ?>
   </div>
-  
+
 </body>
 <?php include '../common/footer.php'; ?>
