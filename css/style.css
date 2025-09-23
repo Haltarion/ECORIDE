@@ -9,11 +9,8 @@
 :root {
   --main-color: #1d4e19;
   --secondary-color: #704021;
-  --border-color: #704021;
   --link-color: #526b94;
-  --background-color: #526b94;
   --white-color: #fef5ef;
-  --nav-color: #fef5ef;
   --red-color: #810505;
   --grey-color: #b9b7b7;
   --black-color: #000000;
@@ -23,9 +20,14 @@
   :root {
     --fs-h1: 27px;
     --fs-h2: 21px;
+    --fs-h3: 18px;
     --fs-p: 16px;
     --fs-p2: 14px;
     --fs-nav: 18px;
+  }
+
+  .container {
+    width: 100%;
   }
 
   /* Style pour le texte de la page d'accueil */
@@ -45,11 +47,16 @@
   :root {
     --fs-h1: 60px;
     --fs-h2: 35px;
+    --fs-h2: 30px;
     --fs-p: 18px;
     --fs-p2: 16px;
     --fs-nav: 18px;
   }
 
+  .container {
+    width: 100%;
+    max-width: 1000px;
+  }
   /* Style pour le texte de la page d'accueil */
   .index__text-accueil {
     align-items: flex-start;
@@ -87,7 +94,7 @@ body {
 }
 
 /* Style pour les boutons */
-button {
+.btn {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -96,10 +103,30 @@ button {
   padding: 0px 20px;
   border: none;
   border-radius: 20px;
-  color: var(--white-color);
-  background-color: var(--main-color);
   font-size: 18px;
   cursor: pointer;
+}
+
+.btn-main {
+  color: var(--white-color);
+  background-color: var(--main-color);
+}
+.btn-sec {
+  color: var(--white-color);
+  background-color: var(--secondary-color);
+}
+.btn-annul {
+  color: var(--white-color);
+  background-color: var(--red-color);
+}
+.btn-connect {
+  background-color: initial;
+  color: var(--border-color);
+  border: 1px solid;
+  border-color: var(--border-color);
+  width: 100%;
+  width: -webkit-fill-available;
+  justify-content: center;
 }
 
 /* Style pour les inputs */
@@ -157,6 +184,7 @@ li {
 label {
   font-size: var(--fs-p);
 }
+
 a {
   color: var(--link-color);
 }
@@ -165,11 +193,7 @@ a {
 .searchForm {
   background: var(--white-color);
   border: 1px solid var(--border-color);
-  border-radius: 50px;
-  width: 100%;
   max-width: 400px;
-  display: flex;
-  flex-direction: row;
 }
 
 .searchText {
@@ -186,8 +210,6 @@ a {
   background: transparent;
   stroke: var(--black-color);
   color: var(--black-color);
-  width: 50px;
-  height: auto;
   border: none;
   outline: none;
   cursor: pointer;
@@ -196,15 +218,6 @@ a {
 .offScreen {
   position: absolute;
   left: -10000px;
-}
-
-.contact {
-  width: 100%;
-  max-width: 1000px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
 }
 
 .body__plan_du_site ul {
@@ -217,8 +230,10 @@ a {
   height: 25px;
 }
 
-.index__text-accueil {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+/* Style pour le prix */
+.prix__montant {
+  font-size: 36px;
+}
+.prix__unite {
+  font-size: 18px;
 }

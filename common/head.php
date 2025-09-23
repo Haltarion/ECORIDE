@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>ECORIDE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/shorts.css" />
     <link rel="stylesheet" href="../../css/style.css" />
     <link rel="stylesheet" href="../../css/header.css" />
     <link rel="stylesheet" href="../../css/form.css" />

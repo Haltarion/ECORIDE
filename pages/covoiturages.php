@@ -1,12 +1,12 @@
 <?php include '../common/head.php'; ?>
 
-<body class="covoiturages__body">
+<body>
 
   <?php include '../common/header.php'; ?>
 
   <h1>Rechercher un covoiturages</h1>
 
-  <div class="covoiturages">
+  <div class="covoiturages w-100 g-15 p-15 container">
     <fieldset class="covoiturages__depart">
       <legend>Départ</legend>
       <?php
@@ -56,9 +56,10 @@
     </fieldset>
 
   </div>
-  <div class="covoiturages__container__button">
+  <div class="covoiturages__container__button w-100 f-row-r container">
     <?php
       $buttonText = "Valider";
+      $class = "btn-main";
       include '../components/clicable/button.php'
     ?>
   </div>

@@ -3,6 +3,9 @@
   .card-covoit {
     width: auto;
   }
+  .infos-voiture {
+    flex-wrap: wrap;
+  }
 }
 /* Style pour les écrans desktop ----------------------------------- */
 @media screen and (min-width: 750px) {
@@ -10,34 +13,23 @@
     width: calc(100vw - 400px);
     min-width: 512px;
   }
+  .infos-voiture {
+    flex-wrap: nowrap;
+  }
 }
 
 /* Style pour les cartes de covoiturages ------------------------- */
 .card-covoit {
-  border: 1px solid var(--border-color);
-  border-radius: 15px;
   margin: 30px auto 0px auto;
-  gap: 10px;
 }
 
 .infos-voyage {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-around;
   padding: 10px 20px;
-  gap: 25px;
 }
 
 /* Conteneur des infos de départ et d'arrivée */
 .infos-voyage__depart-arrivee {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 15px;
   flex-grow: 1;
-  width: 100%;
   max-width: 560px;
 }
 
@@ -71,100 +63,26 @@
   clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
 
-/* Conteneur des infos de départ et d'arrivée */
-.infos-voyage__depart,
-.infos-voyage__arrivee {
-  display: flex;
-  flex-direction: column;
-}
-
-.infos-voyage__depart {
-  align-items: flex-start;
-}
-.infos-voyage__arrivee {
-  align-items: flex-end;
-}
-#villeDepart {
-  font-weight: bold;
-}
-#villeArrivee {
-  font-weight: bold;
-}
-
 /* Conteneur des infos du prix */
 .infos-voyage__prix {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
   color: var(--secondary-color);
-  gap: 5px;
-}
-.infos-voyage__prix__montant,
-.infos-voyage__prix__unite {
-  font-weight: bold;
-}
-.infos-voyage__prix__montant {
-  font-size: 36px;
-}
-.infos-voyage__prix__unite {
-  font-size: 18px;
 }
 
 .infos-voyage__separator {
-  width: 100%;
   height: 1px;
-  background: var(--border-color);
 }
 
 .infos-voiture {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 20px;
-  align-items: center;
-  justify-content: space-around;
-  height: 100%;
   padding: 30px 20px;
 }
 
-.infos-voiture__conducteur {
-  height: 30px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-}
-
 .infos-voiture__photo {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
   object-fit: cover;
-}
-
-.infos-voiture__nom {
-  color: var(--secondary-color);
-  font-weight: bold;
-}
-
-.infos-voiture__star {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  height: 25px;
-}
-.infos-voiture__star svg {
-  fill: var(--main-color);
 }
 
 .infos-voiture__text {
   font-size: 25px;
   margin-top: -5px;
-  color: var(--secondary-color);
-}
-
-.icone-electricalCarCovoit {
-  color: var(--secondary-color);
 }
 
 .placesRestantes {

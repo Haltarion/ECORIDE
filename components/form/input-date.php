@@ -1,8 +1,8 @@
-<div class="component__input-date">
+<div class="f-col al-start w-100">
     <!-- Label principal ---------------------------------------->
     <label for="<?= $inputIdMain ?>"><?php echo $labelMain ?></label>
     <!-- Conteneur des 3 champs --------------------------------->
-    <div class="component__input-date__container">
+    <div class="component__input-date__container w-100">
         <!-- Champ jour --------------------------------------------->
         <div class="component__input-date__container__day">
             <label for="<?= $inputIdDay ?>"><?php echo $labelDay ?></label>

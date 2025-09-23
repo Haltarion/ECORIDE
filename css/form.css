@@ -1,59 +1,4 @@
-/* Style pour la page de covoiturage */
-.covoiturages {
-  width: 100%;
-  width: -webkit-fill-available;
-  gap: 15px;
-  padding: 15px;
-}
-
 /* Style pour la page de connexion */
-.connexion {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  padding: 15px;
-  width: 100%;
-  width: -webkit-fill-available;
-}
-.connexion__existingCount {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
-  width: -webkit-fill-available;
-}
-
-.container__button {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-}
-
-.connexion__newCount {
-  width: 100%;
-  width: -webkit-fill-available;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.connexion__newCount button {
-  background-color: initial;
-  color: var(--border-color);
-  border: 1px solid;
-  border-color: var(--border-color);
-  width: 100%;
-  width: -webkit-fill-available;
-  justify-content: center;
-}
-
-.connexion__separateur {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  width: 100%;
-  width: -webkit-fill-available;
-}
 .connexion__separateur::before,
 .connexion__separateur::after {
   display: block;
@@ -88,30 +33,12 @@ input {
   width: 100%;
   width: -webkit-fill-available;
 }
-/* Style pour les inputs text -----------------------------------*/
-.component__input-text {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  width: -webkit-fill-available;
-}
 
 /* Style pour les inputs date -----------------------------------*/
-.component__input-date {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  width: -webkit-fill-available;
-}
-
 .component__input-date__container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 8px;
-  width: 100%;
-  width: -webkit-fill-available;
 }
 .component__input-date__container div {
   display: flex;
@@ -120,24 +47,6 @@ input {
 }
 .component__input-date__container input {
   width: auto;
-}
-
-/* Style pour les inputs email ----------------------------------*/
-.component__input-email {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  width: -webkit-fill-available;
-}
-
-/* Style pour les inputs mot de passe --------------------------*/
-.component__input-mdp {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  width: -webkit-fill-available;
 }
 
 /* Style pour le message d'erreur -------------------------------*/
@@ -167,10 +76,6 @@ input {
 }
 
 .covoiturages__container__button {
-  width: 100%;
-  width: -webkit-fill-available;
-  display: flex;
-  flex-direction: row-reverse;
   padding: 0px 15px;
 }
 
@@ -187,6 +92,7 @@ input {
   }
 
   .connexion__separateur {
+    display: flex;
     flex-direction: row;
   }
   .connexion__separateur::before,
@@ -206,10 +112,6 @@ input {
     align-items: stretch;
     justify-content: center;
   }
-  .covoiturages,
-  .covoiturages__container__button {
-    max-width: 1200px;
-  }
   .connexion__separateur::before,
   .connexion__separateur::after {
     height: 150px;
@@ -217,6 +119,7 @@ input {
   }
 
   .connexion__separateur {
+    display: flex;
     flex-direction: column;
     width: 50px;
   }

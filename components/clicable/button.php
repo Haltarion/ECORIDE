@@ -1,1 +1,1 @@
-<button class="component__button"><?= $buttonText ?></button>
+<button class="btn <?=$class?>"><?= $buttonText ?></button>

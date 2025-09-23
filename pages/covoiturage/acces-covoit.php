@@ -1,12 +1,10 @@
 <?php include '../../common/head.php'; ?>
 
-<body class="body__acces-covoit">
+<body>
 
   <?php include '../../common/header.php'; ?>
 
-  <div class=acces-covoit__title>
-    <h1 class="acces-covoit__title__title">Voyages proposés</h1>
-  </div>
+  <h1>Voyages proposés</h1>
 
   <?php include '../../components/clicable/filtre.php'; ?>
 

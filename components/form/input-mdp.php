@@ -1,4 +1,4 @@
-<div class="component__input-mdp">
+<div class="f-col al-start w-100">
     <label for="mpd">Mot de passe</label>
     <input type="password" id="mdp" placeholder="Mot de passe" required>
     <div class="component__alerte">

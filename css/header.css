@@ -24,7 +24,7 @@ header {
 @media screen and (max-width: 699px) {
   /* Style pour l'icone du menu mobile */
   .header__nav__burger_menu svg {
-    stroke: var(--nav-color);
+    stroke: var(--white-color);
     width: 30px;
     height: 30px;
     cursor: pointer;
@@ -55,7 +55,7 @@ header {
 
   /* Style pour la fermeture du menu mobile */
   .header__nav__close svg {
-    stroke: var(--nav-color);
+    stroke: var(--white-color);
     background-color: var(--main-color);
     width: 24px;
     height: 24px;
@@ -77,18 +77,18 @@ header {
     padding: 15px 20px;
     text-align: center;
     cursor: pointer;
-    background-color: var(--background-button);
+    background: #70402110;
     border-radius: 10px;
   }
   .header__nav__menu__link a {
-    color: var(--main-color);
+    color: var(--secondary-color);
     text-decoration: none;
     font-weight: bold;
     font-size: var(--fs-nav);
   }
 
   .header__burger svg {
-    stroke: var(--nav-color);
+    stroke: var(--white-color);
     width: 24px;
     height: 24px;
   }
@@ -120,7 +120,7 @@ header {
   }
 
   .header__nav__menu__link a {
-    color: var(--nav-color);
+    color: var(--white-color);
     text-decoration: none;
     display: block;
     position: relative;
@@ -135,7 +135,7 @@ header {
     bottom: -5px;
     width: 0%;
     height: 2px;
-    background-color: var(--nav-color);
+    background-color: var(--white-color);
     transition: width 0.2s ease-in-out;
   }
 
