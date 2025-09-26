@@ -44,11 +44,14 @@
       <?php include '../../components/covoiturage/avis.php' ?>
     </div>
   </div>
-<?php
-  $class = "bouton_participer btn btn-main absolute";
-  $buttonText = "Participer";
-  include '../../components/clicable/button.php'
-?>
+  <div class="h-25"></div>
+  <div class="detail-voyage__button__participer container fixed f-row-r">
+    <?php
+      $class = "btn btn-main ";
+      $buttonText = "Participer";
+      include '../../components/clicable/button.php'
+    ?>
+  </div>
 </body>
 
 <?php include '../../common/footer.php'; ?>

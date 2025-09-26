@@ -208,6 +208,9 @@
 }
 
 /* Style pour le positionnement */
+.fixed {
+  position: fixed;
+}
 .absolute {
   position: absolute;
 }
@@ -221,6 +224,9 @@
 /* Style pour les marges */
 .mb-8 {
   margin-bottom: 8px;
+}
+.mr-3 {
+  margin-right: 30px;
 }
 
 /* Style pour le texte */

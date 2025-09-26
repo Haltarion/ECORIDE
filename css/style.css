@@ -176,8 +176,13 @@ a {
   font-size: 18px;
 }
 
-/* Style pour le bouton participer du détail du voyage */
-.bouton_participer {
-  bottom: 20px;
-  right: 30px;
+.detail-voyage__button__participer {
+  bottom: 80px;
+  margin-right: 0px;
+}
+/* Style pour les petits écrans  ------------------------------------ */
+@media screen and (max-width: 1075px) {
+  .detail-voyage__button__participer {
+    margin-right: 62px;
+  }
 }
