@@ -42,7 +42,7 @@
         include "../../components/form/error-alerte.php";
       ?>
     </div>
-    <div class="f-col al-start w-100 just-sb mw-200">
+    <div class="f-col al-start w-100 just-sb maxw-200">
       <a href="" class="btn btn-main mh-50 w-100">Historique des covoiturages</a>
       <a href="" class="btn btn-main mh-50 w-100">Proposer un voyage</a>
       <a href="" class="btn btn-main mh-50 w-100">gérer mes véhicules</a>

@@ -95,8 +95,17 @@
   width: 100%;
   width: -webkit-fill-available;
 }
-.mw-200 {
+.maxw-200 {
   max-width: 200px;
+}
+.maxw-400 {
+  max-width: 400px;
+}
+.maxw-500 {
+  max-width: 500px;
+}
+.maxw-900 {
+  max-width: 900px;
 }
 .h-25 {
   height: 25px;

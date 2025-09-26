@@ -1,7 +1,7 @@
 /* Style pour barre de recherche */
 .searchForm {
   background: var(--white-color);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--secondary-color);
   max-width: 400px;
 }
 
