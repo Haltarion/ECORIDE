@@ -95,6 +95,9 @@
   width: 100%;
   width: -webkit-fill-available;
 }
+.mw-200 {
+  max-width: 200px;
+}
 .h-25 {
   height: 25px;
 }
@@ -109,6 +112,9 @@
 }
 .h-100 {
   height: 100%;
+}
+.mh-50 {
+  min-height: 50px;
 }
 
 /* Style pour le radius */
@@ -168,13 +174,15 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  text-align: center;
   justify-content: center;
-  height: 35px;
   padding: 0px 20px;
   border: none;
   border-radius: 20px;
   font-size: 18px;
   cursor: pointer;
+  padding: 5px 20px;
+  text-decoration: none;
 }
 
 .btn-main {
@@ -208,4 +216,22 @@
 }
 .sticky {
   position: sticky;
+}
+
+/* Style pour les marges */
+.mb-8 {
+  margin-bottom: 8px;
+}
+
+/* Style pour le texte */
+.textInline {
+  white-space: nowrap;
+}
+
+/* Style pour l'affichage */
+.hide {
+  display: none;
+}
+.visible {
+  display: block;
 }

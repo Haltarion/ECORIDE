@@ -10,7 +10,9 @@
     <div class="f-col al-center g-20 p-20 r-15 b-1 b-secondary">
       <?php include '../../components/covoiturage/depart-arrive.php' ?>
       <div class="f-row just-sb w-100">
-        <?php include '../../components/covoiturage/prix.php' ?>
+        <?php
+          $valeur ="10";
+          include '../../components/covoiturage/prix.php' ?>
         <?php
         $class = "secondary";
         include '../../components/icone/electricalCar.php';
@@ -20,7 +22,9 @@
     </div>
     <h2>Conducteur</h2>
     <div class="f-row just-sb p-20 g-20 r-15 b-1 b-secondary">
-      <?php include '../../components/covoiturage/info-conducteur.php' ?>
+      <?php
+        $pseudo ="Bonport";
+        include '../../components/covoiturage/info-conducteur.php' ?>
       <?php
       $starClass = "infos-voiture__star main f-row g-5 h-25";
       $textClass = "infos-voiture__text secondary";

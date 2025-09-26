@@ -4,14 +4,20 @@
     <!-- Départ / arrivée -->
     <?php include '../../components/covoiturage/depart-arrive.php' ?>
     <!-- Prix -->
-    <?php include '../../components/covoiturage/prix.php' ?>
+    <?php
+      $valeur ="10";
+      include '../../components/covoiturage/prix.php'
+    ?>
   </div>
   <!-- Séparateur -->
   <div class="infos-voyage__separator w-100 bg-secondary" role="img" aria-label="separateur"></div>
   <!-- Partie basse de la carte -->
   <div class="infos-voiture f-row al-center just-sa g-20 h-100">
     <!-- Infos sur le conducteur -->
-    <?php include '../../components/covoiturage/info-conducteur.php' ?>
+    <?php
+      $pseudo ="Bonport";
+      include "../../components/covoiturage/info-conducteur.php";
+    ?>
     <?php
       $starClass = "infos-voiture__star main f-row g-5 h-25";
       $textClass = "infos-voiture__text secondary";

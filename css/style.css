@@ -153,32 +153,6 @@ a {
   color: var(--link-color);
 }
 
-/* Style pour barre de recherche */
-.searchForm {
-  background: var(--white-color);
-  border: 1px solid var(--border-color);
-  max-width: 400px;
-}
-
-.searchText {
-  color: var(--black-color);
-  background: transparent;
-  border: none;
-  flex-grow: 1;
-  padding: 0.25em 0.25em 0.25em 1em;
-  outline: none;
-}
-
-.searchButton {
-  padding: 0.25em 0.5em 0.25em 0.5em;
-  background: transparent;
-  stroke: var(--black-color);
-  color: var(--black-color);
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
 .offScreen {
   position: absolute;
   left: -10000px;

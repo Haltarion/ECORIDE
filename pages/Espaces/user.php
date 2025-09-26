@@ -1,0 +1,76 @@
+<?php include '../../common/head.php'; ?>
+
+<body>
+
+  <?php include '../../common/header.php'; ?>
+
+  <h1>Mon compte</h1>
+
+  <div class="container f-row al-center w-100 g-10 p-20 just-sb">
+    <?php
+      $pseudo ="Bonport";
+      include '../../components/covoiturage/info-conducteur.php'
+    ?>
+    <?php
+      $valeur ="20";
+      include "../../components/covoiturage/prix.php";
+    ?>
+    <?php
+      $starClass = "infos-voiture__star main f-row g-5 h-25";
+      $textClass = "infos-voiture__text secondary";
+      include '../../components/icone/note.php';
+    ?>
+  </div>
+  <div class="container f-row w-100 g-10 p-10">
+    <div class="f-col al-start w-100">
+      <h2>Vous êtes</h2>
+      <div class="f-row al-center g-10 p-10">
+        <input type="radio" id="chauffeur" name="role" value="chauffeur" checked />
+        <label class="textInline" for="chauffeur">Chauffeur</label>
+      </div>
+      <div class="f-row al-center g-10 p-10">
+        <input type="radio" id="passage" name="role" value="passage" />
+        <label class="textInline" for="passage">Passagé</label>
+      </div>
+      <div class="f-row al-center g-10 p-10">
+        <input type="radio" id="les2" name="role" value="les2" />
+        <label class="textInline" for="les2">Les deux</label>
+      </div>
+      <?php
+        $alertMessage="Vous devez renseigner au moins 1 véhicule";
+        $class="hide";
+        include "../../components/form/error-alerte.php";
+      ?>
+    </div>
+    <div class="f-col al-start w-100 just-sb mw-200">
+      <a href="" class="btn btn-main mh-50 w-100">Historique des covoiturages</a>
+      <a href="" class="btn btn-main mh-50 w-100">Proposer un voyage</a>
+      <a href="" class="btn btn-main mh-50 w-100">gérer mes véhicules</a>
+    </div>
+  </div>
+  <div class="container f-col just-center w-100 g-10 p-20 al-sb">
+    <h2>Vos préférences</h2>
+    <p>Autorisez-vous les :</p>
+    <div class="f-row al-center g-10 p-10">
+      <input type="checkbox" id="fumeur" name="fumeur" value="fumeur" />
+      <label class="textInline" for="fumeur">Fumeurs</label>
+    </div>
+    <div class="f-row al-center g-10 p-10">
+      <input type="checkbox" id="animaux" name="animaux" value="animaux" />
+      <label class="textInline" for="animaux">Animaux</label>
+    </div>
+    <?php
+      $inputId="preferences";
+      $placeholder="Indiquez ici vos préférences";
+      $label="Avez-vous d'autres préférences à indiquer ?";
+      include "../../components/form/input-textarea.php"
+    ?>
+  </div>
+  <div class="container f-col just-center w-100 g-10 p-20 al-sb">
+    <h2>Mes véhicules</h2>
+
+  </div>
+
+</body>
+
+<?php include '../../common/footer.php'; ?>
