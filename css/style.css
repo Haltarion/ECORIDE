@@ -93,42 +93,6 @@ body {
   position: relative;
 }
 
-/* Style pour les boutons */
-.btn {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  height: 35px;
-  padding: 0px 20px;
-  border: none;
-  border-radius: 20px;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.btn-main {
-  color: var(--white-color);
-  background-color: var(--main-color);
-}
-.btn-sec {
-  color: var(--white-color);
-  background-color: var(--secondary-color);
-}
-.btn-annul {
-  color: var(--white-color);
-  background-color: var(--red-color);
-}
-.btn-connect {
-  background-color: initial;
-  color: var(--border-color);
-  border: 1px solid;
-  border-color: var(--border-color);
-  width: 100%;
-  width: -webkit-fill-available;
-  justify-content: center;
-}
-
 /* Style pour les inputs */
 input {
   border: 1px solid var(--grey-color);
@@ -236,4 +200,10 @@ a {
 }
 .prix__unite {
   font-size: 18px;
+}
+
+/* Style pour le bouton participer du détail du voyage */
+.bouton_participer {
+  bottom: 20px;
+  right: 30px;
 }

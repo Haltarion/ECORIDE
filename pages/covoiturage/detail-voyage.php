@@ -35,11 +35,16 @@
     <div class="f-row just-sb p-20 g-20 r-15 b-1 b-secondary">
       <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique enim quia sint voluptate quisquam ea sunt eius nobis corporis beatae officiis cumque harum amet fuga incidunt placeat, voluptas ad numquam?</p>
     </div>
-    <h2>Avis</h2>
+    <h2>Avis du conducteur</h2>
     <div class="f-row just-sb p-20 g-20 r-15 b-1 b-secondary">
       <?php include '../../components/covoiturage/avis.php' ?>
     </div>
   </div>
+<?php
+  $class = "bouton_participer btn btn-main absolute";
+  $buttonText = "Participer";
+  include '../../components/clicable/button.php'
+?>
 </body>
 
 <?php include '../../common/footer.php'; ?>
