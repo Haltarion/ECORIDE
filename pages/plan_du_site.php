@@ -12,6 +12,9 @@
       <li><a href="../../pages/covoiturage/detail-voyage.php">Détail du voyage</a></li>
     </ul>
     <li><a href="../../pages/connexion.php">Connexion</a></li>
+    <ul>
+      <li><a href="../../pages/espaces/creat-account.php">Voyages proposés</a></li>
+    </ul>
     <li><a href="../../pages/contact.php">Contact</a></li>
     <li><a href="../../pages/covoiturages.php">Accès aux covoiturages</a></li>
   </ul>

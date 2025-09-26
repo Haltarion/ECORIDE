@@ -10,6 +10,7 @@
     <div class="connexion__existingCount f-col g-15 w-100">
       <?php
         $alertMessage = "Merci de rentrer un email valide.";
+        $required ="required";
         include '../components/form/input-email.php';
       ?>
 

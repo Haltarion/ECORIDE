@@ -1,10 +1,10 @@
 <?php include '../common/head.php'; ?>
 
-<body class="body__contact">
+<body>
 
   <?php include '../common/header.php'; ?>
 
-  <h1 class="contact__title">Contact</h1>
+  <h1>Model</h1>
 
 </body>
 

@@ -14,6 +14,7 @@
         $placeholder = "Adresse de départ";
         $alertMessage = "Veuillez entrer une adresse de départ valide.";
         $inputId = "adresseDepart";
+        $required ="required";
         include '../components/form/input-text.php';
       ?>
 
@@ -27,6 +28,7 @@
         $placeholderYear = "AAAA";
         $alertMessage = "Merci de rentrer la date au format DD MM AAAA.";
         $inputId = "dateDepart";
+        $required ="required";
         include '../components/form/input-date.php';
       ?>
     </fieldset>
@@ -37,6 +39,7 @@
         $placeholder = "Adresse d'arrivée";
         $alertMessage = "Veuillez entrer une adresse d'arrivée valide.";
         $inputId = "adresseArrivee";
+        $required ="required";
         // $value = htmlspecialchars($_POST['searchTextDestination']);
         include '../components/form/input-text.php';
       ?>
@@ -51,6 +54,7 @@
         $placeholderYear = "AAAA";
         $alertMessage = "Merci de rentrer la date au format DD MM AAAA.";
         $inputId = "dateArrivee";
+        $required ="required";
         include '../components/form/input-date.php';
       ?>
     </fieldset>
