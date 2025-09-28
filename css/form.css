@@ -105,6 +105,32 @@ input[type="date"] {
   padding: 0px 15px;
 }
 
+.plaque {
+  background-color: #dcddd8;
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 150px;
+}
+.imatriculation {
+  text-align: center;
+}
+.imatriculation::before,
+.imatriculation::after {
+  content: "F";
+  background-color: #114dbb;
+  display: block;
+  width: 20px;
+  height: 100%;
+  position: absolute;
+}
+.imatriculation::before {
+  top: 0;
+  left: 0;
+}
+.imatriculation::after {
+  top: 0;
+  right: 0;
+}
 /* Style pour les écrans mobile ------------------------------------ */
 @media screen and (max-width: 749px) {
   /* Style pour la page de covoiturage */

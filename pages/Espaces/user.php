@@ -27,12 +27,12 @@
     <div class="f-col al-start w-100">
       <h2>Vous êtes</h2>
       <div class="f-row al-center g-10 p-10">
-        <input type="radio" id="chauffeur" name="role" value="chauffeur" checked />
-        <label class="textInline" for="chauffeur">Chauffeur</label>
+        <input type="radio" id="passage" name="role" value="passage" checked />
+        <label class="textInline" for="passage">Passagé</label>
       </div>
       <div class="f-row al-center g-10 p-10">
-        <input type="radio" id="passage" name="role" value="passage" />
-        <label class="textInline" for="passage">Passagé</label>
+        <input type="radio" id="chauffeur" name="role" value="chauffeur" />
+        <label class="textInline" for="chauffeur">Chauffeur</label>
       </div>
       <div class="f-row al-center g-10 p-10">
         <input type="radio" id="les2" name="role" value="les2" />
@@ -70,6 +70,9 @@
   </div>
   <div class="container f-col just-center w-100 g-10 p-20 al-sb">
     <h2>Mes véhicules</h2>
+    <div class="plaque relative">
+      <p class="imatriculation">GB-790-VM</p>
+    </div>
 
   </div>
 
