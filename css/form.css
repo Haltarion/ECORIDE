@@ -54,7 +54,8 @@ legend {
 /* Style pour les commponents de formulaire ---------------------*/
 input[type="text"],
 input[type="mail"],
-input[type="password"] {
+input[type="password"],
+input[type="date"] {
   width: 100%;
   width: -webkit-fill-available;
 }

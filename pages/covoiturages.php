@@ -19,16 +19,10 @@
       ?>
 
       <?php
-        $labelMain = "Quelle est votre date de départ ?";
-        $labelDay = "Jour";
-        $placeholderDay = "DD";
-        $labelMonth = "Mois";
-        $placeholderMonth = "MM";
-        $labelYear = "Année";
-        $placeholderYear = "AAAA";
-        $alertMessage = "Merci de rentrer la date au format DD MM AAAA.";
-        $inputId = "dateDepart";
-        $required ="required";
+        $labelDate = "Quelle est votre date de départ ?";
+        $inputDateId = "dateDepart";
+        $inputDateName = "DateDepart";
+        $alertMessage = "Merci de sélectionner une date de départ";
         include '../components/form/input-date.php';
       ?>
     </fieldset>
@@ -40,21 +34,15 @@
         $alertMessage = "Veuillez entrer une adresse d'arrivée valide.";
         $inputId = "adresseArrivee";
         $required ="required";
-        // $value = htmlspecialchars($_POST['searchTextDestination']);
+        // $value = htmlspecialchars($_GET['searchTextDestination']);
         include '../components/form/input-text.php';
       ?>
 
       <?php
-        $labelMain = "Quelle est votre date d'arrivée ?";
-        $labelDay = "Jour";
-        $placeholderDay = "DD";
-        $labelMonth = "Mois";
-        $placeholderMonth = "MM";
-        $labelYear = "Année";
-        $placeholderYear = "AAAA";
-        $alertMessage = "Merci de rentrer la date au format DD MM AAAA.";
-        $inputId = "dateArrivee";
-        $required ="required";
+        $labelDate = "Quelle est votre date d'arrivée ?";
+        $inputDateId = "dateArrivee";
+        $inputDateName = "DateArrivee";
+        $alertMessage = "Merci de sélectionner une date d'arrivée";
         include '../components/form/input-date.php';
       ?>
     </fieldset>

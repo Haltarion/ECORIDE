@@ -6,9 +6,10 @@
 
   <h1>Contact</h1>
 
-  <div class="container al-start w-100 f-col g-2">
+  <div class="container al-center w-100 f-col g-10">
     <h2>Téléphone</h2>
     <a href="tel:0432425262">04.32.42.52.62</a>
+</br>
     <h2>Email</h2>
     <a href="mailto:contact@ecoride.fr">contact@ecoride.fr</a>
   </div>
