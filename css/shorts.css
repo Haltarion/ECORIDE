@@ -27,6 +27,9 @@
 .al-end {
   align-items: flex-end;
 }
+.just-start {
+  justify-content: flex-start;
+}
 .just-center {
   justify-content: center;
 }
@@ -56,6 +59,12 @@
 }
 .g-30 {
   gap: 30px;
+}
+.r-g-50 {
+  row-gap: 50px;
+}
+.c-g-50 {
+  column-gap: 50px;
 }
 
 /* Style pour le padding */

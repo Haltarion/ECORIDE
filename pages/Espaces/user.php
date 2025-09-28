@@ -6,19 +6,21 @@
 
   <h1>Mon compte</h1>
 
-  <div class="container f-row al-center w-100 g-10 p-20 just-sb">
-    <?php
-      $pseudo ="Bonport";
-      include '../../components/covoiturage/info-conducteur.php'
-    ?>
+  <div class="container f-row f-w al-start just-sb w-100 p-20">
+    <div class="f-col g-10">
+      <?php
+        $pseudo ="Bonport";
+        include '../../components/covoiturage/info-conducteur.php'
+      ?>
+      <?php
+        $starClass = "infos-voiture__star main f-row g-5 h-25";
+        $textClass = "infos-voiture__text secondary";
+        include '../../components/icone/note.php';
+      ?>
+    </div>
     <?php
       $valeur ="20";
       include "../../components/covoiturage/prix.php";
-    ?>
-    <?php
-      $starClass = "infos-voiture__star main f-row g-5 h-25";
-      $textClass = "infos-voiture__text secondary";
-      include '../../components/icone/note.php';
     ?>
   </div>
   <div class="container f-row w-100 g-10 p-10">
@@ -51,11 +53,11 @@
   <div class="container f-col just-center w-100 g-10 p-20 al-sb">
     <h2>Vos préférences</h2>
     <p>Autorisez-vous les :</p>
-    <div class="f-row al-center g-10 p-10">
+    <div class="f-row al-center g-10">
       <input type="checkbox" id="fumeur" name="fumeur" value="fumeur" />
       <label class="textInline" for="fumeur">Fumeurs</label>
     </div>
-    <div class="f-row al-center g-10 p-10">
+    <div class="f-row al-center g-10">
       <input type="checkbox" id="animaux" name="animaux" value="animaux" />
       <label class="textInline" for="animaux">Animaux</label>
     </div>
