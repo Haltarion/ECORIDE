@@ -7,5 +7,8 @@
     required
   >
   <!-- Message d'alerte --------------------------------------------->
-  <?php include 'C:/Users/micha/OneDrive/Documents/GitHub/ECORIDE/components/form/error-alerte.php'; ?>
+  <?php
+    $alertMessage = "Merci de renseigner une date";
+    include 'C:/Users/micha/OneDrive/Documents/GitHub/ECORIDE/components/form/error-alerte.php';
+  ?>
 </div>

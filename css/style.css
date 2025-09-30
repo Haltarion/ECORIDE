@@ -180,6 +180,7 @@ a {
   bottom: 80px;
   margin-right: 0px;
 }
+
 /* Style pour les petits écrans  ------------------------------------ */
 @media screen and (max-width: 1075px) {
   .detail-voyage__button__participer {

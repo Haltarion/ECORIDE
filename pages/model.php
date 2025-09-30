@@ -1,11 +1,11 @@
-<?php include '../common/head.php'; ?>
+<?php include '../../common/head.php'; ?>
 
 <body>
 
-  <?php include '../common/header.php'; ?>
+  <?php include '../../common/header.php'; ?>
 
   <h1>Model</h1>
 
 </body>
 
-<?php include '../common/footer.php'; ?>
+<?php include '../../common/footer.php'; ?>

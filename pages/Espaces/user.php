@@ -47,7 +47,7 @@
     <div class="f-col al-start w-100 just-sb maxw-200">
       <a href="" class="btn btn-main mh-50 w-100">Historique des covoiturages</a>
       <a href="" class="btn btn-main mh-50 w-100">Proposer un voyage</a>
-      <a href="" class="btn btn-main mh-50 w-100">gérer mes véhicules</a>
+      <a href="../../pages/espaces/user-vehicle.php" class="btn btn-main mh-50 w-100">gérer mes véhicules</a>
     </div>
   </div>
   <div class="container f-col just-center w-100 g-10 p-20 al-sb">
@@ -70,12 +70,23 @@
   </div>
   <div class="container f-col just-center w-100 g-10 p-20 al-sb">
     <h2>Mes véhicules</h2>
-    <div class="plaque relative">
-      <p class="imatriculation">GB-790-VM</p>
-    </div>
-
+    <?php
+      $imatriculation = "AB-123-CD";
+      $marque = "Citroën";
+      $model = "C4";
+      $class = "";
+      $visible = "hide";
+      include "../../components/covoiturage/recap-vehicule.php"
+    ?>
+    <?php
+      $imatriculation = "EF-456-GH";
+      $marque = "Peugeot";
+      $model = "208";
+      $class = "";
+      $visible = "hide";
+      include "../../components/covoiturage/recap-vehicule.php"
+    ?>
   </div>
-
 </body>
 
 <?php include '../../common/footer.php'; ?>

@@ -5,6 +5,7 @@
     <li class="header__nav__menu__link"><a href="../../index.php">Accueil</a></li>
     <li class="header__nav__menu__link"><a href="../../pages/covoiturages.php">Accès aux covoiturages</a></li>
     <li class="header__nav__menu__link"><a href="../../pages/connexion.php">Connexion</a></li>
+    <li class="header__nav__menu__link"><a href="../../pages/espaces/user.php">Mon compte</a></li>
     <li class="header__nav__menu__link"><a href="../../pages/contact.php">Contact</a></li>
   </ul>
 </nav>
