@@ -6,7 +6,7 @@
 
   <h1>Accueil</h1>
 
-  <form action="../../pages/covoiturages.php" method="post" id="searchFormDestination" class="searchForm f-row w-100 r-50" role="search">
+  <form action="pages/covoiturages.php" method="GET" id="searchFormDestination" class="searchForm f-row w-100 r-50" role="search">
     <label class="offScreen" for="searchText">
       Où souhaitez-vous aller ?
     </label>
@@ -20,7 +20,7 @@
       required>
     <button type="submit" class="searchButton h-100">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-      <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
       </svg>
     </button>
   </form>
@@ -36,8 +36,6 @@
     <p>Parce que se déplacer peut rimer avec respect et convivialité, nous vous invitons à rejoindre la communauté ECORIDE dès aujourd’hui.</p>
     <p>Roulez vert, roulez ensemble ! 🌍</p>
   </div>
-
 </body>
 
 <?php include './common/footer.php'; ?>
-

@@ -6,7 +6,7 @@
 
   <h1>Gestion de mes véhicules</h1>
   <div class="container f-col just-start w-100 g-10 p-20 al-sb">
-    <h2>Nouveau véhicule</h2>
+    <h2>Modification du véhicule</h2>
     <?php
     $inputId = "imatriculation";
     $label = "Plaque d'immatriculation*";
@@ -46,32 +46,13 @@
     include '../../components/form/input-number.php';
     ?>
     <div class="container f-row just-sb g-10 w-100 ">
-      <a href="../../pages/espaces/user.php" class="btn btn-annul">Retour à mon compte</a>
+      <a href="../../pages/espaces/user.php" class="btn btn-annul">Annuler</a>
       <?php
       $class = "btn btn-main mh-50";
-      $buttonText = "Ajouter un nouveau véhicule";
+      $buttonText = "Modifier";
       include '../../components/clicable/button.php';
       ?>
     </div>
-  </div>
-  <div class="container f-col just-center w-100 g-10 al-sb">
-    <h2>Mes véhicules</h2>
-    <?php
-    $imatriculation = "AB-123-CD";
-    $marque = "Citroën";
-    $model = "C4";
-    $class = "";
-    $pencilIconVisibility = "visible";
-    include "../../components/covoiturage/recap-vehicule.php"
-    ?>
-    <?php
-    $imatriculation = "EF-456-GH";
-    $marque = "Peugeot";
-    $model = "208";
-    $class = "";
-    $pencilIconVisibility = "visible";
-    include "../../components/covoiturage/recap-vehicule.php"
-    ?>
   </div>
 </body>
 

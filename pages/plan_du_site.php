@@ -13,8 +13,12 @@
     </ul>
     <li><a href="../../pages/connexion.php">Connexion</a></li>
     <ul>
-      <li><a href="../../pages/espaces/creat-account.php">Voyages proposés</a></li>
+      <li><a href="../../pages/espaces/creat-account.php">Créer un compte</a></li>
+      <li><a href="../../pages/espaces/admin.php">Admin</a></li>
       <li><a href="../../pages/espaces/user.php">Mon compte</a></li>
+      <ul>
+        <li><a href="../../pages/espaces/user-vehicle.php">Gestion de mes véhicules</a></li>
+      </ul>
     </ul>
     <li><a href="../../pages/contact.php">Contact</a></li>
     <li><a href="../../pages/covoiturages.php">Accès aux covoiturages</a></li>

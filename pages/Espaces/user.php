@@ -9,18 +9,18 @@
   <div class="container f-row f-w al-start just-sb w-100 p-20">
     <div class="f-col g-10">
       <?php
-        $pseudo ="Bonport";
-        include '../../components/covoiturage/info-conducteur.php'
+      $pseudo = "Bonport";
+      include '../../components/covoiturage/info-conducteur.php'
       ?>
       <?php
-        $starClass = "infos-voiture__star main f-row g-5 h-25";
-        $textClass = "infos-voiture__text secondary";
-        include '../../components/icone/note.php';
+      $starClass = "infos-voiture__star main f-row g-5 h-25";
+      $textClass = "infos-voiture__text secondary";
+      include '../../components/icone/note.php';
       ?>
     </div>
     <?php
-      $valeur ="20";
-      include "../../components/covoiturage/prix.php";
+    $valeur = "20";
+    include "../../components/covoiturage/prix.php";
     ?>
   </div>
   <div class="container f-row w-100 g-10 p-10">
@@ -39,9 +39,9 @@
         <label class="textInline" for="les2">Les deux</label>
       </div>
       <?php
-        $alertMessage="Vous devez renseigner au moins 1 véhicule";
-        $class="hide";
-        include "../../components/form/error-alerte.php";
+      $alertMessage = "Vous devez renseigner au moins 1 véhicule";
+      $class = "hide";
+      include "../../components/form/error-alerte.php";
       ?>
     </div>
     <div class="f-col al-start w-100 just-sb maxw-200">
@@ -62,29 +62,29 @@
       <label class="textInline" for="animaux">Animaux</label>
     </div>
     <?php
-      $inputId="preferences";
-      $placeholder="Indiquez ici vos préférences";
-      $label="Avez-vous d'autres préférences à indiquer ?";
-      include "../../components/form/input-textarea.php"
+    $inputId = "preferences";
+    $placeholder = "Indiquez ici vos préférences";
+    $label = "Avez-vous d'autres préférences à indiquer ?";
+    include "../../components/form/input-textarea.php"
     ?>
   </div>
   <div class="container f-col just-center w-100 g-10 p-20 al-sb">
     <h2>Mes véhicules</h2>
     <?php
-      $imatriculation = "AB-123-CD";
-      $marque = "Citroën";
-      $model = "C4";
-      $class = "";
-      $visible = "hide";
-      include "../../components/covoiturage/recap-vehicule.php"
+    $imatriculation = "AB-123-CD";
+    $marque = "Citroën";
+    $model = "C4";
+    $class = "";
+    $pencilIconVisibility = "hide";
+    include "../../components/covoiturage/recap-vehicule.php"
     ?>
     <?php
-      $imatriculation = "EF-456-GH";
-      $marque = "Peugeot";
-      $model = "208";
-      $class = "";
-      $visible = "hide";
-      include "../../components/covoiturage/recap-vehicule.php"
+    $imatriculation = "EF-456-GH";
+    $marque = "Peugeot";
+    $model = "208";
+    $class = "";
+    $pencilIconVisibility = "hide";
+    include "../../components/covoiturage/recap-vehicule.php"
     ?>
   </div>
 </body>

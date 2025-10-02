@@ -43,5 +43,8 @@
     "rgba(127,255,127,0.2)",
     "rgba(255,127,255,0.2)",
     "rgba(79,236,236,0.2)"
-  ]
+  ],
+  "[php]": {
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  }
 }

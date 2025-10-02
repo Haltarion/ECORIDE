@@ -4,11 +4,10 @@
     type="date"
     id="<?= $inputDateId ?>"
     name="<?= $inputDateName ?>"
-    required
-  >
+    required>
   <!-- Message d'alerte --------------------------------------------->
   <?php
-    $alertMessage = "Merci de renseigner une date";
-    include 'C:/Users/micha/OneDrive/Documents/GitHub/ECORIDE/components/form/error-alerte.php';
+  $alertMessage = "Merci de renseigner une date";
+  include 'error-alerte.php';
   ?>
 </div>
