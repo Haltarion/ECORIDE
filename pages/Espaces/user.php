@@ -24,6 +24,8 @@
     ?>
   </div>
   <div class="container f-row w-100 g-10 p-10">
+
+    <!-- Boutons radio -->
     <div class="f-col al-start w-100">
       <h2>Vous êtes</h2>
       <div class="f-row al-center g-10 p-10">
@@ -44,13 +46,17 @@
       include "../../components/form/error-alerte.php";
       ?>
     </div>
+
+    <!-- Boutons classiques -->
     <div class="f-col al-start w-100 just-sb maxw-200">
       <a href="" class="btn btn-main mh-50 w-100">Historique des covoiturages</a>
-      <a href="" class="btn btn-main mh-50 w-100">Proposer un voyage</a>
-      <a href="../../pages/espaces/user-vehicle.php" class="btn btn-main mh-50 w-100">gérer mes véhicules</a>
+      <a href="suggest-trip.php" class="btn btn-main mh-50 w-100">Proposer un voyage</a>
+      <a href="user-vehicle.php" class="btn btn-main mh-50 w-100">gérer mes véhicules</a>
     </div>
   </div>
   <div class="container f-col just-center w-100 g-10 p-20 al-sb">
+
+    <!-- Préférences -->
     <h2>Vos préférences</h2>
     <p>Autorisez-vous les :</p>
     <div class="f-row al-center g-10">
@@ -69,6 +75,8 @@
     ?>
   </div>
   <div class="container f-col just-center w-100 g-10 p-20 al-sb">
+
+    <!-- Véhicules -->
     <h2>Mes véhicules</h2>
     <?php
     $imatriculation = "AB-123-CD";

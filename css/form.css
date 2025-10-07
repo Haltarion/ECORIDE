@@ -102,7 +102,7 @@ input[type="number"] {
   margin-left: 20px;
 }
 
-.covoiturages__container__button {
+.covoiturage__container__button {
   padding: 0px 15px;
 }
 
@@ -134,12 +134,19 @@ input[type="number"] {
 }
 /* Style pour les écrans mobile ------------------------------------ */
 @media screen and (max-width: 749px) {
-  /* Style pour la page de covoiturage */
-  .covoiturages,
+  /* Style pour les formulaire de covoiturage */
+  .covoiturageForm,
   .connexion {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    max-width: 500px;
+  }
+  .covoiturageComplement {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
     justify-content: center;
     max-width: 500px;
   }
@@ -158,13 +165,19 @@ input[type="number"] {
 /* Style pour les écrans desktop ----------------------------------- */
 @media screen and (min-width: 750px) {
   /* Style pour la page de covoiturage */
-  .covoiturages,
+  .covoiturageForm,
   .connexion {
     display: flex;
     flex-direction: row;
     align-items: stretch;
     justify-content: center;
   }
+  .covoiturageComplement {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   .connexion__separateur::before,
   .connexion__separateur::after {
     height: 150px;

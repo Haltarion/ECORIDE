@@ -11,8 +11,8 @@
       <?php include '../../components/covoiturage/depart-arrive.php' ?>
       <div class="f-row just-sa w-100">
         <?php
-          $valeur ="10";
-          include '../../components/covoiturage/prix.php' ?>
+        $valeur = "10";
+        include '../../components/covoiturage/prix.php' ?>
         <?php
         $class = "secondary";
         include '../../components/icone/electricalCar.php';
@@ -23,8 +23,8 @@
     <h2>Conducteur</h2>
     <div class="f-row just-sa p-20 g-20 r-15 b-1 b-secondary">
       <?php
-        $pseudo ="Bonport";
-        include '../../components/covoiturage/info-conducteur.php' ?>
+      $pseudo = "Bonport";
+      include '../../components/covoiturage/info-conducteur.php' ?>
       <?php
       $starClass = "infos-voiture__star main f-row g-5 h-25";
       $textClass = "infos-voiture__text secondary";
@@ -46,11 +46,7 @@
   </div>
   <div class="h-25"></div>
   <div class="detail-voyage__button__participer container fixed f-row-r">
-    <?php
-      $class = "btn btn-main ";
-      $buttonText = "Participer";
-      include '../../components/clicable/button.php'
-    ?>
+    <button class="btn btn-main mr-10">Participer</button>
   </div>
 </body>
 

@@ -47,11 +47,7 @@
     ?>
     <div class="container f-row just-sb g-10 w-100 ">
       <a href="../../pages/espaces/user.php" class="btn btn-annul">Retour à mon compte</a>
-      <?php
-      $class = "btn btn-main mh-50";
-      $buttonText = "Ajouter un nouveau véhicule";
-      include '../../components/clicable/button.php';
-      ?>
+      <button class="btn btn-main mh-50">Ajouter un nouveau véhicule</button>
     </div>
   </div>
   <div class="container f-col just-center w-100 g-10 al-sb">

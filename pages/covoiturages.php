@@ -4,10 +4,10 @@
 
   <?php include '../common/header.php'; ?>
 
-  <h1>Rechercher un covoiturages</h1>
+  <h1>Rechercher un covoiturage</h1>
 
-  <div class="covoiturages w-100 g-15 p-15 container">
-    <fieldset class="covoiturages__depart">
+  <div class="covoiturageForm w-100 g-15 p-15 container">
+    <fieldset>
       <legend>Départ</legend>
       <?php
       $label = "Quelle est votre adresse de départ ?";
@@ -26,7 +26,7 @@
       include '../components/form/input-date.php';
       ?>
     </fieldset>
-    <fieldset class="covoiturages__arrivee">
+    <fieldset class="covoiturage__arrivee">
       <legend>Arrivée</legend>
       <?php
       $label = "Quelle est votre adresse d'arrivée ?";
@@ -48,12 +48,8 @@
     </fieldset>
 
   </div>
-  <div class="covoiturages__container__button w-100 f-row-r container">
-    <?php
-    $buttonText = "Valider";
-    $class = "btn-main";
-    include '../components/clicable/button.php'
-    ?>
+  <div class="covoiturage__container__button w-100 f-row-r container">
+    <button class="btn btn-main">Valider</button>
   </div>
 
 </body>

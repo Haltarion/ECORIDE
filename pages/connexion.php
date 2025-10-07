@@ -9,19 +9,15 @@
   <div class="connexion f-col w-100 g-30 p-15 container">
     <div class="connexion__existingCount f-col g-15 w-100">
       <?php
-        $alertMessage = "Merci de rentrer un email valide.";
-        $required ="required";
-        include '../components/form/input-email.php';
+      $alertMessage = "Merci de rentrer un email valide.";
+      $required = "required";
+      include '../components/form/input-email.php';
       ?>
 
       <?php include '../components/form/input-mdp.php'; ?>
 
       <div>
-        <?php
-          $buttonText = "Valider";
-          $class = "btn btn-main";
-          include '../components/clicable/button.php'
-        ?>
+        <button class="btn btn-main">Valider</button>
       </div>
     </div>
 
@@ -30,11 +26,7 @@
     </div>
 
     <div class="connexion__newCount f-col just-center w-100">
-      <?php
-        $buttonText = "Créer un compte";
-        $class = "btn btn-connect";
-        include '../components/clicable/button.php'
-      ?>
+      <a href="espaces/creat-account.php" class="btn btn-connect">Créer un compte</a>
     </div>
   </div>
 

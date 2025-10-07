@@ -46,12 +46,8 @@
     include '../../components/form/input-number.php';
     ?>
     <div class="container f-row just-sb g-10 w-100 ">
-      <a href="../../pages/espaces/user.php" class="btn btn-annul">Annuler</a>
-      <?php
-      $class = "btn btn-main mh-50";
-      $buttonText = "Modifier";
-      include '../../components/clicable/button.php';
-      ?>
+      <a href="../../pages/espaces/user-vehicle.php" class="btn btn-annul">Annuler</a>
+      <button class="btn btn-main mh-50">Modifier</button>
     </div>
   </div>
 </body>

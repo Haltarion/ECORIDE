@@ -18,10 +18,13 @@
       <li><a href="../../pages/espaces/user.php">Mon compte</a></li>
       <ul>
         <li><a href="../../pages/espaces/user-vehicle.php">Gestion de mes véhicules</a></li>
+        <ul>
+          <li><a href="../../pages/espaces/modif-vehicle.php">Modifier un véhicule</a></li>
+        </ul>
+        <li><a href="../../pages/espaces/suggest-trip.php">Proposer un voyage</a></li>
       </ul>
     </ul>
     <li><a href="../../pages/contact.php">Contact</a></li>
-    <li><a href="../../pages/covoiturages.php">Accès aux covoiturages</a></li>
   </ul>
 
 </body>
