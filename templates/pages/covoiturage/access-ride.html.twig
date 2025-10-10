@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Covoiturage - Accès aux trajets
+{% endblock %}
+
+{% block body %}
+<body>
+
+  {% include 'partials/header.html.twig' %}
+
+  <h1>Voyages proposés</h1>
+
+  {% include 'components/filtre/filtre.html.twig' %}
+
+  {% include 'components/covoiturage/card-covoit.html.twig' %}
+  {% include 'components/covoiturage/card-covoit.html.twig' %}
+  {% include 'components/covoiturage/card-covoit.html.twig' %}
+
+</body>
+{% endblock %}

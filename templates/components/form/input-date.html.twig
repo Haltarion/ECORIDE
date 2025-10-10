@@ -1,0 +1,12 @@
+<div class="f-col al-start w-100 mb-8">
+  <label for="{{ inputDateId }}">{{ labelDate }}</label>
+  <input
+    type="date"
+    id="{{ inputDateId }}"
+    name="{{ inputDateName }}"
+    required>
+  <!-- Message d'alerte -->
+  {% set class = "mt-2" %}
+  {% set alertMessage = "Merci de renseigner une date" %}
+  {% include 'components/form/error-alerte.html.twig' %}
+</div>

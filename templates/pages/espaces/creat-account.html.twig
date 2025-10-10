@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un compte - EcoRide{% endblock %}
+
+{% block body %}
+  <h1>Créer un compte</h1>
+
+  <div class=" f-col g-20 al-center">
+    {# Champ : Pseudo #}
+    {% include 'components/form/input-text.html.twig' with {
+      inputId: 'pseudo',
+      label: 'Pseudo',
+      placeholder: 'Entrez votre pseudonyme',
+      required: true,
+      alertMessage: 'Merci de renseigner un Pseudo'
+    } %}
+
+    {# Champ : Email #}
+    {% include 'components/form/input-email.html.twig' with {
+      alertMessage: 'Merci de rentrer un email valide',
+      required: true
+    } %}
+
+    {# Champ : Mot de passe #}
+    {% include 'components/form/input-mdp.html.twig' %}
+
+    <button class="btn btn-main maxw-400">Valider et créditer 20 crédits</button>
+  </div>
+{% endblock %}

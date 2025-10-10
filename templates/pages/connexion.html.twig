@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Se connecter{% endblock %}
+
+{% block body %}
+  <h1>Se connecter</h1>
+
+  <form class="connexion g-30 p-15 container">
+    <div class="connexion__existingCount f-col g-15 w-100">
+      {# Champ email #}
+      {% include 'components/form/input-email.html.twig' with {
+        label: 'Adresse email',
+        inputId: 'email',
+        placeholder: 'Entrez votre adresse email',
+        required: true,
+        alertMessage: 'Merci de rentrer un email valide.'
+      } %}
+
+      {# Champ mot de passe #}
+      {% include 'components/form/input-mdp.html.twig' %}
+
+      <div>
+        <button class="btn btn-main" type="submit">Valider</button>
+      </div>
+    </div>
+
+    <div class="connexion__separateur al-center just-center g-20 w-100">
+      <p class="connexion__separateur__text">OU</p>
+    </div>
+
+    <div class="connexion__newCount f-col just-center w-100">
+      <a href="{{ path('app_creat_account') }}" class="btn btn-connect">Créer un compte</a>
+    </div>
+  </form>
+{% endblock %}
