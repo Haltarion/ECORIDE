@@ -8,11 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SearchRideController extends AbstractController
 {
-  #[Route('/search-ride', name: 'app_search_ride', methods:['POST','GET'])]
+  #[Route('/search-ride', name: 'app_search_ride', methods:['POST'])]
   public function searchRide(Request $request): Response
   {
     // Récupération de la ville d'arrivée depuis POST
-    $destinationArrivee = $request->request->get('searchTextDestination', '');
+    $destinationArrivee = $request->request->get('destination');
 
     return $this->render('pages/search-ride.html.twig', [
       'destinationArrivee'=> $destinationArrivee,

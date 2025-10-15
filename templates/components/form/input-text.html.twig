@@ -1,5 +1,5 @@
 <div class="f-col al-start w-100 mb-8">
   <label for="{{ inputId }}">{{ label }}</label>
-  <input type="text" id="{{ inputId }}" placeholder="{{ placeholder }}" value="" {{ required|default('') }}>
+  <input type="text" id="{{ inputId }}" placeholder="{{ placeholder }}" value="{{value|default('')}}" {% if required %} required {% endif %}>
   {% include 'components/form/error-alerte.html.twig' %}
 </div>
