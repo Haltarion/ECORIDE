@@ -6,7 +6,7 @@
   <h1>Rechercher un covoiturage</h1>
 
 
-  <form method="POST" action="{{ path('app_search_ride') }}" class="w-100 f-col al-center">
+  <form id="formSearchRide" method="POST" action="{{ path('app_search_ride') }}" class="w-100 f-col al-center">
     <div class="covoiturageForm w-100 g-15 p-15 container">
       <fieldset class="covoiturage__arrivee">
         <legend>Départ</legend>
@@ -56,7 +56,7 @@
     </div>
 
       <div class="covoiturage__container__button w-100 f-row-r container">
-        <button type="submit" class="btn btn-main">Valider</button>
+        <button type="submit" id="btnSearchRide" class="btn btn-main">Valider</button>
       </div>
     </form>
 

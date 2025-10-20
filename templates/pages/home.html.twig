@@ -4,6 +4,7 @@
 {% block body %}
   <h1>Accueil</h1>
 
+  {# Barre de recherche #}
   <form action="{{ path('app_search_ride') }}" method="POST" id="searchFormDestination" class="searchForm f-row w-100 r-50" role="search">
     <label class="offScreen" for="searchText">
       Où souhaitez-vous aller ?

@@ -3,35 +3,30 @@
 // Vérification des champs requis
 
 // Search-ride.html.twig
-// Sélection des champs
+// Récupération des champs
 const inputAdresseDepart = document.getElementById("adresseDepart");
 const inputDateDepart = document.getElementById("dateDepart");
 const inputAdresseArrivee = document.getElementById("adresseArrivee");
 const inputDateArrivee = document.getElementById("dateArrivee");
+const btnSearchRide = document.getElementById("btnSearchRide");
+const formInscription = document.getElementById("formSearchRide");
 
-// Ajout des écouteurs sur chaque input
-[
-    inputAdresseDepart,
-    inputDateDepart,
-    inputAdresseArrivee,
-    inputDateArrivee,
-].forEach((input) => {
-    if (input) input.addEventListener("input", validateRequired);
-});
+// Ajout des écouteurs sur chaque input text
+inputAdresseDepart.addEventListener("keyup", validateRequired);
+inputAdresseArrivee.addEventListener("keyup", validateRequired);
+inputDateDepart.addEventListener("input", validateRequired);
+inputDateArrivee.addEventListener("input", validateRequired);
 
 // Fonction de validation d'un champ
 function validateRequired(event) {
     const input = event.target;
-    const alertDiv = input.closest(".form-group").nextElementSibling; // le div .component__alerte juste après
-
-    if (input.value.trim() !== "") {
-        input.classList.add("is-valid");
+    if (input.value.trim() != "") {
         input.classList.remove("is-invalid");
-        if (alertDiv) alertDiv.style.display = "none";
+        input.classList.add("is-valid");
+        return true;
     } else {
         input.classList.remove("is-valid");
         input.classList.add("is-invalid");
-        if (alertDiv) alertDiv.style.display = "flex";
+        return false;
     }
-    console.log("Champ :", input.id, "Valeur :", input.value);
 }

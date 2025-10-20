@@ -194,15 +194,6 @@ a {
     justify-content: center;
 }
 
-/* Style pour la validation des formulaires */
-.is-valid {
-    border-color: #3cb371;
-}
-
-.is-invalid {
-    border-color: #e63946;
-}
-
 /* Style pour les petits écrans */
 @media screen and (max-width: 1075px) {
     .detail-voyage__button__participer {

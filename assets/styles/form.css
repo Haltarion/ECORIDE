@@ -133,6 +133,28 @@ input[type="number"] {
     top: 0;
     right: 0;
 }
+
+/* Style pour la validation des formulaires */
+.input-text.is-valid:focus {
+    border-color: #28a745 !important;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
+}
+
+.input-text.is-invalid:focus {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+}
+
+.is-valid {
+    border: 2px solid;
+    border-color: #3cb371;
+}
+
+.is-invalid {
+    border: 2px solid;
+    border-color: #e63946;
+}
+
 /* Style pour les écrans mobile ------------------------------------ */
 @media screen and (max-width: 749px) {
     /* Style pour les formulaire de covoiturage */
