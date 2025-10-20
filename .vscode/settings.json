@@ -1,6 +1,6 @@
 {
     "php.validate.executablePath": "C:\\php\\php.exe",
-    "workbench.colorTheme": "Night Owl",
+    "workbench.colorTheme": "GitHub Dark Colorblind (Beta)",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.colorCustomizations": {
         "terminal.background": "#131212",
