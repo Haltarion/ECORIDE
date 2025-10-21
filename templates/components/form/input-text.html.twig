@@ -1,3 +1,5 @@
+{% set required = required|default(false) %}
+
 <div class="form-group f-col al-start w-100 mb-8">
   <label for="{{ inputId }}">{{ label }}</label>
   <input
@@ -9,13 +11,8 @@
     class="input-text"
     {% if required %} required {% endif %}
   >
-  {# Message d'erreur, caché par défaut #}
-  <div class="component__alerte" style="display: none;">
-    <span class="component__alerte__icon">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
-      </svg>
-    </span>
-    <p>{{ alertMessage }}</p>
+  {# Inclusion du message d’alerte si le champ est requis et vide #}
+  <div class="error-message hide">
+    {% include 'components/form/error-alerte.html.twig' with { alertMessage: alertMessage } %}
   </div>
 </div>

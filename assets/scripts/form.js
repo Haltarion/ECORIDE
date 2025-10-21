@@ -8,39 +8,77 @@ const inputAdresseArrivee = document.getElementById("adresseArrivee");
 const inputDateArrivee = document.getElementById("dateArrivee");
 
 const btnSearchRide = document.getElementById("btnSearchRide");
-const formSearchRide = document.getElementById("formSearchRide");
 
-// Ajout d'écoute des événements sur les inputs et le bouton
-inputAdresseDepart.addEventListener("keyup", validateForm);
-inputAdresseArrivee.addEventListener("keyup", validateForm);
-inputDateDepart.addEventListener("input", validateForm);
-inputDateArrivee.addEventListener("input", validateForm);
+// Tableau de tous les inputs
+const inputs = [
+    inputAdresseDepart,
+    inputAdresseArrivee,
+    inputDateDepart,
+    inputDateArrivee,
+];
 
+// Map pour savoir si un input a été touché
+const touched = new Map();
+inputs.forEach((input) => touched.set(input, false));
+
+// Ajout des écouteurs sur chaque input
+inputs.forEach((input) => {
+    input.addEventListener("input", () => {
+        touched.set(input, true); // marque le champ comme modifié
+        validateForm();
+    });
+    input.addEventListener("keyup", () => {
+        touched.set(input, true); // idem pour keyup
+        validateForm();
+    });
+});
+
+// Ajout de l'écouteur sur le bouton
 btnSearchRide.addEventListener("click", AfficherCovoiturages);
 
-//Function permettant de valider tout le formulaire et d'activer le bouton si tout est ok
+// Fonction globale pour activer/désactiver le bouton
 function validateForm() {
-    const adresseDepartOk = validateRequired(inputAdresseDepart);
-    const AdresseArriveeOk = validateRequired(inputAdresseArrivee);
-    const DateDepartOk = validateRequired(inputDateDepart);
-    const DateArriveeOk = validateRequired(inputDateArrivee);
+    let allValid = true;
 
-    if (adresseDepartOk && AdresseArriveeOk && DateDepartOk && DateArriveeOk) {
-        btnSearchRide.disabled = false;
-    } else {
-        btnSearchRide.disabled = true;
-    }
+    inputs.forEach((input) => {
+        // On fait la validation globale pour tous les champs
+        const isFieldValid = input.value.trim() !== "";
+
+        if (!isFieldValid) allValid = false;
+
+        // On met à jour le visuel et message seulement si le champ a été touché
+        if (touched.get(input)) {
+            validateRequired(input);
+        }
+    });
+
+    btnSearchRide.disabled = !allValid;
 }
 
 // Fonction de validation d'un champ
 function validateRequired(input) {
+    // Recherche du message d'erreur associé (dans la même div parente)
+    const errorDiv = input
+        .closest(".form-group")
+        ?.querySelector(".error-message");
+
     if (input.value.trim() != "") {
         input.classList.remove("is-invalid");
         input.classList.add("is-valid");
+        // Si un message d'erreur est présent, on le cache
+        if (errorDiv) {
+            errorDiv.classList.remove("visible");
+            errorDiv.classList.add("hide");
+        }
         return true;
     } else {
         input.classList.remove("is-valid");
         input.classList.add("is-invalid");
+        // Si un message d'erreur est présent, on l'affiche'
+        if (errorDiv) {
+            errorDiv.classList.remove("hide");
+            errorDiv.classList.add("visible");
+        }
         return false;
     }
 }
