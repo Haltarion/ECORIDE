@@ -1,0 +1,34 @@
+<div class="card-covoit container b-1 b-secondary r-15 g-1">
+
+  {# Partie haute de la carte #}
+  <div class="infos-voyage f-row f-w al-center just-sa g-25">
+    {# Départ / arrivée #}
+    {% include 'components/covoiturage/depart-arrive.html.twig' %}
+
+    {# Prix #}
+    {% include 'components/covoiturage/prix.html.twig' with { valeur: 10 } %}
+  </div>
+
+  {# Séparateur #}
+  <div class="infos-voyage__separator w-100 bg-secondary" role="img" aria-label="séparateur"></div>
+
+  {# Partie basse de la carte #}
+  <div class="infos-voiture f-row al-center just-sa g-20 h-100">
+
+    {# Infos sur le conducteur #}
+    {% include 'components/covoiturage/info-conducteur.html.twig' with { pseudo: 'Bonport' } %}
+
+    {# Note #}
+    {% include 'components/icone/note.html.twig' with { starClass: 'infos-voiture__star main f-row g-5 h-25', textClass: 'infos-voiture__text secondary' } %}
+
+    {# Icone voiture électrique #}
+    {% include 'components/icone/electricalCar.html.twig' with { class: 'secondary' } %}
+
+    {# Places restantes #}
+    {% include 'components/icone/nbPlacesRestantes.html.twig' %}
+
+    {# Bouton détail #}
+    <button class="btn btn-main">Détail</button>
+  </div>
+
+</div>

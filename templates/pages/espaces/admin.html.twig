@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace administrateur{% endblock %}
+
+{% block body %}
+
+  <h1>Espace administrateur</h1>
+
+  <div class="admin__container w-100 f-col g-20 al-center">
+    <div class="w-100 f-row just-sb g-20 al-center">
+      <span class="admin__container__credit">
+        <p class="admin__container__credit__text">10</p>
+        <p class="admin__container__credit__text">Crédits</p>
+      </span>
+
+      <button class="btn btn-main">Nouveau compte employé</button>
+    </div>
+
+    <div class="admin__graph">
+      <div class="admin__graph__nbCovParJour f-row just-center w-100 h-300">
+        <canvas id="nbCovParJour"></canvas>
+      </div>
+
+      <div class="admin__graph__gains f-row just-center w-100 h-300">
+        <canvas id="gains"></canvas>
+      </div>
+    </div>
+  </div>
+{% endblock %}

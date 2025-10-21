@@ -1,0 +1,220 @@
+/* Style pour barre de recherche */
+.searchForm {
+    background: var(--white-color);
+    border: 1px solid var(--secondary-color);
+    max-width: 400px;
+}
+
+.searchText {
+    color: var(--black-color);
+    background: transparent;
+    border: none;
+    flex-grow: 1;
+    padding: 0.25em 0.25em 0.25em 1em;
+    outline: none;
+}
+
+.searchButton {
+    padding: 0.25em 0.5em 0.25em 0.5em;
+    background: transparent;
+    stroke: var(--black-color);
+    color: var(--black-color);
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Style pour la page de connexion */
+.connexion__separateur::before,
+.connexion__separateur::after {
+    display: block;
+    background: var(--black-color);
+    content: "";
+}
+
+/* Style pour les fieldsets -----------------------------------*/
+fieldset {
+    border: 1px solid var(--grey-color);
+    border-radius: 8px;
+    padding: 16px;
+    width: 100%;
+    width: -webkit-fill-available;
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: flex-start;
+}
+
+legend {
+    font-size: var(--fs-h2);
+    font-weight: bold;
+}
+
+/* Style pour les commponents de formulaire ---------------------*/
+input[type="text"],
+input[type="textarea"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="number"] {
+    width: 100%;
+    width: -webkit-fill-available;
+}
+
+/* Style pour les inputs date -----------------------------------*/
+.component__input-date__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+}
+.component__input-date__container div {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.component__input-date__container input {
+    width: auto;
+}
+
+/* Style pour le message d'erreur -------------------------------*/
+.component__alerte__icon svg {
+    width: 15px;
+    height: 15px;
+    stroke: var(--red-color);
+    margin-top: 3px;
+}
+
+.component__alerte {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 4px;
+    color: var(--red-color);
+    margin-top: 4px;
+    visibility: visible; /* Masqué par défaut */
+}
+
+.component__alerte p {
+    margin-block: 0;
+}
+.component__alerte ul {
+    margin-block: 0;
+    margin-left: 20px;
+}
+
+.covoiturage__container__button {
+    padding: 0px 15px;
+}
+
+.plaque {
+    background-color: #dcddd8;
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 150px;
+}
+.imatriculation {
+    text-align: center;
+}
+.imatriculation::before,
+.imatriculation::after {
+    content: "F";
+    background-color: #114dbb;
+    display: block;
+    width: 20px;
+    height: 100%;
+    position: absolute;
+}
+.imatriculation::before {
+    top: 0;
+    left: 0;
+}
+.imatriculation::after {
+    top: 0;
+    right: 0;
+}
+
+/* Style pour la validation des formulaires */
+.input-text.is-valid:focus {
+    border-color: #28a745 !important;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
+}
+
+.input-text.is-invalid:focus {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+}
+
+.is-valid {
+    border: 2px solid;
+    border-color: #3cb371;
+}
+
+.is-invalid {
+    border: 2px solid;
+    border-color: #e63946;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+/* Style pour les écrans mobile ------------------------------------ */
+@media screen and (max-width: 749px) {
+    /* Style pour les formulaire de covoiturage */
+    .covoiturageForm,
+    .connexion {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 500px;
+    }
+    .covoiturageComplement {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        max-width: 500px;
+    }
+
+    .connexion__separateur {
+        display: flex;
+        flex-direction: row;
+    }
+    .connexion__separateur::before,
+    .connexion__separateur::after {
+        height: 1px;
+        width: 100%;
+        width: -webkit-fill-available;
+    }
+}
+/* Style pour les écrans desktop ----------------------------------- */
+@media screen and (min-width: 750px) {
+    /* Style pour la page de covoiturage */
+    .covoiturageForm,
+    .connexion {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        justify-content: center;
+    }
+    .covoiturageComplement {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .connexion__separateur::before,
+    .connexion__separateur::after {
+        height: 150px;
+        width: 1px;
+    }
+
+    .connexion__separateur {
+        display: flex;
+        flex-direction: column;
+        width: 50px;
+    }
+}

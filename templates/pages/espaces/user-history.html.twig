@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Historique des covoiturages - EcoRide
+{% endblock %}
+
+{% block body %}
+  <h1>Historique des covoiturages</h1>
+
+  {% include 'components/covoiturage/trip-history.html.twig' with {
+    villeDepart: 'Paris',
+    dateDepart: '12/06/2024',
+    heureDepart: '14:30',
+    villeArrivee: 'Lyon',
+    dateArrivee: '12/06/2024',
+    heureArrivee: '17:30',
+    valeur: '20',
+    nbPlaces: '3'
+  } %}
+
+  {% include 'components/covoiturage/trip-history.html.twig' with {
+    villeDepart: 'Marseille',
+    dateDepart: '05/06/2024',
+    heureDepart: '09:00',
+    villeArrivee: 'Nice',
+    dateArrivee: '05/06/2024',
+    heureArrivee: '11:15',
+    valeur: '15',
+    nbPlaces: '2'
+  } %}
+
+  {% include 'components/covoiturage/trip-history.html.twig' with {
+    villeDepart: 'Bordeaux',
+    dateDepart: '20/05/2024',
+    heureDepart: '16:45',
+    villeArrivee: 'Toulouse',
+    dateArrivee: '20/05/2024',
+    heureArrivee: '19:00',
+    valeur: '10',
+    nbPlaces: '1'
+  } %}
+{% endblock %}

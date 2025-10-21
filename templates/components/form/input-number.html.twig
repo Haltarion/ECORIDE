@@ -1,0 +1,17 @@
+{% set required = required|default(false) %}
+
+<div class="form-group f-col al-start w-100 mb-8">
+  <label for="{{ inputId }}">{{ label }}</label>
+  <input
+    type="number"
+    id="{{ inputId }}"
+    value="{{ value }}"
+    min="{{ min }}"
+    max="{{ max }}"
+    {{ required|default('') }}
+  >
+  {# Inclusion du message d’alerte si le champ est requis et vide #}
+  <div class="error-message hide">
+    {% include 'components/form/error-alerte.html.twig' with { alertMessage: alertMessage } %}
+  </div>
+</div>
