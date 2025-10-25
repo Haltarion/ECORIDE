@@ -1,5 +1,6 @@
-// Script pour le menu burger
+// Script pour le menu burger et le filtre sur mobile
 var openMenu = false;
+var openFiltre = false;
 
 // Initialisation au chargement de la page
 document.addEventListener("DOMContentLoaded", function () {
@@ -10,11 +11,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeIcon = document.querySelector(
         ".header__nav__burger_menu__close-icon"
     );
+    const toggleClose = document.querySelector(".toggle-close");
 
     if (burgerIcon) burgerIcon.style.display = "inline";
     if (closeIcon) closeIcon.style.display = "none";
+    if (!toggleClose)
+        document.querySelector(".filtre__form").classList.add(".toggle-close");
 });
 
+// Fonctions pour le menu mobile
 function actionMenu() {
     openMenu = !openMenu;
 
@@ -53,4 +58,25 @@ function closeMenuMobile() {
         .querySelector(".header__nav__burger_menu")
         .classList.remove("header__nav__burger_menu_open");
     document.querySelector(".header__nav").classList.remove("open");
+}
+
+// Fonctions pour le filtre mobile
+function actionFiltreForm() {
+    openFiltre = !openFiltre;
+
+    if (openFiltre) {
+        openFiltreMobile();
+    } else {
+        closeFiltreMobile();
+    }
+}
+
+function openFiltreMobile() {
+    document.querySelector(".filtre__form").classList.add("toggle-open");
+    document.querySelector(".filtre__form").classList.remove("toggle-close");
+}
+
+function closeFiltreMobile() {
+    document.querySelector(".filtre__form").classList.remove("toggle-open");
+    document.querySelector(".filtre__form").classList.add("toggle-close");
 }
