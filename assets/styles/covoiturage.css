@@ -26,7 +26,6 @@
 .filtre__form {
     border: 1px solid var(--secondary-color);
     border-radius: 10px;
-    padding: 20px;
 }
 
 /* Style pour les cartes de covoiturages ------------------------- */
@@ -121,15 +120,13 @@
     .filtre__form__title {
         display: none;
     }
-    .toggle-close {
+
+    .filtre__form {
         display: none;
-        transform: rotatex(90deg);
-        transition: 1s ease-in-out;
     }
-    .toggle-open {
+    .filtre__form.open {
         display: block;
-        transform: rotatex(0deg);
-        transition: 1s ease-in-out;
+        padding: 20px;
     }
     .infos-voiture {
         flex-wrap: wrap;
