@@ -5,17 +5,17 @@
 {% endblock %}
 
 {% block body %}
-<body>
-
-  {% include 'partials/header.html.twig' %}
-
   <h1>Voyages proposés</h1>
 
-  {% include 'components/filtre/filtre.html.twig' %}
+  <div class="access_ride__container">
+    <div class="access_ride__container__filtre">
+      {% include 'components/filtre/filtre.html.twig' %}
+    </div>
+    <div class="access_ride__container__cards">
+      {% include 'components/covoiturage/card-covoit.html.twig' %}
+      {% include 'components/covoiturage/card-covoit.html.twig' %}
+      {% include 'components/covoiturage/card-covoit.html.twig' %}
+    </div>
+  </div>
 
-  {% include 'components/covoiturage/card-covoit.html.twig' %}
-  {% include 'components/covoiturage/card-covoit.html.twig' %}
-  {% include 'components/covoiturage/card-covoit.html.twig' %}
-
-</body>
 {% endblock %}

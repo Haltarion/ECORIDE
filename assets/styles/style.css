@@ -93,14 +93,6 @@ main {
     position: relative;
 }
 
-/* Style pour les inputs */
-input {
-    border: 1px solid var(--grey-color);
-    border-radius: 4px;
-    font-size: var(--fs-p);
-    padding: 6px 10px;
-}
-
 /* Style pour le pied de page */
 footer {
     bottom: 0px;
@@ -193,14 +185,7 @@ a {
     gap: 20px;
     justify-content: center;
 }
-
-/* Style pour les petits écrans */
-@media screen and (max-width: 1075px) {
-    .detail-voyage__button__participer {
-        margin-right: 62px;
-    }
-}
-
+/* Style pour les grands écrans */
 @media screen and (min-width: 1275px) {
     .admin__graph {
         flex-direction: row;

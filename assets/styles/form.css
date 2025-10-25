@@ -52,6 +52,7 @@ legend {
 }
 
 /* Style pour les commponents de formulaire ---------------------*/
+
 input[type="text"],
 input[type="textarea"],
 input[type="email"],
@@ -60,6 +61,13 @@ input[type="date"],
 input[type="number"] {
     width: 100%;
     width: -webkit-fill-available;
+    border: 1px solid var(--grey-color);
+    border-radius: 4px;
+    font-size: var(--fs-p);
+    padding: 6px 10px;
+}
+input[type="range"] {
+    cursor: pointer;
 }
 
 /* Style pour les inputs date -----------------------------------*/

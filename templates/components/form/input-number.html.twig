@@ -11,7 +11,7 @@
     {{ required|default('') }}
   >
   {# Inclusion du message d’alerte si le champ est requis et vide #}
-  <div class="error-message hide">
+  <div class="error-message hidden">
     {% include 'components/form/error-alerte.html.twig' with { alertMessage: alertMessage } %}
   </div>
 </div>
