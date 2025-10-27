@@ -15,6 +15,11 @@
             <link rel="stylesheet" href="{{ asset('styles/form.css') }}">
             <link rel="stylesheet" href="{{ asset('styles/stars.css') }}">
             <link rel="stylesheet" href="{{ asset('styles/covoiturage.css') }}">
+            <link rel="stylesheet" href="{{ asset('styles/icone.css') }}">
+            <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
         {% endblock %}
 
         {% block importmap %}{{ importmap('app') }}{% endblock %}
@@ -42,6 +47,7 @@
         <script src="{{ asset('scripts/graphs.js') }}"></script>
         <script src="{{ asset('scripts/form.js') }}"></script>
         <script src="{{ asset('scripts/filtre.js') }}"></script>
+        <script src="{{ asset('scripts/icone.js') }}"></script>
         {% endblock %}
     </body>
 </html>

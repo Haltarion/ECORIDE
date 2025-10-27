@@ -107,6 +107,9 @@
     gap: 10px;
     height: 100%;
 }
+.filtre__form {
+    padding: 20px;
+}
 .filtre__form__title {
     padding: 10px;
 }
@@ -126,7 +129,6 @@
     }
     .filtre__form.open {
         display: block;
-        padding: 20px;
     }
     .infos-voiture {
         flex-wrap: wrap;

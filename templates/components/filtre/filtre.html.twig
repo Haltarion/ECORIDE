@@ -15,39 +15,35 @@
     <div class="filtre__item">
       <label class="filtre__item__label" for="ecologique">Voyages écologiques uniquement</label>
       <div class="filtre__item__imput-container f-row al-center g-10">
-        <input
-          type="checkbox"
-          id="ecologique"
-          name="ecologique"
-          value="0"
-        >
+        {% include 'components/icone/interrupteur.html.twig' with {
+          checkboxId: "ecolo",
+        } %}
       </div>
     </div>
     {# Choix du critère prix max #}
     <div class="filtre__item">
       <label class="filtre__item__label" for="prixMax">Prix maximum :</label>
       <div class="filtre__item__imput-container f-row al-center g-10">
-        <input
-            type="range"
-            id="prixMax"
-            name="prixMax"
-            min="2"
-            max="50"
-            step="2"
-            value="50"
-          >
+        {% include 'components/icone/inputRange.html.twig' with {
+          sliderId: "prixMax",
+        } %}
           <span id="prixMaxValeur">50 crédits</span>
         </div>
     </div>
     <div class="filtre__item">
-      <label class="filtre__item__label" for="rapide">Le plus rapide</label>
+      <label class="filtre__item__label" for="duree">Le plus rapide</label>
       <div class="filtre__item__imput-container f-row al-center g-10">
-        <input
-          type="checkbox"
-          id="rapide"
-          name="rapide"
-          value="0"
-        >
+        {% include 'components/icone/interrupteur.html.twig' with {
+          checkboxId: "dureeMax",
+        } %}
+      </div>
+    </div>
+    <div class="filtre__item">
+      <label class="filtre__item__label" for="note">Note minimale</label>
+      <div class="filtre__item__imput-container f-row al-center g-10">
+        {% include 'components/icone/starRating.html.twig' with {
+          starRatingId: "noteMin",
+        } %}
       </div>
     </div>
     <div class="f-row just-end">
