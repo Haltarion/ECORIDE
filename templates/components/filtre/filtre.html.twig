@@ -1,34 +1,52 @@
-<div class="filtre">
 
-  <h2 class="filtre__title">Filtre</h2>
+<button
+  id="filtre__toggle"
+  class="filtre__toggle-btn btn btn-sec filtre__title"
+  type="button"
+>Filtres
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 filtre__toggle-icon">
+    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+  </svg>
+</button>
 
-  <form action="" method="post" class="filtre__form">
-    <ul class="filtre__form__list">
-      <button type="button" class="filtre__form__list__button" onclick="actionElec()">
-        <span class="filtre__form__list__button__text">Ecologique</span>
-        <span class="filtre__form__list__button__icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
-          </svg>
-        </span>
-      </button>
-      <button type="button" class="filtre__form__list__button" onclick="actionPrix()">
-        <span class="filtre__form__list__button__text">Prix max</span>
-        <label for="prixMax" class="offScreen">Prix maximal</label>
-        <input type="text" id="prixMax" placeholder="10 c" required>
-      </button>
-      <button type="button" class="filtre__form__list__button" onclick="actionDuree()">
-        <span class="filtre__form__list__button__text">Durée max</span>
-        <label for="dureeMax" class="offScreen">Durée maximale</label>
-        <input type="text" id="dureeMax" placeholder="1h" required>
-      </button>
-      <button type="button" class="filtre__form__list__button" onclick="actionNote()">
-        <span class="filtre__form__list__button__text">Note minimale</span>
-        <label for="noteMin" class="offScreen">Note minimale</label>
-        {% set starClass = "filtre__form__list__button__note__star" %}
-        {% set textClass = "filtre__form__list__button__note__text" %}
-        {% include 'components/icone/note.html.twig' %}
-      </button>
-    </ul>
+<form id="filtre__form" class="filtre__form">
+  <h2 class="filtre__form__title">Filtre</h2>
+    {# Choix du critère écologique #}
+    <div class="filtre__item">
+      <label class="filtre__item__label" for="ecologique">Voyages écologiques uniquement</label>
+      <div class="filtre__item__imput-container f-row al-center g-10">
+        {% include 'components/icone/interrupteur.html.twig' with {
+          checkboxId: "ecolo",
+        } %}
+      </div>
+    </div>
+    {# Choix du critère prix max #}
+    <div class="filtre__item">
+      <label class="filtre__item__label" for="prixMax">Prix maximum :</label>
+      <div class="filtre__item__imput-container f-row al-center g-10">
+        {% include 'components/icone/inputRange.html.twig' with {
+          sliderId: "prixMax",
+        } %}
+          <span id="prixMaxValeur">50 crédits</span>
+        </div>
+    </div>
+    <div class="filtre__item">
+      <label class="filtre__item__label" for="duree">Le plus rapide</label>
+      <div class="filtre__item__imput-container f-row al-center g-10">
+        {% include 'components/icone/interrupteur.html.twig' with {
+          checkboxId: "dureeMax",
+        } %}
+      </div>
+    </div>
+    <div class="filtre__item">
+      <label class="filtre__item__label" for="note">Note minimale</label>
+      <div class="filtre__item__imput-container f-row al-center g-10">
+        {% include 'components/icone/starRating.html.twig' with {
+          starRatingId: "noteMin",
+        } %}
+      </div>
+    </div>
+    <div class="f-row just-end">
+    <button id="filtre__button" class="filtre__button btn btn-main" type="button">Appliquer</button>
+    </div>
   </form>
-</div>

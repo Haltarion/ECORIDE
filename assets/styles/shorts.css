@@ -30,6 +30,9 @@
 .just-start {
     justify-content: flex-start;
 }
+.just-end {
+    justify-content: flex-end;
+}
 .just-center {
     justify-content: center;
 }
@@ -268,7 +271,7 @@
 }
 
 /* Style pour l'affichage */
-.hide {
+.hidden {
     display: none;
 }
 .visible {

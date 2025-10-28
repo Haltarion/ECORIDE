@@ -1,0 +1,191 @@
+.access_ride__container {
+    width: 100%;
+    width: -webkit-fill-available;
+}
+
+/* Style pour le formulaire de filtre ------------------------- */
+.filtre__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+
+.filtre__item__label {
+    width: 270px;
+    margin-right: 20px;
+}
+
+.filtre__item__imput-container {
+    width: 240px;
+}
+
+.filtre__form {
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+}
+
+/* Style pour les cartes de covoiturages ------------------------- */
+.infos-voyage {
+    padding: 10px 20px;
+}
+
+/* Conteneur des infos de départ et d'arrivée */
+.infos-voyage__depart-arrivee {
+    flex-grow: 1;
+    max-width: 560px;
+}
+
+/* ligne avec flèche entre les deux villes */
+.infos-voyage__depart-arrivee__fleche {
+    /* largeur responsive : entre 120px et 800px, 40% de la largeur viewport au milieu */
+    --w: 100%;
+    /* épaisseur */
+    --h: 2px;
+    --head: 12px;
+
+    width: var(--w);
+    height: var(--h);
+    position: relative;
+    background: black;
+    border-radius: calc(var(--h) / 2);
+    z-index: 0;
+}
+
+/* pointe de la flèche (triangle à droite) */
+.infos-voyage__depart-arrivee__fleche::after {
+    content: "";
+    position: absolute;
+    right: calc(-1 * var(--head));
+    top: 50%;
+    transform: translateY(-50%);
+    width: var(--head);
+    height: var(--head);
+    background: black;
+    /* forme triangulaire */
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+/* Conteneur des infos du prix */
+.infos-voyage__prix {
+    color: var(--secondary-color);
+}
+
+.infos-voyage__separator {
+    height: 1px;
+}
+
+.infos-voiture {
+    padding: 30px 20px;
+}
+
+.infos-voiture__photo {
+    object-fit: cover;
+}
+
+.infos-voiture__text {
+    font-size: 25px;
+    margin-top: -5px;
+}
+
+.placesRestantes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    font-size: 25px;
+    color: var(--secondary-color);
+}
+
+.card-covoit,
+.filtre__form {
+    border: 1px solid var(--secondary-color);
+    border-radius: 15px;
+    gap: 10px;
+    height: 100%;
+}
+.filtre__form {
+    padding: 20px;
+}
+.filtre__form__title {
+    padding: 10px;
+}
+/* Style pour les cards et le filtre ------------------------- */
+/* Style pour les écrans mobiles */
+@media screen and (max-width: 949px) {
+    .card-covoit,
+    .access_ride__container__filtre {
+        width: auto;
+    }
+    .filtre__form__title {
+        display: none;
+    }
+
+    .filtre__form {
+        display: none;
+    }
+    .filtre__form.open {
+        display: block;
+    }
+    .infos-voiture {
+        flex-wrap: wrap;
+    }
+    .access_ride__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .access_ride__container {
+        flex-direction: column;
+    }
+    .access_ride__container__filtre,
+    .access_ride__container__cards {
+        width: 100%;
+        width: -webkit-fill-available;
+    }
+}
+
+/* Style pour les écrans desktop */
+@media screen and (min-width: 950px) {
+    .access_ride__container__filtre {
+        height: 100%;
+    }
+    .filtre__toggle-btn {
+        display: none;
+    }
+    .infos-voiture {
+        flex-wrap: nowrap;
+    }
+    .access_ride__container {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 20px;
+    }
+    .access_ride__container {
+        flex-direction: column;
+    }
+    .access_ride__container__filtre,
+    .access_ride__container__cards {
+        width: 100%;
+        width: -webkit-fill-available;
+    }
+}
+
+/* Style pour les conteneurs ------------------------- */
+.access_ride__container__filtre,
+.access_ride__container__cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+/* Style pour le détail du voyage --------------------------- */
+/* Style pour les petits écrans */
+@media screen and (max-width: 1075px) {
+    .detail-voyage__button__participer {
+        margin-right: 62px;
+    }
+}

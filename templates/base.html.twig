@@ -3,45 +3,42 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
         <title>{% block title %}EcoRide{% endblock %}</title>
-
         <link rel="icon" href="{{ asset('media/Logo-EcoRide.png') }}">
-
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('styles/style.css') }}">
             <link rel="stylesheet" href="{{ asset('styles/shorts.css') }}">
             <link rel="stylesheet" href="{{ asset('styles/header.css') }}">
             <link rel="stylesheet" href="{{ asset('styles/form.css') }}">
             <link rel="stylesheet" href="{{ asset('styles/stars.css') }}">
-            <link rel="stylesheet" href="{{ asset('styles/card.css') }}">
-            <link rel="stylesheet" href="{{ asset('styles/filtre.css') }}">
+            <link rel="stylesheet" href="{{ asset('styles/covoiturage.css') }}">
+            <link rel="stylesheet" href="{{ asset('styles/icone.css') }}">
+            <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
         {% endblock %}
-
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     </head>
-
     <body>
         {# --- En-tête global du site --- #}
         {% include 'partials/header.html.twig' %}
-
         {# --- Contenu de la page --- #}
         <main>
             {% block body %}{% endblock %}
         </main>
-
         {# --- Pied de page --- #}
         {% include 'partials/footer.html.twig' %}
-
         {% block javascripts %}
         {# Librairies externes #}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
         {# Scripts locaux #}
         <script src="{{ asset('scripts/script.js') }}"></script>
         <script src="{{ asset('scripts/graphs.js') }}"></script>
         <script src="{{ asset('scripts/form.js') }}"></script>
+        <script src="{{ asset('scripts/filtre.js') }}"></script>
+        <script src="{{ asset('scripts/icone.js') }}"></script>
         {% endblock %}
     </body>
 </html>
