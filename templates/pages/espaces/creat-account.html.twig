@@ -5,10 +5,10 @@
 {% block body %}
   <h1>Créer un compte</h1>
 
-  <div class=" f-col g-20 al-center">
+  <form id="formulaireInscription" class="f-col g-20 al-center">
     {# Champ : Pseudo #}
     {% include 'components/form/input-text.html.twig' with {
-      inputId: 'pseudo',
+      inputId: 'pseudoInput',
       label: 'Pseudo',
       placeholder: 'Entrez votre pseudonyme',
       required: true,
@@ -24,6 +24,9 @@
     {# Champ : Mot de passe #}
     {% include 'components/form/input-mdp.html.twig' %}
 
-    <button class="btn btn-main maxw-400">Valider et créditer 20 crédits</button>
-  </div>
+    {# Champ : Validation mot de passe #}
+    {% include 'components/form/input-validate-mdp.html.twig' %}
+
+    <button id="btnValidationInscription" class="btn btn-main maxw-400">Valider et créditer 20 crédits</button>
+  </form>
 {% endblock %}

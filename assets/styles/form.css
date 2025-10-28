@@ -155,13 +155,13 @@ legend {
 }
 
 .is-valid {
-    border: 2px solid;
-    border-color: #3cb371;
+    border: 2px solid !important;
+    border-color: #3cb371 !important;
 }
 
 .is-invalid {
-    border: 2px solid;
-    border-color: #e63946;
+    border: 2px solid !important;
+    border-color: #e63946 !important;
 }
 
 button:disabled {
