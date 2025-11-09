@@ -17,12 +17,20 @@
 
     {# Champ : Email #}
     {% include 'components/form/input-email.html.twig' with {
+      label: 'Adresse email',
+      inputId: 'signupEmail',
+      placeholder: 'Entrez votre adresse email',
+      required: true,
       alertMessage: 'Merci de rentrer un email valide',
       required: true
     } %}
 
     {# Champ : Mot de passe #}
-    {% include 'components/form/input-mdp.html.twig' %}
+    {% include 'components/form/input-mdp.html.twig' with {
+        inputId: 'signupPassword',
+        required: true
+      }
+      %}
 
     {# Champ : Validation mot de passe #}
     {% include 'components/form/input-validate-mdp.html.twig' %}

@@ -1,6 +1,13 @@
 <div id="passwordInput" class="f-col al-start w-100">
-    <label for="mdp">Mot de passe</label>
-    <input type="password" id="mdp" placeholder="Mot de passe" required>
+    <label for="{{ inputId }}">Mot de passe *</label>
+    <input
+      type="password"
+      id="{{ inputId }}"
+      name="{{ inputId }}"
+      placeholder="Mot de passe"
+    class="input-mdp"
+      {% if required %} required {% endif %}
+      >
     <div class="component__alerte">
         <span class="component__alerte__icon">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

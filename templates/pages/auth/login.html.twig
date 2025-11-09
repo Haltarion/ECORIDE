@@ -10,17 +10,21 @@
       {# Champ email #}
       {% include 'components/form/input-email.html.twig' with {
         label: 'Adresse email',
-        inputId: 'email',
+        inputId: 'loginEmail',
         placeholder: 'Entrez votre adresse email',
         required: true,
         alertMessage: 'Merci de rentrer un email valide.'
       } %}
 
       {# Champ mot de passe #}
-      {% include 'components/form/input-mdp.html.twig' %}
+      {% include 'components/form/input-mdp.html.twig' with {
+        inputId: 'loginPassword',
+        required: true
+      }
+      %}
 
       <div>
-        <button class="btn btn-main" type="submit">Valider</button>
+        <button id="btnLogin" class="btn btn-main" type="submit" disabled>Valider</button>
       </div>
     </div>
 
@@ -32,4 +36,9 @@
       <a href="{{ path('app_signup') }}" class="btn btn-connect">Créer un compte</a>
     </div>
   </form>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('scripts/auth/login.js') }}"></script>
 {% endblock %}

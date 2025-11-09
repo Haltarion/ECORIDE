@@ -15,5 +15,9 @@
       {% include 'components/covoiturage/card-covoit.html.twig' %}
     </div>
   </div>
+{% endblock %}
 
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('scripts/filtre.js') }}"></script>
 {% endblock %}

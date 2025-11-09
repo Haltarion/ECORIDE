@@ -10,12 +10,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeIcon = document.querySelector(
         ".header__nav__burger_menu__close-icon"
     );
-    const toggleClose = document.querySelector(".filtre__form");
+    const toggleClose = document.querySelector(".header__nav");
 
     if (burgerIcon) burgerIcon.style.display = "inline";
     if (closeIcon) closeIcon.style.display = "none";
     if (!toggleClose)
-        document.querySelector(".filtre__form").classList.remove("open");
+        document.querySelector(".header__nav").classList.remove("open");
 });
 
 // Fonctions pour le menu mobile

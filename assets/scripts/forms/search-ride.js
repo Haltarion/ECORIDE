@@ -1,5 +1,4 @@
 // Verification des formulaires
-
 // Search-ride.html.twig
 // Récupération des inputs du formulaire
 const inputAdresseDepart = document.getElementById("adresseDepart");
@@ -34,7 +33,7 @@ inputs.forEach((input) => {
 });
 
 // Ajout de l'écouteur sur le bouton
-btnSearchRide.addEventListener("click", AfficherCovoiturages);
+// btnSearchRide.addEventListener("click", AfficherCovoiturages);
 
 // Fonction globale pour activer/désactiver le bouton
 function validateForm() {

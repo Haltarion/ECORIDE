@@ -5,7 +5,6 @@
 {% block body %}
   <h1>Rechercher un covoiturage</h1>
 
-
   <form id="formSearchRide" method="POST" action="{{ path('app_access_ride') }}" class="w-100 f-col al-center">
     <div class="covoiturageForm w-100 g-15 p-15 container">
       <fieldset class="covoiturage__arrivee">
@@ -57,9 +56,13 @@
       </fieldset>
     </div>
 
-      <div class="covoiturage__container__button w-100 f-row-r container">
-        <button type="submit" id="btnSearchRide" class="btn btn-main" disabled>Valider</button>
-      </div>
-    </form>
+    <div class="covoiturage__container__button w-100 f-row-r container">
+      <button type="submit" id="btnSearchRide" class="btn btn-main" disabled>Valider</button>
+    </div>
+  </form>
+{% endblock %}
 
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('scripts/forms/search-ride.js') }}"></script>
 {% endblock %}
