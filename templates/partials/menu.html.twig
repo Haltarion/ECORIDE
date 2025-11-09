@@ -1,10 +1,14 @@
 <!-- Menu -->
 <nav class="header__nav">
   <ul class="header__nav__menu">
-    <li class="header__nav__menu__link"><a href="{{ path('app_home') }}">Accueil</a></li>
+    <li class="header__nav__menu__link" ><a href="{{ path('app_home') }}">Accueil</a></li>
     <li class="header__nav__menu__link"><a href="{{ path('app_search_ride') }}">Accès aux covoiturages</a></li>
-    <li class="header__nav__menu__link"><a href="{{ path('app_connexion') }}">Connexion</a></li>
-    <li class="header__nav__menu__link"><a href="{{ path('app_user_space') }}">Mon compte</a></li>
+    {% if app.user %}
+      <li class="header__nav__menu__link"><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+      <li class="header__nav__menu__link"><a href="{{ path('app_user_space') }}">Mon compte</a></li>
+    {% else %}
+      <li class="header__nav__menu__link"><a href="{{ path('app_login') }}">Connexion</a></li>
+    {% endif %}
     <li class="header__nav__menu__link"><a href="{{ path('app_contact') }}">Contact</a></li>
   </ul>
 </nav>
