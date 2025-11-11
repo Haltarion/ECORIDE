@@ -47,8 +47,7 @@ input[type="range"] {
     align-items: flex-start;
     gap: 4px;
     color: var(--red-color);
-    margin-top: 4px;
-    visibility: visible; /* Masqué par défaut */
+    margin-top: 4px; /* Masqué par défaut */
 }
 
 .component__alerte p {
@@ -144,12 +143,12 @@ legend {
 }
 
 /* Style pour la validation des formulaires */
-.input-text.is-valid:focus {
+.input.is-valid:focus {
     border-color: #28a745 !important;
     box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
 }
 
-.input-text.is-invalid:focus {
+.input.is-invalid:focus {
     border-color: #dc3545 !important;
     box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
 }

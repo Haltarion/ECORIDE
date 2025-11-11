@@ -1,5 +1,4 @@
 // Verification des formulaires
-// Search-ride.html.twig
 // Récupération des inputs du formulaire
 const inputAdresseDepart = document.getElementById("adresseDepart");
 const inputDateDepart = document.getElementById("dateDepart");
@@ -67,7 +66,7 @@ function validateRequired(input) {
         // Si un message d'erreur est présent, on le cache
         if (errorDiv) {
             errorDiv.classList.remove("visible");
-            errorDiv.classList.add("hide");
+            errorDiv.classList.add("hidden");
         }
         return true;
     } else {
@@ -75,7 +74,7 @@ function validateRequired(input) {
         input.classList.add("is-invalid");
         // Si un message d'erreur est présent, on l'affiche'
         if (errorDiv) {
-            errorDiv.classList.remove("hide");
+            errorDiv.classList.remove("hidden");
             errorDiv.classList.add("visible");
         }
         return false;

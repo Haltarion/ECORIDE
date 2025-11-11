@@ -1,5 +1,3 @@
-console.trace("Script login.js chargé depuis:");
-
 // Récupération des inputs du formulaire
 const inputLoginEmail = document.getElementById("loginEmail");
 const inputLoginPassword = document.getElementById("loginPassword");
@@ -26,7 +24,7 @@ inputs.forEach((input) => {
 });
 
 // Ajout de l'écouteur sur le bouton
-btnLogin.addEventListener("click", AfficherCovoiturages);
+btnLogin.addEventListener("click", checkCredentials);
 
 // Fonction globale pour activer/désactiver le bouton
 function validateForm() {
@@ -60,7 +58,7 @@ function validateRequired(input) {
         // Si un message d'erreur est présent, on le cache
         if (errorDiv) {
             errorDiv.classList.remove("visible");
-            errorDiv.classList.add("hide");
+            errorDiv.classList.add("hidden");
         }
         return true;
     } else {
@@ -68,9 +66,49 @@ function validateRequired(input) {
         input.classList.add("is-invalid");
         // Si un message d'erreur est présent, on l'affiche'
         if (errorDiv) {
-            errorDiv.classList.remove("hide");
+            errorDiv.classList.remove("hidden");
             errorDiv.classList.add("visible");
         }
         return false;
     }
+}
+
+// Vérification des identifiants
+function checkCredentials() {
+    let dataForm = new FormData(signinForm);
+
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({
+        username: dataForm.get("email"),
+        password: dataForm.get("mdp"),
+    });
+
+    const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+    };
+
+    // Appel API pour la vérification des identifiants
+    fetch(apiUrl + "login", requestOptions)
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                mailInput.classList.add("is-invalid");
+                passwordInput.classList.add("is-invalid");
+            }
+        })
+        .then((result) => {
+            const token = result.apiToken;
+            setToken(token);
+
+            //placer ce token en cookie
+            setCookie(RoleCookieName, result.roles[0], 7);
+            window.location.replace("/");
+        })
+        .catch((error) => console.error(error));
 }
