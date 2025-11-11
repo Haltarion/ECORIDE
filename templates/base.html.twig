@@ -30,15 +30,12 @@
         {# --- Pied de page --- #}
         {% include 'partials/footer.html.twig' %}
         {% block javascripts %}
-        {# Librairies externes #}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        {# Scripts locaux #}
-        <script src="{{ asset('scripts/script.js') }}"></script>
-        <script src="{{ asset('scripts/graphs.js') }}"></script>
-        <script src="{{ asset('scripts/form.js') }}"></script>
-        <script src="{{ asset('scripts/filtre.js') }}"></script>
-        <script src="{{ asset('scripts/icone.js') }}"></script>
+          {# Librairies externes #}
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          {# Scripts locaux #}
+          <script src="{{ asset('app.js') }}"></script>
+          <script src="{{ asset('scripts/script.js') }}"></script>
         {% endblock %}
     </body>
 </html>

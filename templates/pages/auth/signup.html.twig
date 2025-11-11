@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un compte{% endblock %}
+
+{% block body %}
+  <h1>Créer un compte</h1>
+
+  <form id="formulaireInscription" class="f-col g-20 al-center">
+    {# Champ : Pseudo #}
+    {% include 'components/form/input-text.html.twig' with {
+      inputId: 'pseudoInput',
+      label: 'Pseudo',
+      placeholder: 'Entrez votre pseudonyme',
+      required: true,
+      alertMessage: 'Merci de renseigner un Pseudo'
+    } %}
+
+    {# Champ : Email #}
+    {% include 'components/form/input-email.html.twig' with {
+      label: 'Adresse email',
+      inputId: 'signupEmail',
+      placeholder: 'Entrez votre adresse email',
+      required: true,
+      alertMessage: 'Merci de rentrer un email valide',
+      required: true
+    } %}
+
+    {# Champ : Mot de passe #}
+    {% include 'components/form/input-mdp.html.twig' with {
+        inputId: 'signupPassword',
+        required: true
+      }
+      %}
+
+    {# Champ : Validation mot de passe #}
+    {% include 'components/form/input-validate-mdp.html.twig' with {
+      inputId: 'confirmSignupEmail',
+      required: true
+    } %}
+
+    <div class="f-row g-10 just-center w-100">
+      <a href="{{ path('app_login') }}" class="btn btn-sec maxw-400 m-10">Retour à la connexion</a>
+      <button id="btnValidationInscription" class="btn btn-main maxw-400">Valider et créditer 20 crédits</button>
+    </div>
+  </form>
+{% endblock %}

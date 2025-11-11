@@ -1,12 +1,13 @@
 {% set required = required|default(false) %}
 
 <div class="form-group f-col al-start w-100 mb-8">
-  <label for="{{ inputDateId }}">{{ labelDate }}</label>
+  <label for="{{ inputDateId }}">{{ labelDate }} *</label>
   <input
     type="date"
     id="{{ inputDateId }}"
     name="{{ inputDateName }}"
     value="{{ value|default('') }}"
+    class="input"
     required
   >
   {# Inclusion du message d’alerte si le champ est requis et vide #}

@@ -1,11 +1,12 @@
 {% set required = required|default(false) %}
 
 <div class="form-group f-col al-start w-100">
-  <label for="mail">Email</label>
+  <label for="{{ inputId }}">{{ label }} *</label>
   <input
     type="email"
-    id="mail"
+    id="{{ inputId }}"
     placeholder="Adresse email"
+    class="input"
     {% if required %}required{% endif %}
   >
   {# Inclusion du message d’alerte si le champ est requis et vide #}

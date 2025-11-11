@@ -12,10 +12,10 @@ class AccessRideController extends AbstractController
   #[Route('/access-ride', name: 'app_access_ride', methods: ['POST'])]
   public function index(Request $request): Response
   {
-    $adresseDepart = $request->request->get('adresseDepart');
-    $adresseArrivee = $request->request->get('adresseArrivee');
-    $dateDepart = $request->request->get('dateDepart');
-    $dateArrivee = $request->request->get('dateArrivee');
+    $adresseDepart = $request->request->get('adresseDepart', null);
+    $adresseArrivee = $request->request->get('adresseArrivee', null);
+    $dateDepart = $request->request->get('dateDepart', null);
+    $dateArrivee = $request->request->get('dateArrivee', null);
 
     // Pour l'instant, on simule une recherche
     // Plus tard je pourrais interroger ma base de données ici

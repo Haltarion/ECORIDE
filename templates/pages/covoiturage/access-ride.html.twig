@@ -1,8 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-  Covoiturage - Accès aux trajets
-{% endblock %}
+{% block title %}Covoiturage{% endblock %}
 
 {% block body %}
   <h1>Voyages proposés</h1>
@@ -17,5 +15,9 @@
       {% include 'components/covoiturage/card-covoit.html.twig' %}
     </div>
   </div>
+{% endblock %}
 
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('scripts/filtre.js') }}"></script>
 {% endblock %}
