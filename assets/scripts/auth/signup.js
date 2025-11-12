@@ -1,10 +1,9 @@
 // Récupération des inputs du formulaire
 const inputPseudo = document.getElementById("pseudoInput");
-const inputMail = document.getElementById("emailInput");
-const inputPassword = document.getElementById("passwordInput");
-const inputValidationPassword = document.getElementById(
-    "validatePasswordInput"
-);
+const inputMail = document.getElementById("signupEmail");
+const inputPassword = document.getElementById("signupPassword");
+const inputValidationPassword = document.getElementById("confirmSignupEmail");
+
 const btnValidation = document.getElementById("btnValidationInscription");
 const formInscription = document.getElementById("formulaireInscription");
 
@@ -38,13 +37,28 @@ function validateMail(input) {
     //Définir mon regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const mailUser = input.value;
+    const errorDiv = input
+        .closest(".form-group")
+        ?.querySelector(".error-message");
+
     if (mailUser.match(emailRegex)) {
         input.classList.add("is-valid");
         input.classList.remove("is-invalid");
+
+        // Si un message d'erreur est présent, on le cache
+        if (errorDiv) {
+            errorDiv.classList.remove("visible");
+            errorDiv.classList.add("hidden");
+        }
         return true;
     } else {
         input.classList.remove("is-valid");
         input.classList.add("is-invalid");
+        // Si un message d'erreur est présent, on l'affiche'
+        if (errorDiv) {
+            errorDiv.classList.remove("hidden");
+            errorDiv.classList.add("visible");
+        }
         return false;
     }
 }
@@ -55,39 +69,78 @@ function validatePassword(input) {
     const passwordRegex =
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/;
     const passwordUser = input.value;
+    const errorDiv = input
+        .closest(".form-group")
+        ?.querySelector(".error-message");
     if (passwordUser.match(passwordRegex)) {
         input.classList.add("is-valid");
         input.classList.remove("is-invalid");
+        // Si un message d'erreur est présent, on le cache
+        if (errorDiv) {
+            errorDiv.classList.remove("visible");
+            errorDiv.classList.add("hidden");
+        }
         return true;
     } else {
         input.classList.remove("is-valid");
         input.classList.add("is-invalid");
+        // Si un message d'erreur est présent, on l'affiche'
+        if (errorDiv) {
+            errorDiv.classList.remove("hidden");
+            errorDiv.classList.add("visible");
+        }
         return false;
     }
 }
 
 // Fonction de validation de la confirmation du mot de passe
 function validateConfirmationPassword(inputPwd, inputConfirmPwd) {
+    const errorDiv = inputConfirmPwd
+        .closest(".form-group")
+        ?.querySelector(".error-message");
     if (inputPwd.value == inputConfirmPwd.value) {
         inputConfirmPwd.classList.add("is-valid");
         inputConfirmPwd.classList.remove("is-invalid");
+        // Si un message d'erreur est présent, on le cache
+        if (errorDiv) {
+            errorDiv.classList.remove("visible");
+            errorDiv.classList.add("hidden");
+        }
         return true;
     } else {
         inputConfirmPwd.classList.add("is-invalid");
         inputConfirmPwd.classList.remove("is-valid");
+        // Si un message d'erreur est présent, on l'affiche'
+        if (errorDiv) {
+            errorDiv.classList.remove("hidden");
+            errorDiv.classList.add("visible");
+        }
         return false;
     }
 }
 
 // Fonction de validation des champs requis
 function validateRequired(input) {
+    const errorDiv = input
+        .closest(".form-group")
+        ?.querySelector(".error-message");
     if (input.value != "") {
         input.classList.add("is-valid");
         input.classList.remove("is-invalid");
+        // Si un message d'erreur est présent, on le cache
+        if (errorDiv) {
+            errorDiv.classList.remove("visible");
+            errorDiv.classList.add("hidden");
+        }
         return true;
     } else {
         input.classList.remove("is-valid");
         input.classList.add("is-invalid");
+        // Si un message d'erreur est présent, on l'affiche'
+        if (errorDiv) {
+            errorDiv.classList.remove("hidden");
+            errorDiv.classList.add("visible");
+        }
         return false;
     }
 }

@@ -39,8 +39,14 @@
     } %}
 
     <div class="f-row g-10 just-center w-100">
-      <a href="{{ path('app_login') }}" class="btn btn-sec maxw-400 m-10">Retour à la connexion</a>
-      <button id="btnValidationInscription" class="btn btn-main maxw-400">Valider et créditer 20 crédits</button>
+      <a href="{{ path('app_login') }}" class="btn btn-sec maxw-200 m-10">Retour à la connexion</a>
+
+      <button id="btnValidationInscription" class="btn btn-main maxw-200" type="submit" disabled>Valider et créditer 20 crédits</button>
     </div>
   </form>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('scripts/auth/signup.js') }}"></script>
 {% endblock %}
