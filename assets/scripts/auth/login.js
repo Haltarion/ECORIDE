@@ -1,51 +1,87 @@
 // Récupération des inputs du formulaire
-const inputLoginEmail = document.getElementById("loginEmail");
-const inputLoginPassword = document.getElementById("loginPassword");
+const inputLoginEmail = document.getElementById("email");
+const inputLoginPassword = document.getElementById("password");
 
 const btnLogin = document.getElementById("btnLogin");
 
-// Tableau de tous les inputs
-const inputs = [inputLoginEmail, inputLoginPassword];
+// Ajout d'écoute des événements sur les inputs et le bouton
+inputLoginEmail.addEventListener("keyup", validateForm);
+inputLoginPassword.addEventListener("keyup", validateForm);
 
-// Map pour savoir si un input a été touché
-const touched = new Map();
-inputs.forEach((input) => touched.set(input, false));
-
-// Ajout des écouteurs sur chaque input
-inputs.forEach((input) => {
-    input.addEventListener("input", () => {
-        touched.set(input, true); // marque le champ comme modifié
-        validateForm();
-    });
-    input.addEventListener("keyup", () => {
-        touched.set(input, true); // idem pour keyup
-        validateForm();
-    });
-});
-
-// Ajout de l'écouteur sur le bouton
-btnLogin.addEventListener("click", checkCredentials);
-
-// Fonction globale pour activer/désactiver le bouton
+//Function permettant de valider tout le formulaire et d'activer le bouton si tout est ok
 function validateForm() {
-    let allValid = true;
+    const mailOk = validateMail(inputLoginEmail);
+    const passwordOk = validatePassword(inputLoginPassword);
 
-    inputs.forEach((input) => {
-        // On fait la validation globale pour tous les champs
-        const isFieldValid = input.value.trim() !== "";
-
-        if (!isFieldValid) allValid = false;
-
-        // On met à jour le visuel et message seulement si le champ a été touché
-        if (touched.get(input)) {
-            validateRequired(input);
-        }
-    });
-
-    btnLogin.disabled = !allValid;
+    if (mailOk && passwordOk) {
+        btnLogin.disabled = false;
+    } else {
+        btnLogin.disabled = true;
+    }
 }
 
-// Fonction de validation d'un champ
+// Fonction de validation de l'email
+function validateMail(input) {
+    //Définir mon regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const mailUser = input.value;
+    const errorDiv = input
+        .closest(".form-group")
+        ?.querySelector(".error-message");
+
+    if (mailUser.match(emailRegex)) {
+        input.classList.add("is-valid");
+        input.classList.remove("is-invalid");
+
+        // Si un message d'erreur est présent, on le cache
+        if (errorDiv) {
+            errorDiv.classList.remove("visible");
+            errorDiv.classList.add("hidden");
+        }
+        return true;
+    } else {
+        input.classList.remove("is-valid");
+        input.classList.add("is-invalid");
+        // Si un message d'erreur est présent, on l'affiche'
+        if (errorDiv) {
+            errorDiv.classList.remove("hidden");
+            errorDiv.classList.add("visible");
+        }
+        return false;
+    }
+}
+
+// Fonction de validation du mot de passe
+function validatePassword(input) {
+    //Définir mon regex
+    const passwordRegex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/;
+    const passwordUser = input.value;
+    const errorDiv = input
+        .closest(".form-group")
+        ?.querySelector(".error-message");
+    if (passwordUser.match(passwordRegex)) {
+        input.classList.add("is-valid");
+        input.classList.remove("is-invalid");
+        // Si un message d'erreur est présent, on le cache
+        if (errorDiv) {
+            errorDiv.classList.remove("visible");
+            errorDiv.classList.add("hidden");
+        }
+        return true;
+    } else {
+        input.classList.remove("is-valid");
+        input.classList.add("is-invalid");
+        // Si un message d'erreur est présent, on l'affiche'
+        if (errorDiv) {
+            errorDiv.classList.remove("hidden");
+            errorDiv.classList.add("visible");
+        }
+        return false;
+    }
+}
+
+// Fonction de validation des champs requis
 function validateRequired(input) {
     // Recherche du message d'erreur associé (dans la même div parente)
     const errorDiv = input
@@ -71,44 +107,4 @@ function validateRequired(input) {
         }
         return false;
     }
-}
-
-// Vérification des identifiants
-function checkCredentials() {
-    let dataForm = new FormData(signinForm);
-
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const raw = JSON.stringify({
-        username: dataForm.get("email"),
-        password: dataForm.get("mdp"),
-    });
-
-    const requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body: raw,
-        redirect: "follow",
-    };
-
-    // Appel API pour la vérification des identifiants
-    fetch(apiUrl + "login", requestOptions)
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                mailInput.classList.add("is-invalid");
-                passwordInput.classList.add("is-invalid");
-            }
-        })
-        .then((result) => {
-            const token = result.apiToken;
-            setToken(token);
-
-            //placer ce token en cookie
-            setCookie(RoleCookieName, result.roles[0], 7);
-            window.location.replace("/");
-        })
-        .catch((error) => console.error(error));
 }

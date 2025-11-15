@@ -10,7 +10,7 @@
       {# Champ email #}
       {% include 'components/form/input-email.html.twig' with {
         label: 'Adresse email',
-        inputId: 'loginEmail',
+        inputId: 'email',
         placeholder: 'Entrez votre adresse email',
         required: true,
         alertMessage: 'Merci de rentrer un email valide.'
@@ -18,7 +18,7 @@
 
       {# Champ mot de passe #}
       {% include 'components/form/input-mdp.html.twig' with {
-        inputId: 'loginPassword',
+        inputId: 'password',
         required: true
       }
       %}
