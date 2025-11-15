@@ -5,11 +5,11 @@
 {% block body %}
   <h1>Créer un compte</h1>
 
-  <form id="formulaireInscription" class="f-col g-20 al-center">
+  <form id="formulaireInscription" action="{{ path('app_signup_process') }}" method="post" class="f-col g-20 al-center">
     {# Champ : Pseudo #}
     {% include 'components/form/input-text.html.twig' with {
-      inputId: 'pseudoInput',
       label: 'Pseudo',
+      inputId: 'pseudo',
       placeholder: 'Entrez votre pseudonyme',
       required: true,
       alertMessage: 'Merci de renseigner un Pseudo'
@@ -18,7 +18,7 @@
     {# Champ : Email #}
     {% include 'components/form/input-email.html.twig' with {
       label: 'Adresse email',
-      inputId: 'signupEmail',
+      inputId: 'email',
       placeholder: 'Entrez votre adresse email',
       required: true,
       alertMessage: 'Merci de rentrer un email valide',
@@ -27,14 +27,14 @@
 
     {# Champ : Mot de passe #}
     {% include 'components/form/input-mdp.html.twig' with {
-        inputId: 'signupPassword',
+        inputId: 'password',
         required: true
       }
       %}
 
     {# Champ : Validation mot de passe #}
     {% include 'components/form/input-validate-mdp.html.twig' with {
-      inputId: 'confirmSignupEmail',
+      inputId: 'confirmSignupPassword',
       required: true
     } %}
 

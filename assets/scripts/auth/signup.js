@@ -1,8 +1,10 @@
 // Récupération des inputs du formulaire
-const inputPseudo = document.getElementById("pseudoInput");
-const inputMail = document.getElementById("signupEmail");
-const inputPassword = document.getElementById("signupPassword");
-const inputValidationPassword = document.getElementById("confirmSignupEmail");
+const inputPseudo = document.getElementById("pseudo");
+const inputMail = document.getElementById("email");
+const inputPassword = document.getElementById("password");
+const inputValidationPassword = document.getElementById(
+    "confirmSignupPassword"
+);
 
 const btnValidation = document.getElementById("btnValidationInscription");
 const formInscription = document.getElementById("formulaireInscription");
@@ -12,8 +14,6 @@ inputPseudo.addEventListener("keyup", validateSignUpForm);
 inputMail.addEventListener("keyup", validateSignUpForm);
 inputPassword.addEventListener("keyup", validateSignUpForm);
 inputValidationPassword.addEventListener("keyup", validateSignUpForm);
-
-btnValidation.addEventListener("click", InscrireUtilisateur);
 
 //Function permettant de valider tout le formulaire et d'activer le bouton si tout est ok
 function validateSignUpForm() {
@@ -143,43 +143,4 @@ function validateRequired(input) {
         }
         return false;
     }
-}
-
-// Fonction d'inscription de l'utilisateur
-function InscrireUtilisateur() {
-    let dataForm = new FormData(formInscription);
-
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const raw = JSON.stringify({
-        firstName: dataForm.get("pseudo"),
-        email: dataForm.get("email"),
-        password: dataForm.get("mdp"),
-    });
-
-    const requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body: raw,
-        redirect: "follow",
-    };
-
-    fetch(apiUrl + "registration", requestOptions)
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                alert("Erreur lors de l'inscription");
-            }
-        })
-        .then((result) => {
-            alert(
-                "Bravo " +
-                    dataForm.get("prenom") +
-                    ", vous êtes maintenant inscrit, vous pouvez vous connecter !"
-            );
-            document.location.href = "/signin";
-        })
-        .catch((error) => console.error(error));
 }

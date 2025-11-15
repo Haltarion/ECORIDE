@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\espaces;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class UserSpaceController extends AbstractController
+class UserVehicleController extends AbstractController
 {
-  #[Route('/user-space', name: 'app_user_space')]
+  #[Route('/user-vehicle', name: 'app_user_vehicle')]
   public function index(): Response
   {
-    return $this->render('pages/espaces/user-space.html.twig');
+    return $this->render('pages/espaces/user-vehicle.html.twig');
   }
 }
