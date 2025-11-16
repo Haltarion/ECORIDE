@@ -3,154 +3,185 @@
 namespace App\Entity;
 
 use App\Repository\CovoiturageRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CovoiturageRepository::class)]
 class Covoiturage
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+  #[ORM\Id]
+  #[ORM\GeneratedValue]
+  #[ORM\Column]
+  private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $date_depart = null;
+  // -----------------------------
+  // Champs du covoiturage
+  // -----------------------------
+  #[ORM\Column(type: Types::DATE_MUTABLE)]
+  private ?\DateTime $date_depart = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTime $heure_depart = null;
+  #[ORM\Column(type: Types::TIME_MUTABLE)]
+  private ?\DateTime $heure_depart = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $adresse_depart = null;
+  #[ORM\Column(length: 50)]
+  private ?string $adresse_depart = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $date_arrivee = null;
+  #[ORM\Column(type: Types::DATE_MUTABLE)]
+  private ?\DateTime $date_arrivee = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $adresse_arrivee = null;
+  #[ORM\Column(length: 50)]
+  private ?string $adresse_arrivee = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTime $heure_arrivee = null;
+  #[ORM\Column(type: Types::TIME_MUTABLE)]
+  private ?\DateTime $heure_arrivee = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $statut = null;
+  #[ORM\Column(length: 50)]
+  private ?string $statut = null;
 
-    #[ORM\Column]
-    private ?int $nb_places = null;
+  #[ORM\Column]
+  private ?int $nb_places = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
-    private ?string $prix_par_personne = null;
+  #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
+  private ?string $prix_par_personne = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+  // -----------------------------
+  // Relation obligatoire : voiture
+  // -----------------------------
+  #[ORM\ManyToOne(targetEntity: Voiture::class, inversedBy: 'covoiturages')]
+  #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
+  private ?Voiture $voiture = null;
 
-    public function getDateDepart(): ?\DateTime
-    {
-        return $this->date_depart;
-    }
+  // -----------------------------
+  // Relation obligatoire : conducteur
+  // -----------------------------
+  #[ORM\ManyToOne(targetEntity: Utilisateur::class, inversedBy: 'covoiturages')]
+  #[ORM\JoinColumn(nullable: false)]
+  private ?Utilisateur $conducteur = null;
 
-    public function setDateDepart(\DateTime $date_depart): static
-    {
-        $this->date_depart = $date_depart;
+  // -----------------------------
+  // Relation ManyToMany : passagers
+  // -----------------------------
+  #[ORM\ManyToMany(targetEntity: Utilisateur::class, inversedBy: 'covoituragesPassager')]
+  #[ORM\JoinTable(name: "covoiturage_passagers")]
+  private Collection $passagers;
 
-        return $this;
-    }
+  public function __construct()
+  {
+    $this->passagers = new ArrayCollection();
+  }
 
-    public function getHeureDepart(): ?\DateTime
-    {
-        return $this->heure_depart;
-    }
+  public function getId(): ?int
+  {
+    return $this->id;
+  }
 
-    public function setHeureDepart(\DateTime $heure_depart): static
-    {
-        $this->heure_depart = $heure_depart;
+  public function getDateDepart(): ?\DateTime
+  {
+    return $this->date_depart;
+  }
 
-        return $this;
-    }
+  public function setDateDepart(\DateTime $date_depart): static
+  {
+    $this->date_depart = $date_depart;
 
-    public function getAdresseDepart(): ?string
-    {
-        return $this->adresse_depart;
-    }
+    return $this;
+  }
 
-    public function setAdresseDepart(string $adresse_depart): static
-    {
-        $this->adresse_depart = $adresse_depart;
+  public function getHeureDepart(): ?\DateTime
+  {
+    return $this->heure_depart;
+  }
 
-        return $this;
-    }
+  public function setHeureDepart(\DateTime $heure_depart): static
+  {
+    $this->heure_depart = $heure_depart;
 
-    public function getDateArrivee(): ?\DateTime
-    {
-        return $this->date_arrivee;
-    }
+    return $this;
+  }
 
-    public function setDateArrivee(\DateTime $date_arrivee): static
-    {
-        $this->date_arrivee = $date_arrivee;
+  public function getAdresseDepart(): ?string
+  {
+    return $this->adresse_depart;
+  }
 
-        return $this;
-    }
+  public function setAdresseDepart(string $adresse_depart): static
+  {
+    $this->adresse_depart = $adresse_depart;
 
-    public function getAdresseArrivee(): ?string
-    {
-        return $this->adresse_arrivee;
-    }
+    return $this;
+  }
 
-    public function setAdresseArrivee(string $adresse_arrivee): static
-    {
-        $this->adresse_arrivee = $adresse_arrivee;
+  public function getDateArrivee(): ?\DateTime
+  {
+    return $this->date_arrivee;
+  }
 
-        return $this;
-    }
+  public function setDateArrivee(\DateTime $date_arrivee): static
+  {
+    $this->date_arrivee = $date_arrivee;
 
-    public function getHeureArrivee(): ?\DateTime
-    {
-        return $this->heure_arrivee;
-    }
+    return $this;
+  }
 
-    public function setHeureArrivee(\DateTime $heure_arrivee): static
-    {
-        $this->heure_arrivee = $heure_arrivee;
+  public function getAdresseArrivee(): ?string
+  {
+    return $this->adresse_arrivee;
+  }
 
-        return $this;
-    }
+  public function setAdresseArrivee(string $adresse_arrivee): static
+  {
+    $this->adresse_arrivee = $adresse_arrivee;
 
-    public function getStatut(): ?string
-    {
-        return $this->statut;
-    }
+    return $this;
+  }
 
-    public function setStatut(string $statut): static
-    {
-        $this->statut = $statut;
+  public function getHeureArrivee(): ?\DateTime
+  {
+    return $this->heure_arrivee;
+  }
 
-        return $this;
-    }
+  public function setHeureArrivee(\DateTime $heure_arrivee): static
+  {
+    $this->heure_arrivee = $heure_arrivee;
 
-    public function getNbPlaces(): ?int
-    {
-        return $this->nb_places;
-    }
+    return $this;
+  }
 
-    public function setNbPlaces(int $nb_places): static
-    {
-        $this->nb_places = $nb_places;
+  public function getStatut(): ?string
+  {
+    return $this->statut;
+  }
 
-        return $this;
-    }
+  public function setStatut(string $statut): static
+  {
+    $this->statut = $statut;
 
-    public function getPrixParPersonne(): ?string
-    {
-        return $this->prix_par_personne;
-    }
+    return $this;
+  }
 
-    public function setPrixParPersonne(string $prix_par_personne): static
-    {
-        $this->prix_par_personne = $prix_par_personne;
+  public function getNbPlaces(): ?int
+  {
+    return $this->nb_places;
+  }
 
-        return $this;
-    }
+  public function setNbPlaces(int $nb_places): static
+  {
+    $this->nb_places = $nb_places;
+
+    return $this;
+  }
+
+  public function getPrixParPersonne(): ?string
+  {
+    return $this->prix_par_personne;
+  }
+
+  public function setPrixParPersonne(string $prix_par_personne): static
+  {
+    $this->prix_par_personne = $prix_par_personne;
+
+    return $this;
+  }
 }
