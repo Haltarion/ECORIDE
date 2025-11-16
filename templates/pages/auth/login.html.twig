@@ -5,15 +5,22 @@
 {% block body %}
   <h1>Se connecter</h1>
 
-  <form id="signinForm" class="connexion g-30 p-15 container">
-    <div class="connexion__existingCount f-col g-15 w-100">
+  {% if error %}
+    <div class="alert alert-danger">
+      {{ error.messageKey|trans(error.messageData, 'security') }}
+    </div>
+  {% endif %}
+
+  <form id="signinForm" class="connexion g-30 p-15 container" method="post" action="{{ path('app_login') }}">
+    <div class="connexion__existingCount f-col just-center g-15 w-100">
       {# Champ email #}
       {% include 'components/form/input-email.html.twig' with {
         label: 'Adresse email',
         inputId: 'email',
         placeholder: 'Entrez votre adresse email',
         required: true,
-        alertMessage: 'Merci de rentrer un email valide.'
+        alertMessage: 'Merci de rentrer un email valide.',
+        value: last_username
       } %}
 
       {# Champ mot de passe #}
@@ -22,6 +29,8 @@
         required: true
       }
       %}
+
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
       <div>
         <button id="btnLogin" class="btn btn-main" type="submit" disabled>Valider</button>
