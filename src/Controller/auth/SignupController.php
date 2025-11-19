@@ -3,6 +3,7 @@
 namespace App\Controller\auth;
 
 use App\Entity\User;
+use Symfony\Bundle\SecurityBundle\Security;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,7 +26,8 @@ class SignupController extends AbstractController
   public function inscription(
     Request $request,
     EntityManagerInterface $em,
-    UserPasswordHasherInterface $hasher
+    UserPasswordHasherInterface $hasher,
+    Security $security
   ): Response {
     $pseudo = $request->request->get('pseudo');
     $email = $request->request->get('email');
@@ -42,6 +44,9 @@ class SignupController extends AbstractController
 
     $em->persist($user);
     $em->flush();
+
+    // Connexion automatique après inscription
+    $security->login($user);
 
     return $this->redirectToRoute('app_user_space'); // Redirige vers la page mon compte après inscription
   }

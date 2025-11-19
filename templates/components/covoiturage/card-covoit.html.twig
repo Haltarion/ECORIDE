@@ -16,7 +16,10 @@
   <div class="infos-voiture f-row al-center just-sa g-20 h-100">
 
     {# Infos sur le conducteur #}
-    {% include 'components/covoiturage/info-conducteur.html.twig' with { pseudo: 'Bonport' } %}
+    {% include 'components/covoiturage/info-conducteur.html.twig' with {
+      class: 'infos-voiture__photo h-30 r-50',
+      pseudo: 'Bonport'
+    } %}
 
     {# Note #}
     {% include 'components/icone/note.html.twig' with { starClass: 'infos-voiture__star main f-row g-5 h-25', textClass: 'infos-voiture__text secondary' } %}

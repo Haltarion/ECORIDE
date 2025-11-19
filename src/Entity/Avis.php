@@ -35,18 +35,18 @@ class Avis
   // -----------------------------
 
   // Auteur de l'avis (obligatoire)
-  #[ORM\ManyToOne(targetEntity: Utilisateur::class, inversedBy: 'avisRediges')]
+  #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'avisRediges')]
   #[ORM\JoinColumn(nullable: false)]
-  private ?Utilisateur $auteur = null;
+  private ?User $auteur = null;
 
   // Conducteur noté (obligatoire)
-  #[ORM\ManyToOne(targetEntity: Utilisateur::class, inversedBy: 'avisRecus')]
+  #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'avisRecus')]
   #[ORM\JoinColumn(nullable: false)]
-  private ?Utilisateur $conducteur = null;
+  private ?User $conducteur = null;
 
   public function __construct()
   {
-    // date auto, non renseignée par l'utilisateur
+    // date auto, non renseignée par user
     $this->date_avis = new \DateTimeImmutable();
   }
 

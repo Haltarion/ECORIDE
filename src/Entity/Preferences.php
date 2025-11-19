@@ -26,8 +26,8 @@ class Preferences
   // Relation OneToOne obligatoire
   // -----------------------------
 
-  #[ORM\OneToOne(mappedBy: 'preferences', targetEntity: Utilisateur::class)]
-  private ?Utilisateur $utilisateur = null;
+  #[ORM\OneToOne(mappedBy: 'preferences', targetEntity: User::class)]
+  private ?User $user = null;
 
   public function getId(): ?int
   {

@@ -39,13 +39,13 @@ class Profil
   }
 
   // -----------------------------
-  // Utilisateurs associés à ce profil
+  // Users associés à ce profil
   // -----------------------------
-  #[ORM\ManyToMany(targetEntity: Utilisateur::class, mappedBy: 'profils')]
-  private Collection $utilisateurs;
+  #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'profils')]
+  private Collection $users;
 
   public function __construct()
   {
-    $this->utilisateurs = new ArrayCollection();
+    $this->users = new ArrayCollection();
   }
 }

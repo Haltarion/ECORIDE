@@ -38,10 +38,10 @@ class Voiture
   #[ORM\Column(type: 'string', length: 20, unique: true)]
   private ?string $immatriculation = null;
 
-  // relation ManyToOne vers Utilisateur
-  #[ORM\ManyToOne(targetEntity: Utilisateur::class, inversedBy: 'voitures')]
+  // relation ManyToOne vers User
+  #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'voitures')]
   #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
-  private ?Utilisateur $utilisateur = null;
+  private ?User $user = null;
 
   // relation OneToMany vers Covoiturages
   #[ORM\OneToMany(mappedBy: 'voiture', targetEntity: Covoiturage::class)]

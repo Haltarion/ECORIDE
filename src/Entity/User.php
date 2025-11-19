@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\UtilisateurRepository;
+use App\Repository\UserRepository;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
-class Utilisateur
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
   #[ORM\Id]
   #[ORM\GeneratedValue]
@@ -36,21 +38,21 @@ class Utilisateur
   // -----------------------------
   // Preferences
   // -----------------------------
-  #[ORM\OneToOne(inversedBy: 'utilisateur', cascade: ['persist', 'remove'])]
+  #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
   #[ORM\JoinColumn(nullable: true)]
   private ?Preferences $preferences = null;
 
   // -----------------------------
   // Profils métier (conducteur/passager)
   // -----------------------------
-  #[ORM\ManyToMany(targetEntity: Profil::class, inversedBy: 'utilisateurs')]
-  #[ORM\JoinTable(name: "utilisateur_profils")]
+  #[ORM\ManyToMany(targetEntity: Profil::class, inversedBy: 'users')]
+  #[ORM\JoinTable(name: "user_profils")]
   private Collection $profils;
 
   // -----------------------------
   // Voitures
   // -----------------------------
-  #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Voiture::class, cascade: ['remove'])]
+  #[ORM\OneToMany(mappedBy: 'user', targetEntity: Voiture::class, cascade: ['remove'])]
   private Collection $voitures;
 
   // -----------------------------
@@ -116,6 +118,15 @@ class Utilisateur
     return $this;
   }
 
+  public function getUserIdentifier(): string
+  {
+    return $this->email;
+  }
+
+
+  /**
+   * @see PasswordAuthenticatedUserInterface
+   */
   public function getPassword(): ?string
   {
     return $this->password;
@@ -131,12 +142,6 @@ class Utilisateur
   public function getRoles(): array
   {
     return $this->roles;
-    // ROLE_USER ajouté automatiquement
-    if (!in_array('ROLE_USER', $roles, true)) {
-      $roles[] = 'ROLE_USER';
-    }
-
-    return array_unique($roles);
   }
 
   public function setRoles(array $roles): self
@@ -144,5 +149,11 @@ class Utilisateur
     $this->roles = $roles;
 
     return $this;
+  }
+
+  public function eraseCredentials(): void
+  {
+    // If you store any temporary, sensitive data on the user, clear it here
+    // $this->plainPassword = null;
   }
 }

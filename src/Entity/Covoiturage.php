@@ -56,14 +56,14 @@ class Covoiturage
   // -----------------------------
   // Relation obligatoire : conducteur
   // -----------------------------
-  #[ORM\ManyToOne(targetEntity: Utilisateur::class, inversedBy: 'covoiturages')]
+  #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'covoiturages')]
   #[ORM\JoinColumn(nullable: false)]
-  private ?Utilisateur $conducteur = null;
+  private ?User $conducteur = null;
 
   // -----------------------------
   // Relation ManyToMany : passagers
   // -----------------------------
-  #[ORM\ManyToMany(targetEntity: Utilisateur::class, inversedBy: 'covoituragesPassager')]
+  #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'covoituragesPassager')]
   #[ORM\JoinTable(name: "covoiturage_passagers")]
   private Collection $passagers;
 
