@@ -35,6 +35,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   #[ORM\Column(type: 'json')]
   private array $roles = []; // ROLE_USER par défaut
 
+  // Dépendances vers d'autres entités
+
   // -----------------------------
   // Preferences
   // -----------------------------
@@ -79,6 +81,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   #[ORM\OneToMany(mappedBy: 'conducteur', targetEntity: Avis::class)]
   private Collection $avisRecus;
 
+  // -----------------------------
+  // Extras utilisateur
+  // -----------------------------
+  #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+  #[ORM\JoinColumn(nullable: true)]
+  private ?UserExtras $extras = null;
+
+
   public function __construct()
   {
     $this->profils = new ArrayCollection();
@@ -89,11 +99,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     $this->avisRecus = new ArrayCollection();
   }
 
+  // -----------------------------
+  // Getters et Setters
+  // -----------------------------
+
   public function getId(): ?int
   {
     return $this->id;
   }
 
+  // Pseudo ----------------------
   public function getPseudo(): ?string
   {
     return $this->pseudo;
@@ -106,6 +121,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     return $this;
   }
 
+  // Email ----------------------
   public function getEmail(): ?string
   {
     return $this->email;
@@ -118,6 +134,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     return $this;
   }
 
+  // UserInterface methods ----------------------
   public function getUserIdentifier(): string
   {
     return $this->email;
