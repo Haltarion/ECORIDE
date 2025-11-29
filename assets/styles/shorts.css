@@ -243,6 +243,19 @@
     justify-content: center;
 }
 
+.btn-outline-light {
+    border: 1px solid transparent;
+    border-radius: 20px;
+    padding: 5px;
+    background-color: var(--white-color);
+    color: black;
+    fill: white;
+}
+.btn-outline-light:hover {
+    border: 1px solid var(--grey-color);
+    cursor: pointer;
+}
+
 /* Style pour le positionnement */
 .fixed {
     position: fixed;

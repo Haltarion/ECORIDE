@@ -58,3 +58,22 @@ function closeMenuMobile() {
         .classList.remove("header__nav__burger_menu_open");
     document.querySelector(".header__nav").classList.remove("open");
 }
+
+// Script pour la modal de modification de la photo de profil
+const modal = document.getElementById("modal-edit-photo");
+const openBtn = document.getElementById("open-modal-btn");
+const closeBtn = document.getElementById("close-modal");
+const fileInput = document.getElementById("photo-input");
+const fileName = document.getElementById("file-name");
+
+openBtn.addEventListener("click", () => {
+    modal.classList.add("open");
+});
+
+closeBtn.addEventListener("click", () => {
+    modal.classList.remove("open");
+});
+
+fileInput.addEventListener("change", () => {
+    fileName.textContent = fileInput.files[0]?.name || "Nom du fichier";
+});
