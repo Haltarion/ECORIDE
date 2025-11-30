@@ -17,6 +17,16 @@ input[type="range"] {
     width: 122px;
     cursor: pointer;
 }
+input[type="file"]:button {
+    border: 1px solid var(--grey-color);
+    border-radius: 4px;
+    font-size: var(--fs-p);
+    padding: 6px 10px;
+    cursor: pointer;
+}
+.file-name {
+    text-align: center;
+}
 
 /* Style pour les inputs date -----------------------------------*/
 .component__input-date__container {

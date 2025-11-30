@@ -10,13 +10,13 @@ const btnValidation = document.getElementById("btnValidationInscription");
 const formInscription = document.getElementById("formulaireInscription");
 
 // Ajout d'écoute des événements sur les inputs et le bouton
-inputPseudo.addEventListener("keyup", validateSignUpForm);
-inputMail.addEventListener("keyup", validateSignUpForm);
-inputPassword.addEventListener("keyup", validateSignUpForm);
-inputValidationPassword.addEventListener("keyup", validateSignUpForm);
+inputPseudo.addEventListener("keyup", validateForm);
+inputMail.addEventListener("keyup", validateForm);
+inputPassword.addEventListener("keyup", validateForm);
+inputValidationPassword.addEventListener("keyup", validateForm);
 
 //Function permettant de valider tout le formulaire et d'activer le bouton si tout est ok
-function validateSignUpForm() {
+function validateForm() {
     const nomOk = validateRequired(inputPseudo);
     const mailOk = validateMail(inputMail);
     const passwordOk = validatePassword(inputPassword);

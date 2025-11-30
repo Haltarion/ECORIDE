@@ -6,20 +6,36 @@
   <h1>Mon compte</h1>
 
   <div class="container f-row f-w al-start just-sb w-100 p-10">
-    <div class="f-col g-10">
-      {% include 'components/covoiturage/info-conducteur.html.twig' with {
-        pseudo: 'Bonport'
-      } %}
+    <div class="profile-grid">
+      <div class="profile-photo-cell">
+        <img class="photoProfil"
+          src="{{ asset(user.photo ?? 'media/default-user.png') }}"
+          alt="Photo de profil du conducteur"
+        >
+        <div class="action-image-buttons" >
+          <button
+            type="button"
+            class="btn-outline-light"
+            id="open-modal-btn"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <p class="secondary bold">{{ "Bonport"|default('Conducteur') }}</p>
 
       {% include 'components/icone/note.html.twig' with {
         starClass: 'infos-voiture__star main f-row g-5 h-25',
         textClass: 'infos-voiture__text secondary'
       } %}
     </div>
-
-    {% include 'components/covoiturage/prix.html.twig' with {
-      valeur: '20'
-    } %}
+    <div class="profile-note-cell">
+      {% include 'components/covoiturage/prix.html.twig' with {
+        valeur: '20'
+      } %}
+    </div>
   </div>
 
   <div class="container f-row w-100 g-10 p-10">
@@ -99,4 +115,24 @@
       pencilIconVisibility: 'hidden'
     } %}
   </div>
+
+  <div id="modal-edit-photo" class="modal">
+    <div class="modal-content">
+      <h3>Modifier ma photo de profil</h3>
+
+      <form class="f-col g-15" method="post" enctype="multipart/form-data">
+        <label for="photo-input" class="btn btn-sec">Choisir une photo</label>
+        <img class="photoProfil"
+          src="{{ asset(user.photo ?? 'media/default-user.png') }}"
+          alt="Photo de profil du conducteur"
+        >
+        <input type="file" id="photo-input" name="photo" class="hidden">
+        <span id="file-name" class="file-name">Nom du fichier</span>
+        <button class="btn btn-main" type="submit">Enregistrer</button>
+      </form>
+
+      <button id="close-modal" class="btn btn-annul">Fermer</button>
+    </div>
+  </div>
+
 {% endblock %}

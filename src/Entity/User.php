@@ -3,13 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: "utilisateurs")]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
   #[ORM\Id]
@@ -17,35 +17,98 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   #[ORM\Column]
   private ?int $id = null;
 
-  #[ORM\Column(length: 45)]
+  // -----------------------------
+  // Champs obligatoires
+  // -----------------------------
+  #[ORM\Column(type: 'string', length: 50, unique: true)]
   private ?string $pseudo = null;
 
-  #[ORM\Column(length: 45)]
+  #[ORM\Column(type: 'string', length: 50, unique: true)]
   private ?string $email = null;
 
   #[ORM\Column(length: 60)]
   private ?string $password = null;
 
-  #[ORM\Column(type: Types::BLOB, nullable: true)]
-  private $photo = null;
+  // -----------------------------
+  // Rôles techniques Symfony
+  // -----------------------------
+  #[ORM\Column(type: 'json')]
+  private array $roles = []; // ROLE_USER par défaut
 
-  #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 2, nullable: true)]
-  private ?string $credit = null;
+  // Dépendances vers d'autres entités
 
-  #[ORM\Column(type: Types::DECIMAL, precision: 1, scale: 1, nullable: true)]
-  private ?string $note = null;
+  // -----------------------------
+  // Preferences
+  // -----------------------------
+  #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+  #[ORM\JoinColumn(nullable: true)]
+  private ?Preferences $preferences = null;
 
-  #[ORM\Column(nullable: false)]
-  private ?int $role_of = 1;
+  // -----------------------------
+  // Profils métier (conducteur/passager)
+  // -----------------------------
+  #[ORM\ManyToMany(targetEntity: Profil::class, inversedBy: 'users')]
+  #[ORM\JoinTable(name: "user_profils")]
+  private Collection $profils;
 
-  #[ORM\Column(nullable: true)]
-  private ?int $user_preferences = null;
+  // -----------------------------
+  // Voitures
+  // -----------------------------
+  #[ORM\OneToMany(mappedBy: 'user', targetEntity: Voiture::class, cascade: ['remove'])]
+  private Collection $voitures;
+
+  // -----------------------------
+  // Covoiturages en tant que conducteur
+  // -----------------------------
+  #[ORM\OneToMany(mappedBy: 'conducteur', targetEntity: Covoiturage::class)]
+  private Collection $covoiturages;
+
+  // -----------------------------
+  // Covoiturages en tant que passager
+  // -----------------------------
+  #[ORM\ManyToMany(targetEntity: Covoiturage::class, mappedBy: 'passagers')]
+  private Collection $covoituragesPassager;
+
+  // -----------------------------
+  // Avis rédigés (auteur)
+  // -----------------------------
+  #[ORM\OneToMany(mappedBy: 'auteur', targetEntity: Avis::class)]
+  private Collection $avisRediges;
+
+  // -----------------------------
+  // Avis reçus (conducteur noté)
+  // -----------------------------
+  #[ORM\OneToMany(mappedBy: 'conducteur', targetEntity: Avis::class)]
+  private Collection $avisRecus;
+
+  // -----------------------------
+  // Extras utilisateur
+  // -----------------------------
+  #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+  #[ORM\JoinColumn(nullable: true)]
+  private ?UserExtras $extras = null;
+
+
+  public function __construct()
+  {
+    $this->profils = new ArrayCollection();
+    $this->voitures = new ArrayCollection();
+    $this->covoiturages = new ArrayCollection();
+    $this->covoituragesPassager = new ArrayCollection();
+    $this->avisRediges = new ArrayCollection();
+    $this->avisRecus = new ArrayCollection();
+  }
+
+  // -----------------------------
+  // Getters et Setters
+  // -----------------------------
 
   public function getId(): ?int
   {
     return $this->id;
   }
 
+  // Pseudo ----------------------
   public function getPseudo(): ?string
   {
     return $this->pseudo;
@@ -58,6 +121,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     return $this;
   }
 
+  // Email ----------------------
   public function getEmail(): ?string
   {
     return $this->email;
@@ -70,6 +134,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     return $this;
   }
 
+  // UserInterface methods ----------------------
+  public function getUserIdentifier(): string
+  {
+    return $this->email;
+  }
+
+
+  /**
+   * @see PasswordAuthenticatedUserInterface
+   */
   public function getPassword(): ?string
   {
     return $this->password;
@@ -82,79 +156,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     return $this;
   }
 
-  public function getPhoto()
-  {
-    return $this->photo;
-  }
-
-  public function setPhoto($photo): static
-  {
-    $this->photo = $photo;
-
-    return $this;
-  }
-
-  public function getCredit(): ?string
-  {
-    return $this->credit;
-  }
-
-  public function setCredit(?string $credit): static
-  {
-    $this->credit = $credit;
-
-    return $this;
-  }
-
-  public function getNote(): ?string
-  {
-    return $this->note;
-  }
-
-  public function setNote(?string $note): static
-  {
-    $this->note = $note;
-
-    return $this;
-  }
-
-  public function getRoleOf(): ?int
-  {
-    return $this->role_of;
-  }
-
-  public function setRoleOf(?int $role_of): static
-  {
-    $this->role_of = $role_of;
-
-    return $this;
-  }
-
-  public function getUserPreferences(): ?int
-  {
-    return $this->user_preferences;
-  }
-
-  public function setUserPreferences(?int $user_preferences): static
-  {
-    $this->user_preferences = $user_preferences;
-
-    return $this;
-  }
-
-  // Méthodes requises par UserInterface
   public function getRoles(): array
   {
-    return ['ROLE_USER'];
+    return $this->roles;
+  }
+
+  public function setRoles(array $roles): self
+  {
+    $this->roles = $roles;
+
+    return $this;
   }
 
   public function eraseCredentials(): void
   {
-    // Effacer les données sensibles temporaires si nécessaire
-  }
-
-  public function getUserIdentifier(): string
-  {
-    return (string) $this->email;
+    // If you store any temporary, sensitive data on the user, clear it here
+    // $this->plainPassword = null;
   }
 }

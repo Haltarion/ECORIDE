@@ -171,3 +171,11 @@ div.slider-background {
     color: var(--main-color);
     transform: scale(1.2);
 }
+
+.action-image-buttons {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    display: flex;
+    gap: 10px;
+}
