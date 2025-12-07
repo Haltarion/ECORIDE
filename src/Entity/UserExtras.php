@@ -31,7 +31,9 @@ class UserExtras
   #[ORM\OneToOne(mappedBy: 'extras', targetEntity: User::class)]
   private ?User $user = null;
 
-
+  // -----------------------------
+  // Getters et Setters
+  // -----------------------------
   public function getId(): ?int
   {
     return $this->id;
@@ -70,6 +72,18 @@ class UserExtras
   {
     $this->photo = $photo;
 
+    return $this;
+  }
+  // -----------------------------
+  // Getters et Setters des autres entités
+  // -----------------------------
+  public function getUser(): ?User
+  {
+    return $this->user;
+  }
+  public function setUser(?User $user): static
+  {
+    $this->user = $user;
     return $this;
   }
 }

@@ -88,6 +88,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   #[ORM\JoinColumn(nullable: true)]
   private ?UserExtras $extras = null;
 
+  // -----------------------------
+  // Getters et Setters des autres entités
+  // -----------------------------
+  /** @property UserExtras|null $extras */
+
+  public function getExtras(): ?UserExtras
+  {
+    return $this->extras;
+  }
+  public function setExtras(?UserExtras $extras): static
+  {
+    $this->extras = $extras;
+
+    return $this;
+  }
 
   public function __construct()
   {
@@ -158,7 +173,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
   public function getRoles(): array
   {
-    return $this->roles;
+    $roles = $this->roles;
+    $roles[] = 'ROLE_USER';
+    return array_unique($roles);
   }
 
   public function setRoles(array $roles): self

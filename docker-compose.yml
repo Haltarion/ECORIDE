@@ -54,6 +54,21 @@ services:
         networks:
             - symfony
 
+    pma:
+        image: phpmyadmin/phpmyadmin:5.2
+        container_name: symfony-pma
+        restart: always
+        depends_on:
+            - db
+        ports:
+            - "8081:80"
+        environment:
+            PMA_HOST: db
+            PMA_USER: app
+            PMA_PASSWORD: app
+        networks:
+            - symfony
+
 networks:
     symfony:
 

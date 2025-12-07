@@ -83,13 +83,14 @@
 }
 
 .infos-voiture__photo {
-    object-fit: contain;
+    object-fit: cover;
     height: 30px;
     border-radius: 50px;
 }
 .photoProfil {
-    object-fit: contain;
+    object-fit: cover;
     height: 100px;
+    width: 100px;
     border-radius: 50px;
 }
 
