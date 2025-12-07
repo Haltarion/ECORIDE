@@ -8,9 +8,9 @@
   <div class="container f-row f-w al-start just-sb w-100 p-10">
     <div class="profile-grid">
       <div class="profile-photo-cell">
-        <img class="photoProfil"
-          src="{{ asset(user.photo ?? 'media/default-user.png') }}"
-          alt="Photo de profil du conducteur"
+        <img id="photo-profil" class="photoProfil"
+          src="{{ asset('media/default-user.png')}}"
+          alt="Photo de profil"
         >
         <div class="action-image-buttons" >
           <button
@@ -120,9 +120,9 @@
     <div class="modal-content">
       <h3>Modifier ma photo de profil</h3>
 
-      <form class="f-col g-15" method="post" enctype="multipart/form-data">
+      <form class="f-col g-15" method="post" enctype="multipart/form-data" action="{{ path('app_user_space_photo') }}">
         <label for="photo-input" class="btn btn-sec">Choisir une photo</label>
-        <img class="photoProfil"
+        <img id="modal-photo-profil" class="photoProfil"
           src="{{ asset(user.photo ?? 'media/default-user.png') }}"
           alt="Photo de profil du conducteur"
         >
@@ -134,5 +134,10 @@
       <button id="close-modal" class="btn btn-annul">Fermer</button>
     </div>
   </div>
+{% endblock %}
 
+{% block javascripts %}
+  {{ parent() }}
+  <script>window.userPhotoFromDB = "{{ userPhoto }}"</script>
+  <script type="module" src="{{ asset('scripts/forms/user-space.js') }}"></script>
 {% endblock %}

@@ -63,8 +63,9 @@ function closeMenuMobile() {
 const modal = document.getElementById("modal-edit-photo");
 const openBtn = document.getElementById("open-modal-btn");
 const closeBtn = document.getElementById("close-modal");
-const fileInput = document.getElementById("photo-input");
+const input = document.getElementById("photo-input");
 const fileName = document.getElementById("file-name");
+const img = document.getElementById("modal-photo-profil");
 
 openBtn.addEventListener("click", () => {
     modal.classList.add("open");
@@ -74,6 +75,56 @@ closeBtn.addEventListener("click", () => {
     modal.classList.remove("open");
 });
 
-fileInput.addEventListener("change", () => {
-    fileName.textContent = fileInput.files[0]?.name || "Nom du fichier";
+// Script pour récupérer la photo
+// Variables temporaires
+let tempName = "";
+let tempSrc = "";
+
+// Types autorisés
+const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+
+// Taille max (2 Mo)
+const maxSize = 2 * 1024 * 1024;
+
+function sanitizeFileName(name) {
+    // Supprimer les chemins éventuels (sécurité)
+    name = name.replace(/^.*[\\/]/, "");
+
+    // Remplacer caractères dangereux
+    name = name.replace(/[<>:"'|?*]/g, "_");
+
+    // Échapper les caractères HTML
+    name = name
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    return name;
+}
+
+input.addEventListener("change", function () {
+    const file = this.files[0];
+    if (!file) return;
+
+    // Vérification type
+    if (!allowedTypes.includes(file.type)) {
+        alert("Votre image doit être au format JPG, PNG ou WEBP.");
+        return;
+    }
+
+    // Vérification taille
+    if (file.size > maxSize) {
+        alert("Fichier trop volumineux");
+        return;
+    }
+
+    // Affiche le nom
+    tempName = sanitizeFileName(file.name);
+    fileName.textContent = tempName;
+
+    // Affiche l'image
+    tempSrc = URL.createObjectURL(file);
+    img.src = tempSrc;
 });
