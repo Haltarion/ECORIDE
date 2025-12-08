@@ -11,25 +11,34 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserSpaceController extends AbstractController
 {
+  // -------------------------
+  // Affichage de l'espace utilisateur
+  // -------------------------
   #[Route('/user-space', name: 'app_user_space')]
   public function index(): Response
   {
+    // Récupération de l'utilisateur connecté et de ses extras
     $user = $this->getUser();
     $extras = $user?->getExtras();
 
-    // Si l'utilisateur n'a pas encore d'extras → photo = ""
+    // Si l'utilisateur n'a pas encore d'extras alors photo = ""
     $photo = $extras?->getPhoto() ?? '';
     return $this->render('pages/espaces/user-space.html.twig', [
       'userPhoto' => $photo,
     ]);
   }
 
+  // -------------------------
   // Enregistrement de la photo dans la base de donnée
+  // -------------------------
   #[Route('/user-space/photo', name: 'app_user_space_photo', methods: ['POST'])]
   public function uploadPhoto(Request $request, EntityManagerInterface $entityManager): Response
   {
     // Mettre à jour la photo de l'utilisateur dans la base de données
     $user = $this->getUser();
+    if (!$user) {
+      return $this->redirectToRoute('app_user_space');
+    }
 
     // 1. Récupérer ou créer les extras
     $extras = $user->getExtras();
@@ -51,15 +60,24 @@ class UserSpaceController extends AbstractController
     // 3. Dossier de destination
     $uploadDir = $this->getParameter('kernel.project_dir') . '/public/uploads/users';
 
-    // 4. Générer un nom unique
+    // 4. Récupérer l’ancienne photo
+    $oldPhoto = $extras->getPhoto();
+
+    // 5. Générer un nom unique
     $filename = uniqid() . '.' . $file->guessExtension();
 
-    // 5. Déplacer le fichier
+    // 6. Déplacer le fichier
     $file->move($uploadDir, $filename);
 
-    // 6. Mettre à jour la photo dans les extras
+    // 7. Supprimer l’ancienne photo si elle existait
+    if ($oldPhoto && file_exists($uploadDir . '/' . $oldPhoto)) {
+        unlink($uploadDir . '/' . $oldPhoto);
+    }
+
+    // 8. Mettre à jour la photo dans les extras
     $extras->setPhoto($filename);
 
+    // 9. Enregistrer en base de données
     $entityManager->flush();
 
     return $this->redirectToRoute('app_user_space');

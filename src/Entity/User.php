@@ -88,22 +88,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   #[ORM\JoinColumn(nullable: true)]
   private ?UserExtras $extras = null;
 
-  // -----------------------------
-  // Getters et Setters des autres entités
-  // -----------------------------
-  /** @property UserExtras|null $extras */
-
-  public function getExtras(): ?UserExtras
-  {
-    return $this->extras;
-  }
-  public function setExtras(?UserExtras $extras): static
-  {
-    $this->extras = $extras;
-
-    return $this;
-  }
-
   public function __construct()
   {
     $this->profils = new ArrayCollection();
@@ -189,5 +173,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   {
     // If you store any temporary, sensitive data on the user, clear it here
     // $this->plainPassword = null;
+  }
+  
+  // -----------------------------
+  // Getters et Setters des autres entités
+  // -----------------------------
+  /** @property UserExtras|null $extras */
+
+  public function getExtras(): ?UserExtras
+  {
+    return $this->extras;
+  }
+  public function setExtras(?UserExtras $extras): self
+  {
+    $this->extras = $extras;
+    return $this;
   }
 }

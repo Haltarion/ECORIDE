@@ -51,8 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
         img.src = tempSrc;
     });
 
-    // Afficher la photo de profile stockée en base de données
-    if (window.userPhotoFromDB !== "") {
-        photo.src = "/uploads/users/" + window.userPhotoFromDB;
-    }
+    // // Afficher la photo de profile stockée en base de données
+    // if (window.userPhotoFromDB !== "") {
+    //     photo.src = "/uploads/users/" + window.userPhotoFromDB;
+    // }
 });
