@@ -69,6 +69,10 @@
     border-radius: 8px;
 }
 
+.ml li {
+    list-style-type: none;
+}
+
 /* Style pour les écrans mobile ------------------------------------ */
 @media screen and (max-width: 749px) {
     :root {
