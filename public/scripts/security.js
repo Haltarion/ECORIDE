@@ -1,5 +1,3 @@
-// security.js
-console.log("security.js loaded");
 export function sanitizeString(str) {
     str = str.replace(/^.*[\\/]/, "");
     str = str.replace(/[<>:"'|?*]/g, "_");

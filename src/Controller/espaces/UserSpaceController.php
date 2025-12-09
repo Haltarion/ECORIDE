@@ -21,10 +21,18 @@ class UserSpaceController extends AbstractController
     $user = $this->getUser();
     $extras = $user?->getExtras();
 
-    // Si l'utilisateur n'a pas encore d'extras alors photo = ""
+    // Récupération des informations de l'utilisateur
+    $pseudo = $user?->getPseudo() ?? 'Utilisateur';
     $photo = $extras?->getPhoto() ?? '';
+    $credit = $extras?->getCredit();
+    $note = $extras?->getNote();
+
+
     return $this->render('pages/espaces/user-space.html.twig', [
+      'userName' => $pseudo,
       'userPhoto' => $photo,
+      'userCredit' => $credit,
+      'userNote' => $note,
     ]);
   }
 
