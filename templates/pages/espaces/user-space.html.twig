@@ -32,7 +32,8 @@
 
       {% include 'components/icone/note.html.twig' with {
         starClass: 'infos-voiture__star main f-row g-5 h-25',
-        textClass: 'infos-voiture__text secondary'
+        textClass: 'infos-voiture__text secondary',
+        note : userNote ?? '0'
       } %}
     </div>
     <div class="profile-credit-cell">
@@ -47,25 +48,25 @@
     <div class="f-col al-start w-100">
       <h2>Vous êtes</h2>
 
-      <div class="f-row al-center g-10 p-10">
-        <input type="radio" id="passage" name="role" value="passage" checked>
-        <label class="textInline" for="passage">Passager</label>
+      <div class="form-group f-row al-center g-10 p-10">
+        <input type="radio" id="passager" name="profil" value="passager" checked>
+        <label class="textInline" for="passager">Passager</label>
       </div>
 
       <div class="f-row al-center g-10 p-10">
-        <input type="radio" id="chauffeur" name="role" value="chauffeur">
+        <input type="radio" id="chauffeur" name="profil" value="chauffeur">
         <label class="textInline" for="chauffeur">Chauffeur</label>
       </div>
 
       <div class="f-row al-center g-10 p-10">
-        <input type="radio" id="les2" name="role" value="les2">
+        <input type="radio" id="les2" name="profil" value="les2">
         <label class="textInline" for="les2">Les deux</label>
       </div>
-
+      <div id="error-alerte" class="hidden">
       {% include 'components/form/error-alerte.html.twig' with {
-        alertMessage: 'Vous devez renseigner au moins 1 véhicule',
-        class: 'hidden'
+        alertMessage: 'Vous devez renseigner au moins 1 véhicule'
       } %}
+      </div>
     </div>
 
     <!-- Boutons classiques -->
@@ -76,7 +77,7 @@
     </div>
   </div>
 
-  <div class="container f-col just-center w-100 g-10 p-10 al-sb">
+  <div id="preferences" class="container f-col just-center w-100 g-10 p-10 al-sb hidden">
     <!-- Préférences -->
     <h2>Vos préférences</h2>
 
@@ -99,7 +100,7 @@
     } %}
   </div>
 
-  <div class="container f-col just-center w-100 g-10 p-10 al-sb">
+  <div id="vehicule" class="container f-col just-center w-100 g-10 p-10 al-sb hidden">
     <!-- Véhicules -->
     <h2>Mes véhicules</h2>
 
@@ -152,5 +153,6 @@
 {% block javascripts %}
   {{ parent() }}
   <script>window.userPhotoFromDB = "{{ userPhoto }}"</script>
+  <script>window.csrfProfileToken = "{{ csrf_token('profile-change') }}";</script>
   <script type="module" src="{{ asset('scripts/forms/user-space.js') }}"></script>
 {% endblock %}

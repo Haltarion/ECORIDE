@@ -3,10 +3,13 @@
 namespace App\Controller\espaces;
 
 use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\User;
 use App\Entity\UserExtras;
+use App\Entity\Profil;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserSpaceController extends AbstractController
@@ -20,6 +23,7 @@ class UserSpaceController extends AbstractController
     // Récupération de l'utilisateur connecté et de ses extras
     $user = $this->getUser();
     $extras = $user?->getExtras();
+    $profils = $user->getProfils();
 
     // Récupération des informations de l'utilisateur
     $pseudo = $user?->getPseudo() ?? 'Utilisateur';
@@ -45,7 +49,7 @@ class UserSpaceController extends AbstractController
     // Mettre à jour la photo de l'utilisateur dans la base de données
     $user = $this->getUser();
     if (!$user) {
-      return $this->redirectToRoute('app_user_space');
+      return new JsonResponse(['success' => false, 'message' => 'Not authenticated'], 401);
     }
 
     // 1. Récupérer ou créer les extras
@@ -89,5 +93,50 @@ class UserSpaceController extends AbstractController
     $entityManager->flush();
 
     return $this->redirectToRoute('app_user_space');
+  }
+  // -------------------------
+  // Mise à jour du profil utilisateur (chauffeur/passager)
+  // -------------------------
+  #[Route('/user-space/profil', name: 'app_user_space_profil', methods: ['POST'])]
+  public function updateProfil(Request $request, EntityManagerInterface $em): JsonResponse
+  {
+    // Vérification du token CSRF
+    $data = json_decode($request->getContent(), true) ?? [];
+    $token = $data['_csrf_token'] ?? '';
+    if (!$this->isCsrfTokenValid('profile-change', $token)) {
+      return new JsonResponse(['success' => false, 'message' => 'Invalid CSRF'], 403);
+    }
+
+    // Récupération du profil choisi
+    $profilValue = $data['profil'] ?? 'Passager';
+    $user = $this->getUser();
+    if (!$user) {
+      return new JsonResponse(['success' => false, 'message' => 'Not authenticated'], 401);
+    }
+
+    $profilRepo = $em->getRepository(Profil::class);
+
+    // vider existants
+    foreach ($user->getProfils() as $p) {
+      $user->removeProfil($p);
+    }
+
+    // Si 'les2', ajouter les deux profils
+    if ($profilValue === 'les2') {
+      $p1 = $profilRepo->findOneBy(['libelle' => 'Passager']);
+      $p2 = $profilRepo->findOneBy(['libelle' => 'Chauffeur']);
+      if ($p1) $user->addProfil($p1);
+      if ($p2) $user->addProfil($p2);
+    } else {
+      // Sinon, ajouter le profil choisi
+      $label = ucfirst($profilValue); // 'passager' -> 'Passager'
+      $p = $profilRepo->findOneBy(['libelle' => $label]);
+      if ($p) $user->addProfil($p);
+    }
+
+    $em->persist($user);
+    $em->flush();
+
+    return new JsonResponse(['success' => true]);
   }
 }

@@ -4,6 +4,7 @@ namespace App\Controller\auth;
 
 use App\Entity\User;
 use App\Entity\UserExtras;
+use App\Entity\Profil;
 use Symfony\Bundle\SecurityBundle\Security;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,6 +51,14 @@ class SignupController extends AbstractController
     $extras->setNote('0.0');
     $extras->setUser($user);
     $user->setExtras($extras);
+
+    // Ajouter les profils à l'utilisateur
+    $profilRepository = $em->getRepository(Profil::class);
+    $profilPassager = $profilRepository->findOneBy(['libelle' => 'Passager']);
+
+    if ($profilPassager) {
+      $user->addProfil($profilPassager);
+    }
 
     $em->persist($user);
     $em->persist($extras);

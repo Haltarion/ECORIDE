@@ -155,6 +155,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     return $this;
   }
 
+  // -----------------------------
+  // Getters et Setters des autres entités
+  // -----------------------------
+  /** @property UserExtras|null $extras */
+
+  public function getExtras(): ?UserExtras
+  {
+    return $this->extras;
+  }
+  public function setExtras(?UserExtras $extras): self
+  {
+    $this->extras = $extras;
+    return $this;
+  }
+
   public function getRoles(): array
   {
     $roles = $this->roles;
@@ -169,24 +184,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     return $this;
   }
 
+  public function getProfils(): Collection
+  {
+    return $this->profils;
+  }
+
+  public function addProfil(?Profil $profil): static
+  {
+    if (!$this->profils->contains($profil)) {
+      $this->profils->add($profil);
+    }
+    return $this;
+  }
+
+  public function removeProfil(Profil $profil): static
+  {
+    $this->profils->removeElement($profil);
+
+    return $this;
+  }
+
+  public function hasProfil(Profil $profil): bool
+  {
+    return $this->profils->contains($profil);
+  }
+
   public function eraseCredentials(): void
   {
     // If you store any temporary, sensitive data on the user, clear it here
     // $this->plainPassword = null;
-  }
-
-  // -----------------------------
-  // Getters et Setters des autres entités
-  // -----------------------------
-  /** @property UserExtras|null $extras */
-
-  public function getExtras(): ?UserExtras
-  {
-    return $this->extras;
-  }
-  public function setExtras(?UserExtras $extras): self
-  {
-    $this->extras = $extras;
-    return $this;
   }
 }

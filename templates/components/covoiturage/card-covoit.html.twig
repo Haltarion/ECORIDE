@@ -17,12 +17,15 @@
 
     {# Infos sur le conducteur #}
     {% include 'components/covoiturage/info-conducteur.html.twig' with {
-      class: 'infos-voiture__photo h-30 r-50',
-      pseudo: 'Bonport'
+      class: 'infos-voiture__photo h-30 r-50'
     } %}
 
     {# Note #}
-    {% include 'components/icone/note.html.twig' with { starClass: 'infos-voiture__star main f-row g-5 h-25', textClass: 'infos-voiture__text secondary' } %}
+    {% include 'components/icone/note.html.twig' with {
+      starClass: 'infos-voiture__star main f-row g-5 h-25',
+      textClass: 'infos-voiture__text secondary',
+      note : '4.5'
+    } %}
 
     {# Icone voiture électrique #}
     {% include 'components/icone/electricalCar.html.twig' with { class: 'secondary' } %}
