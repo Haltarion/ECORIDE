@@ -57,33 +57,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const errorDiv = document.getElementById("error-alerte");
     const preferences = document.getElementById("preferences");
     const vehicule = document.getElementById("vehicule");
-    // Valeur initiale
-    window.profil =
-        document.querySelector('input[name="profil"]:checked')?.value ||
-        "passager";
-    // mise à jour visuelle locale + envoi au serveur quand on change
-    function onProfilChange(value) {
+    // Valeur initiale depuis le serveur
+    const initialSelected = window.selectedProfil ?? "passager";
+    window.profil = initialSelected;
+
+    // Envoi de la requête optionnel
+    function onProfilChange(value, send = true) {
         window.profil = value;
-        // mise à jour UI locale si besoin
         document.documentElement.dataset.userProfil = value;
+
         if (value === "passager") {
-            preferences.classList.remove("visible");
             preferences.classList.add("hidden");
-            errorDiv.classList.remove("visible");
             errorDiv.classList.add("hidden");
-            vehicule.classList.remove("visible");
             vehicule.classList.add("hidden");
         } else {
             preferences.classList.remove("hidden");
-            preferences.classList.add("visible");
             // if (vehicule === "") {
             errorDiv.classList.remove("hidden");
-            errorDiv.classList.add("visible");
             // } else {
             vehicule.classList.remove("hidden");
-            vehicule.classList.add("visible");
             // }
         }
+
+        if (!send) return; // éviter fetch au chargement
 
         // envoi au controller
         fetch("/user-space/profil", {
@@ -107,4 +103,16 @@ document.addEventListener("DOMContentLoaded", () => {
     radios.forEach((r) =>
         r.addEventListener("change", () => onProfilChange(r.value))
     );
+
+    // attacher événements
+    radios.forEach((r) =>
+        r.addEventListener("change", () => onProfilChange(r.value))
+    );
+
+    // cocher la radio correspondante et appliquer l'UI sans envoyer la requête
+    const radioToCheck = document.querySelector(
+        `input[name="profil"][value="${initialSelected}"]`
+    );
+    if (radioToCheck) radioToCheck.checked = true;
+    onProfilChange(initialSelected, false);
 });

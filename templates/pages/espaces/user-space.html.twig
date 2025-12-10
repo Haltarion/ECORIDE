@@ -49,7 +49,7 @@
       <h2>Vous êtes</h2>
 
       <div class="form-group f-row al-center g-10 p-10">
-        <input type="radio" id="passager" name="profil" value="passager" checked>
+        <input type="radio" id="passager" name="profil" value="passager">
         <label class="textInline" for="passager">Passager</label>
       </div>
 
@@ -70,7 +70,7 @@
     </div>
 
     <!-- Boutons classiques -->
-    <div class="f-col al-start w-100 just-sb maxw-200">
+    <div class="f-col al-start g-5 w-100 just-sb maxw-200">
       <a href="#" class="btn btn-main mh-50 w-100">Historique des covoiturages</a>
       <a href="{{ path('app_suggest_trip') }}" class="btn btn-main mh-50 w-100">Proposer un voyage</a>
       <a href="{{ path('app_user_vehicle') }}" class="btn btn-main mh-50 w-100">Gérer mes véhicules</a>
@@ -152,7 +152,10 @@
 
 {% block javascripts %}
   {{ parent() }}
-  <script>window.userPhotoFromDB = "{{ userPhoto }}"</script>
-  <script>window.csrfProfileToken = "{{ csrf_token('profile-change') }}";</script>
+  <script>
+    window.selectedProfil = "{{ selectedProfil|default('passager') }}";
+    window.userPhotoFromDB = "{{ userPhoto }}"
+    window.csrfProfileToken = "{{ csrf_token('profile-change') }}";
+  </script>
   <script type="module" src="{{ asset('scripts/forms/user-space.js') }}"></script>
 {% endblock %}
