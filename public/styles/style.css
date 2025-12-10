@@ -15,6 +15,7 @@
     --grey-color: #b9b7b7;
     --black-color: #000000;
 }
+
 .profile-grid {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -23,26 +24,31 @@
     align-items: center;
     justify-items: center;
 }
-
 /* Cellule photo + bouton */
 .profile-photo-cell {
     grid-row: 1;
     grid-column: 1;
     position: relative;
 }
-
 /* Pseudo */
 .profile-name-cell {
     grid-row: 1;
     grid-column: 2;
 }
-
 /* Note */
 .profile-note-cell {
     grid-row: 2;
     grid-column: 1 / span 2; /* la note sur toute la largeur */
 }
 
+.profile-credit-cell {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    align-items: center;
+    justify-items: center;
+}
 .modal {
     display: none;
     position: fixed;

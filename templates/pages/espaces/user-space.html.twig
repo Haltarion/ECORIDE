@@ -36,10 +36,14 @@
         note : userNote ?? '0'
       } %}
     </div>
-    <div class="profile-credit-cell">
+    <div class="profile-credit-cell maxw-200">
       {% include 'components/covoiturage/prix.html.twig' with {
         valeur: userCredit
       } %}
+      <form method="POST" action="{{ path('app_user_space_delete_account') }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?');">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('delete-account') }}">
+        <button type="submit" class="btn btn-annul mh-50 w-100">Supprimer mon compte</button>
+      </form>
     </div>
   </div>
 
@@ -154,8 +158,9 @@
   {{ parent() }}
   <script>
     window.selectedProfil = "{{ selectedProfil|default('passager') }}";
-    window.userPhotoFromDB = "{{ userPhoto }}"
     window.csrfProfileToken = "{{ csrf_token('profile-change') }}";
+    window.csrfPhotoToken = "{{ csrf_token('profile-photo') }}";
+    window.csrfDeleteToken = "{{ csrf_token('delete-account') }}";
   </script>
   <script type="module" src="{{ asset('scripts/forms/user-space.js') }}"></script>
 {% endblock %}

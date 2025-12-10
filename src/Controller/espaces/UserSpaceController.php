@@ -13,32 +13,42 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Security\CsrfTokenVerifier;
+use App\Security\UserProvider;
 
 class UserSpaceController extends AbstractController
 {
   private CsrfTokenVerifier $csrfVerifier;
+  private UserProvider $userProvider;
 
-  public function __construct(CsrfTokenVerifier $csrfVerifier)
+  public function __construct(CsrfTokenVerifier $csrfVerifier, UserProvider $userProvider)
   {
     $this->csrfVerifier = $csrfVerifier;
+    $this->userProvider = $userProvider;
   }
 
-  // -------------------------
-  // Enregistrement de la photo dans la base de donnée
-  // -------------------------
-  #[Route('/user-space/photo', name: 'app_user_space_photo', methods: ['POST'])]
-  public function uploadPhoto(Request $request, EntityManagerInterface $entityManager): Response
+  /**
+   * Vérification centralisée : token CSRF + authentification
+   * @return User L'utilisateur authentifié
+   */
+  private function verifySecurityAndGetUser(array $data, string $tokenId = 'profile-change')
   {
-    // Vérification du token CSRF
-    $data = json_decode($request->getContent(), true) ?? [];
-    // lance AccessDeniedHttpException si invalide
-    $this->csrfVerifier->assertTokenValid('profile-change', $data['_csrf_token'] ?? '');
+    $this->csrfVerifier->assertTokenValid($tokenId, $data['_csrf_token'] ?? '');
+    return $this->userProvider->getAuthenticatedUser();
+  }
 
-    // Mettre à jour la photo de l'utilisateur dans la base de données
-    $user = $this->getUser();
-    if (!$user) {
-      return new JsonResponse(['success' => false, 'message' => 'Not authenticated'], 401);
+  /**
+  * Enregistrement de la photo dans la base de donnée
+  */
+  #[Route('/user-space/photo', name: 'app_user_space_photo', methods: ['POST'])]
+  public function uploadPhoto(Request $request, EntityManagerInterface $entityManager): JsonResponse
+  {
+    // Vérification token CSRF et authentification
+    $data = json_decode($request->getContent(), true) ?? [];
+    // fallback pour form post
+    if (empty($data) && $request->request->has('_csrf_token')) {
+        $data = $request->request->all();
     }
+    $user = $this->verifySecurityAndGetUser($data, 'profile-photo');
 
     // 1. Récupérer ou créer les extras
     $extras = $user->getExtras();
@@ -49,11 +59,10 @@ class UserSpaceController extends AbstractController
       $entityManager->persist($extras);
       $entityManager->persist($user);
     }
-    // 2. Récupération du fichier
+    // 2. Récupération du fichier (multipart/form-data)
     $file = $request->files->get('photo');
     if (!$file) {
-      // rien envoyé → on sort
-      return $this->redirectToRoute('app_user_space');
+      return new JsonResponse(['success' => false, 'message' => 'No file provided'], 400);
     }
     // 3. Dossier de destination
     $uploadDir = $this->getParameter('kernel.project_dir') . '/public/uploads/users';
@@ -65,33 +74,32 @@ class UserSpaceController extends AbstractController
     $file->move($uploadDir, $filename);
     // 7. Supprimer l’ancienne photo si elle existait
     if ($oldPhoto && file_exists($uploadDir . '/' . $oldPhoto)) {
-        unlink($uploadDir . '/' . $oldPhoto);
+      unlink($uploadDir . '/' . $oldPhoto);
     }
     // 8. Mettre à jour la photo dans les extras
     $extras->setPhoto($filename);
     // 9. Enregistrer en base de données
     $entityManager->flush();
 
-    return $this->redirectToRoute('app_user_space');
+    return new JsonResponse(['success' => true]);
   }
-  // -------------------------
-  // Mise à jour du profil utilisateur (chauffeur/passager)
-  // -------------------------
+
+  /**
+  * Mise à jour du profil utilisateur (chauffeur/passager)
+  */
   #[Route('/user-space/profil', name: 'app_user_space_profil', methods: ['POST'])]
   public function updateProfil(Request $request, EntityManagerInterface $em): JsonResponse
   {
-    // Vérification du token CSRF
+    // Vérification token CSRF et authentification
     $data = json_decode($request->getContent(), true) ?? [];
-    // lance AccessDeniedHttpException si invalide
-    $this->csrfVerifier->assertTokenValid('profile-change', $data['_csrf_token'] ?? '');
+    // fallback pour form post
+    if (empty($data) && $request->request->has('_csrf_token')) {
+        $data = $request->request->all();
+    }
+    $user = $this->verifySecurityAndGetUser($data, 'profile-change');
 
     // Récupération du profil choisi
     $profilValue = $data['profil'] ?? 'Passager';
-    $user = $this->getUser();
-    if (!$user) {
-      return new JsonResponse(['success' => false, 'message' => 'Not authenticated'], 401);
-    }
-
     $profilRepo = $em->getRepository(Profil::class);
 
     // vider existants
@@ -118,21 +126,25 @@ class UserSpaceController extends AbstractController
     return new JsonResponse(['success' => true]);
   }
 
-  // -------------------------
-  // Mise a jour des préférences utilisateur
-  // -------------------------
-  #[Route('/user-space/preferences', name: 'app_user_space_preferences', methods: ['POST'])]
-  public function updatePreferences(Request $request, EntityManagerInterface $em): JsonResponse
-  {
-    // Vérification du token CSRF
-    $data = json_decode($request->getContent(), true) ?? [];
-    // lance AccessDeniedHttpException si invalide
-    $this->csrfVerifier->assertTokenValid('profile-change', $data['_csrf_token'] ?? '');
-  }
+  /**
+  * Mise a jour des préférences utilisateur
+  */
+  // #[Route('/user-space/preferences', name: 'app_user_space_preferences', methods: ['POST'])]
+  // public function updatePreferences(Request $request, EntityManagerInterface $em): JsonResponse
+  // {
+  //   // Vérification token CSRF et authentification
+  //   $data = json_decode($request->getContent(), true) ?? [];
+  //   // fallback pour form post
+  //   if (empty($data) && $request->request->has('_csrf_token')) {
+  //       $data = $request->request->all();
+  //   }
+  //   $user = $this->verifySecurityAndGetUser($data, 'profile-change');
 
-  // -------------------------
-  // Affichage de l'espace utilisateur
-  // -------------------------
+  // }
+
+  /**
+  * Affichage de l'espace utilisateur
+  */
   #[Route('/user-space', name: 'app_user_space')]
   public function index(EntityManagerInterface $em): Response
   {
@@ -185,5 +197,49 @@ class UserSpaceController extends AbstractController
       'userNote' => $note,
       'selectedProfil' => $selectedProfil,
     ]);
+  }
+
+  /**
+  * Suppression du compte utilisateur
+  */
+  #[Route('/user-space/supprimer-compte', name: 'app_user_space_delete_account', methods: ['POST'])]
+  public function deleteAccount(Request $request, EntityManagerInterface $em): Response
+  {
+    // Vérification token CSRF et authentification
+    $data = json_decode($request->getContent(), true) ?? [];
+    // fallback pour form post
+    if (empty($data) && $request->request->has('_csrf_token')) {
+        $data = $request->request->all();
+    }
+    $user = $this->verifySecurityAndGetUser($data, 'delete-account');
+
+    // 1. Récupérer ou créer les extras
+    $extras = $user->getExtras();
+    if (!$extras) {
+      $extras = new UserExtras();
+      $extras->setUser($user);
+      $user->setExtras($extras);
+      $em->persist($extras);
+      $em->persist($user);
+    }
+    // 3. Dossier de destination
+    $uploadDir = $this->getParameter('kernel.project_dir') . '/public/uploads/users';
+    // 4. Récupérer la photo
+    $photo = $extras->getPhoto();
+    // 5. Supprimer la photo si elle existait
+    if ($photo && file_exists($uploadDir . '/' . $photo)) {
+        unlink($uploadDir . '/' . $photo);
+    }
+
+    // Supprimer l'utilisateur
+    $em->remove($user);
+    $em->flush();
+
+    // Déconnecter l'utilisateur après la suppression
+    $this->container->get('security.token_storage')->setToken(null);
+    $request->getSession()->invalidate();
+
+    // Redirection vers la page d'accueil
+    return $this->redirectToRoute('app_home');
   }
 }

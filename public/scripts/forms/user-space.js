@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // envoi au controller
         fetch("/user-space/profil", {
             method: "POST",
-            credentials: "same-origin",
+            credentials: "same-origin", // inclure les cookies
             headers: {
                 "Content-Type": "application/json",
                 "X-Requested-With": "XMLHttpRequest",
@@ -100,9 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .catch((err) => console.error("Profil fetch error", err));
     }
-    radios.forEach((r) =>
-        r.addEventListener("change", () => onProfilChange(r.value))
-    );
 
     // attacher événements
     radios.forEach((r) =>
@@ -115,4 +112,28 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     if (radioToCheck) radioToCheck.checked = true;
     onProfilChange(initialSelected, false);
+
+    // Pour la soumission du formulaire photo (multipart)
+    const formPhoto = document.querySelector(
+        'form[action*="/user-space/photo"]'
+    );
+    if (formPhoto) {
+        formPhoto.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const formData = new FormData(formPhoto);
+            formData.append("_csrf_token", window.csrfPhotoToken);
+
+            fetch(formPhoto.action, {
+                method: "POST",
+                credentials: "same-origin",
+                body: formData,
+            })
+                .then((r) => r.json())
+                .then((json) => {
+                    if (json.success) window.location.reload();
+                    else console.warn("Photo upload failed", json);
+                })
+                .catch((err) => console.error("Photo upload error", err));
+        });
+    }
 });
