@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll('input[name="profil"]')
     );
     const errorDiv = document.getElementById("error-alerte");
-    const preferences = document.getElementById("preferences");
+    const preferencesForm = document.getElementById("preferencesForm");
     const vehicule = document.getElementById("vehicule");
     // Valeur initiale depuis le serveur
     const initialSelected = window.selectedProfil ?? "passager";
@@ -67,11 +67,11 @@ document.addEventListener("DOMContentLoaded", () => {
         document.documentElement.dataset.userProfil = value;
 
         if (value === "passager") {
-            preferences.classList.add("hidden");
+            preferencesForm.classList.add("hidden");
             errorDiv.classList.add("hidden");
             vehicule.classList.add("hidden");
         } else {
-            preferences.classList.remove("hidden");
+            preferencesForm.classList.remove("hidden");
             // if (vehicule === "") {
             errorDiv.classList.remove("hidden");
             // } else {
@@ -135,5 +135,44 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .catch((err) => console.error("Photo upload error", err));
         });
+    }
+
+    // Script pour la gestion des préférences
+    const fumeurCheckbox = document.getElementById("fumeur");
+    const animauxCheckbox = document.getElementById("animaux");
+    const preferencesTextarea = document.getElementById("preferences");
+    const btnValidation = document.getElementById("valide-pref-btn");
+
+    btnValidation?.addEventListener("click", (e) => {
+        e.preventDefault();
+        updatePreferences();
+    });
+
+    function updatePreferences() {
+        const rawText = preferencesTextarea?.value || "";
+        const safeText = sanitizeString(rawText);
+        const data = {
+            fumeur: fumeurCheckbox?.checked ? "fumeur" : "",
+            animaux: animauxCheckbox?.checked ? "animaux" : "",
+            preferences: safeText,
+            _csrf_token: window.csrfProfileToken,
+        };
+
+        fetch("/user-space/preferences", {
+            method: "POST",
+            credentials: "same-origin",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        })
+            .then((r) => r.json())
+            .then((json) => {
+                if (!json.success) {
+                    alert(
+                        "Une erreur est survenue lors de l'enregistrement des préférences."
+                    );
+                    console.warn("Preferences update failed", json);
+                } else alert("Préférences enregistrées avec succès");
+            })
+            .catch((err) => console.error("Preferences update error", err));
     }
 });

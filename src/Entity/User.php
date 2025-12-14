@@ -40,7 +40,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   // -----------------------------
   // Preferences
   // -----------------------------
-  #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+  #[ORM\OneToOne(inversedBy: 'user', targetEntity: Preferences::class, cascade: ['persist', 'remove'])]
   #[ORM\JoinColumn(nullable: true)]
   private ?Preferences $preferences = null;
 
@@ -158,8 +158,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   // -----------------------------
   // Getters et Setters des autres entités
   // -----------------------------
-  /** @property UserExtras|null $extras */
 
+  /** @property UserExtras|null $extras */
   public function getExtras(): ?UserExtras
   {
     return $this->extras;
@@ -208,6 +208,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   {
     return $this->profils->contains($profil);
   }
+
+  /** @property Preferences|null $preferences */
+  public function getPreferences(): ?Preferences
+{
+    return $this->preferences;
+}
+
+public function setPreferences(?Preferences $preferences): static
+{
+    $this->preferences = $preferences;
+    return $this;
+}
 
   public function eraseCredentials(): void
   {

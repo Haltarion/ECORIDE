@@ -129,18 +129,35 @@ class UserSpaceController extends AbstractController
   /**
   * Mise a jour des préférences utilisateur
   */
-  // #[Route('/user-space/preferences', name: 'app_user_space_preferences', methods: ['POST'])]
-  // public function updatePreferences(Request $request, EntityManagerInterface $em): JsonResponse
-  // {
-  //   // Vérification token CSRF et authentification
-  //   $data = json_decode($request->getContent(), true) ?? [];
-  //   // fallback pour form post
-  //   if (empty($data) && $request->request->has('_csrf_token')) {
-  //       $data = $request->request->all();
-  //   }
-  //   $user = $this->verifySecurityAndGetUser($data, 'profile-change');
+  #[Route('/user-space/preferences', name: 'app_user_space_preferences', methods: ['POST'])]
+  public function updatePreferences(Request $request, EntityManagerInterface $em): JsonResponse
+  {
+    // Vérification token CSRF et authentification
+    $data = json_decode($request->getContent(), true) ?? [];
+    // fallback pour form post
+    if (empty($data) && $request->request->has('_csrf_token')) {
+        $data = $request->request->all();
+    }
+    $user = $this->verifySecurityAndGetUser($data, 'profile-change');
 
-  // }
+    // Récupérer ou créer les préférences
+    $preferences = $user->getPreferences();
+    if (!$preferences) {
+      $preferences = new Preferences();
+      $user->setPreferences($preferences);
+      $em->persist($preferences);
+    }
+
+    // Mettre à jour les préférences
+    $preferences->setFumeur(isset($data['fumeur']) && $data['fumeur'] === 'fumeur');
+    $preferences->setAnimal(isset($data['animaux']) && $data['animaux'] === 'animaux');
+    $preferences->setPerso($data['preferences'] ?? '');
+
+    $em->persist($user);
+    $em->flush();
+
+    return new JsonResponse(['success' => true]);
+  }
 
   /**
   * Affichage de l'espace utilisateur
@@ -155,6 +172,7 @@ class UserSpaceController extends AbstractController
     }
     $extras = $user?->getExtras();
     $profils = $user->getProfils();
+    $preferences = $user->getPreferences();
 
     // Déterminer le profil sélectionné ; si vide, mettre "Passager" par défaut et persister
     $selectedProfil = 'passager';
@@ -188,7 +206,9 @@ class UserSpaceController extends AbstractController
     $photo = $extras?->getPhoto() ?? '';
     $credit = $extras?->getCredit();
     $note = $extras?->getNote();
-
+    $hasFumeur = $preferences?->isFumeur() ?? false;
+    $hasAnimaux = $preferences?->isAnimal() ?? false;
+    $autresPreferences = $preferences?->getPerso() ?? '';
 
     return $this->render('pages/espaces/user-space.html.twig', [
       'userName' => $pseudo,
@@ -196,6 +216,9 @@ class UserSpaceController extends AbstractController
       'userCredit' => $credit,
       'userNote' => $note,
       'selectedProfil' => $selectedProfil,
+      'hasFumeur' => $hasFumeur,
+      'hasAnimaux' => $hasAnimaux,
+      'autresPreferences' => $autresPreferences,
     ]);
   }
 

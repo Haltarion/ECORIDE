@@ -81,28 +81,36 @@
     </div>
   </div>
 
-  <div id="preferences" class="container f-col just-center w-100 g-10 p-10 al-sb hidden">
+  <form id="preferencesForm" class="container f-row al-end w-100 g-10 p-10 hidden">
     <!-- Préférences -->
-    <h2>Vos préférences</h2>
+    <div id="pref-perso" method="post" action="{{ path('app_user_space_preferences') }}" class="f-col al-start w-100">
+      <h2>Vos préférences</h2>
 
-    <p>Autorisez-vous les :</p>
+      <p>Autorisez-vous les :</p>
 
-    <div class="f-row al-center g-10">
-      <input type="checkbox" id="fumeur" name="fumeur" value="fumeur">
-      <label class="textInline" for="fumeur">Fumeurs</label>
+      <div class="f-row al-center g-10 p-10">
+        <input type="checkbox" id="fumeur" name="fumeur" value="fumeur" {{ hasFumeur ? 'checked' : '' }}>
+        <label class="textInline" for="fumeur">Fumeurs</label>
+      </div>
+
+      <div class="f-row al-center g-10 p-10 mb-8">
+        <input type="checkbox" id="animaux" name="animaux" value="animaux" {{ hasAnimaux ? 'checked' : '' }}>
+        <label class="textInline" for="animaux">Animaux</label>
+      </div>
+
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token('profile-change') }}">
+      {% include 'components/form/input-textarea.html.twig' with {
+        inputId: 'preferences',
+        placeholder: 'Indiquez ici vos préférences',
+        label: 'Avez-vous d\'autres préférences à indiquer ?',
+        value: autresPreferences
+      } %}
     </div>
 
-    <div class="f-row al-center g-10">
-      <input type="checkbox" id="animaux" name="animaux" value="animaux">
-      <label class="textInline" for="animaux">Animaux</label>
+    <div class="f-col al-start g-5 w-100 just-sb maxw-200">
+      <button id="valide-pref-btn" type="button" class="btn btn-main mh-50 w-100">Enregistrer mes préférences</button>
     </div>
-
-    {% include 'components/form/input-textarea.html.twig' with {
-      inputId: 'preferences',
-      placeholder: 'Indiquez ici vos préférences',
-      label: 'Avez-vous d\'autres préférences à indiquer ?'
-    } %}
-  </div>
+  </form>
 
   <div id="vehicule" class="container f-col just-center w-100 g-10 p-10 al-sb hidden">
     <!-- Véhicules -->
