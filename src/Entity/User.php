@@ -159,7 +159,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   // Getters et Setters des autres entités
   // -----------------------------
 
-  /** @property UserExtras|null $extras */
+  // Extras utilisateur
   public function getExtras(): ?UserExtras
   {
     return $this->extras;
@@ -170,6 +170,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     return $this;
   }
 
+  // Rôles techniques Symfony
   public function getRoles(): array
   {
     $roles = $this->roles;
@@ -184,6 +185,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     return $this;
   }
 
+  // Profils métier
   public function getProfils(): Collection
   {
     return $this->profils;
@@ -209,17 +211,43 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     return $this->profils->contains($profil);
   }
 
-  /** @property Preferences|null $preferences */
+  // Preferences
   public function getPreferences(): ?Preferences
-{
-    return $this->preferences;
-}
+  {
+      return $this->preferences;
+  }
 
-public function setPreferences(?Preferences $preferences): static
-{
-    $this->preferences = $preferences;
+  public function setPreferences(?Preferences $preferences): static
+  {
+      $this->preferences = $preferences;
+      return $this;
+  }
+
+  // Vehivules
+  public function getVoitures(): Collection
+  {
+    return $this->voitures;
+  }
+
+  public function addVoiture(?Voiture $voiture): static
+  {
+    if (!$this->voitures->contains($voiture)) {
+      $this->voitures->add($voiture);
+    }
     return $this;
-}
+  }
+
+  public function removeVoiture(Voiture $voiture): static
+  {
+    $this->voitures->removeElement($voiture);
+
+    return $this;
+  }
+
+  public function hasVoiture(Voiture $voiture): bool
+  {
+    return $this->voitures->contains($voiture);
+  }
 
   public function eraseCredentials(): void
   {

@@ -14,16 +14,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Security\CsrfTokenVerifier;
 use App\Security\UserProvider;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class UserSpaceController extends AbstractController
 {
   private CsrfTokenVerifier $csrfVerifier;
   private UserProvider $userProvider;
+  private UserPasswordHasherInterface $hasher;
 
-  public function __construct(CsrfTokenVerifier $csrfVerifier, UserProvider $userProvider)
+  public function __construct(CsrfTokenVerifier $csrfVerifier, UserProvider $userProvider, UserPasswordHasherInterface $hasher)
   {
     $this->csrfVerifier = $csrfVerifier;
     $this->userProvider = $userProvider;
+    $this->hasher = $hasher;
   }
 
   /**
@@ -160,6 +164,69 @@ class UserSpaceController extends AbstractController
   }
 
   /**
+  * Mise a jour des informations utilisateur
+  */
+  #[Route('/user-space/infos', name: 'app_edit_info_process', methods: ['POST'])]
+  public function updateInfos(Request $request, EntityManagerInterface $em): JsonResponse
+  {
+    try {
+      // Vérification token CSRF et authentification
+      $data = json_decode($request->getContent(), true) ?? [];
+      // fallback pour form post
+      if (empty($data) && $request->request->has('_csrf_token')) {
+          $data = $request->request->all();
+      }
+      $user = $this->verifySecurityAndGetUser($data, 'infos-change');
+
+      // Récupérer les nouvelles informations
+      $newPseudo = $data['pseudo'] ?? null;
+      $newEmail = $data['email'] ?? null;
+      $oldPassword = $data['oldPassword'] ?? null;
+      $newPassword = $data['newPassword'] ?? null;
+
+      // Vérifier si le nouveau pseudo n'existe pas déjà
+      if ($newPseudo !== null && $newPseudo !== $user->getPseudo()) {
+          $existingUser = $em->getRepository(User::class)->findOneBy(['pseudo' => $newPseudo]);
+          if ($existingUser) {
+              return new JsonResponse(['success' => false, 'message' => 'Ce pseudo existe déjà'], 409);
+          }
+      }
+      // Si un nouveau mot de passe est fourni, vérifier l'ancien mot de passe
+      if (!empty($newPassword)) {
+          if (empty($oldPassword)) {
+              return new JsonResponse(['success' => false, 'message' => 'Ancien mot de passe requis'], 400);
+          }
+          // Vérifier que l'ancien mot de passe correspond au hash enregistré
+          if (!$this->hasher->isPasswordValid($user, $oldPassword)) {
+              return new JsonResponse(['success' => false, 'message' => 'Ancien mot de passe incorrect'], 401);
+          }
+          // Hasher et enregistrer le nouveau mot de passe
+          $user->setPassword($this->hasher->hashPassword($user, $newPassword));
+      }
+
+      if ($newPseudo !== null) {
+          $user->setPseudo($newPseudo);
+      }
+      if ($newEmail !== null) {
+          $user->setEmail($newEmail);
+      }
+
+      $em->persist($user);
+      $em->flush();
+
+      return new JsonResponse([
+        'success' => true,
+        // URL de rafraîchissement de la page
+        'redirect' => $this->generateUrl('app_user_space'),
+      ]);
+    } catch (AccessDeniedHttpException $e) {
+      return new JsonResponse(['success' => false, 'message' => 'Token CSRF invalide'], 403);
+    } catch (\Exception $e) {
+      return new JsonResponse(['success' => false, 'message' => 'Erreur serveur: ' . $e->getMessage()], 500);
+    }
+  }
+
+  /**
   * Affichage de l'espace utilisateur
   */
   #[Route('/user-space', name: 'app_user_space')]
@@ -203,6 +270,7 @@ class UserSpaceController extends AbstractController
 
     // Récupération des informations de l'utilisateur
     $pseudo = $user?->getPseudo() ?? 'Utilisateur';
+    $email = $user?->getEmail() ?? '';
     $photo = $extras?->getPhoto() ?? '';
     $credit = $extras?->getCredit();
     $note = $extras?->getNote();
@@ -215,6 +283,7 @@ class UserSpaceController extends AbstractController
       'userPhoto' => $photo,
       'userCredit' => $credit,
       'userNote' => $note,
+      'userEmail' => $email,
       'selectedProfil' => $selectedProfil,
       'hasFumeur' => $hasFumeur,
       'hasAnimaux' => $hasAnimaux,

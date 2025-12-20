@@ -1,10 +1,10 @@
 <div class="form-group f-col al-start w-100">
-  <label for="{{ inputId }}">Mot de passe *</label>
+  <label for="{{ inputId }}">{{ label ?? 'Mot de passe *' }}</label>
   <input
     type="password"
     id="{{ inputId }}"
     name="{{ inputId }}"
-    placeholder="Mot de passe"
+    placeholder="{{ placeholder ?? 'Mot de passe' }}"
     class="input"
     {% if required %} required {% endif %}
   >
