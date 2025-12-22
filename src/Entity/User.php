@@ -40,7 +40,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   // -----------------------------
   // Preferences
   // -----------------------------
-  #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+  #[ORM\OneToOne(inversedBy: 'user', targetEntity: Preferences::class, cascade: ['persist', 'remove'])]
   #[ORM\JoinColumn(nullable: true)]
   private ?Preferences $preferences = null;
 
@@ -87,22 +87,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
   #[ORM\JoinColumn(nullable: true)]
   private ?UserExtras $extras = null;
-
-  // -----------------------------
-  // Getters et Setters des autres entités
-  // -----------------------------
-  /** @property UserExtras|null $extras */
-
-  public function getExtras(): ?UserExtras
-  {
-    return $this->extras;
-  }
-  public function setExtras(?UserExtras $extras): static
-  {
-    $this->extras = $extras;
-
-    return $this;
-  }
 
   public function __construct()
   {
@@ -171,6 +155,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     return $this;
   }
 
+  // -----------------------------
+  // Getters et Setters des autres entités
+  // -----------------------------
+
+  // Extras utilisateur
+  public function getExtras(): ?UserExtras
+  {
+    return $this->extras;
+  }
+  public function setExtras(?UserExtras $extras): self
+  {
+    $this->extras = $extras;
+    return $this;
+  }
+
+  // Rôles techniques Symfony
   public function getRoles(): array
   {
     $roles = $this->roles;
@@ -183,6 +183,70 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     $this->roles = $roles;
 
     return $this;
+  }
+
+  // Profils métier
+  public function getProfils(): Collection
+  {
+    return $this->profils;
+  }
+
+  public function addProfil(?Profil $profil): static
+  {
+    if (!$this->profils->contains($profil)) {
+      $this->profils->add($profil);
+    }
+    return $this;
+  }
+
+  public function removeProfil(Profil $profil): static
+  {
+    $this->profils->removeElement($profil);
+
+    return $this;
+  }
+
+  public function hasProfil(Profil $profil): bool
+  {
+    return $this->profils->contains($profil);
+  }
+
+  // Preferences
+  public function getPreferences(): ?Preferences
+  {
+      return $this->preferences;
+  }
+
+  public function setPreferences(?Preferences $preferences): static
+  {
+      $this->preferences = $preferences;
+      return $this;
+  }
+
+  // Vehivules
+  public function getVoitures(): Collection
+  {
+    return $this->voitures;
+  }
+
+  public function addVoiture(?Voiture $voiture): static
+  {
+    if (!$this->voitures->contains($voiture)) {
+      $this->voitures->add($voiture);
+    }
+    return $this;
+  }
+
+  public function removeVoiture(Voiture $voiture): static
+  {
+    $this->voitures->removeElement($voiture);
+
+    return $this;
+  }
+
+  public function hasVoiture(Voiture $voiture): bool
+  {
+    return $this->voitures->contains($voiture);
   }
 
   public function eraseCredentials(): void

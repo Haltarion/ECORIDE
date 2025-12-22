@@ -7,7 +7,8 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     libzip-dev \
     libpng-dev \
-    libonig-dev
+    libonig-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
 RUN docker-php-ext-install intl pdo_mysql mbstring zip
@@ -18,5 +19,14 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && rm composer-setup.php
 
 # Set working directory
+WORKDIR /var/www
+
+# Install PHP dependencies (vendor) during build
+COPY composer.json composer.lock ./
+RUN composer install --no-interaction --no-progress --prefer-dist
+
+# Copy application sources
+COPY . .
+
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

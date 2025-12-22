@@ -3,6 +3,8 @@
 namespace App\Controller\auth;
 
 use App\Entity\User;
+use App\Entity\UserExtras;
+use App\Entity\Profil;
 use Symfony\Bundle\SecurityBundle\Security;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,12 +39,29 @@ class SignupController extends AbstractController
       return new JsonResponse(['success' => false, 'message' => 'Champs manquants'], 400);
     }
 
+    // Création de l'utilisateur
     $user = new User();
     $user->setPseudo($pseudo);
     $user->setEmail($email);
     $user->setPassword($hasher->hashPassword($user, $password));
 
+    // Créer les extras avec 20 crédits
+    $extras = new UserExtras();
+    $extras->setCredit('20');
+    $extras->setNote('0.0');
+    $extras->setUser($user);
+    $user->setExtras($extras);
+
+    // Ajouter les profils à l'utilisateur
+    $profilRepository = $em->getRepository(Profil::class);
+    $profilPassager = $profilRepository->findOneBy(['libelle' => 'Passager']);
+
+    if ($profilPassager) {
+      $user->addProfil($profilPassager);
+    }
+
     $em->persist($user);
+    $em->persist($extras);
     $em->flush();
 
     // Connexion automatique après inscription

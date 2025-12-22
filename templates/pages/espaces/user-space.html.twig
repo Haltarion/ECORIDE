@@ -6,17 +6,22 @@
   <h1>Mon compte</h1>
 
   <div class="container f-row f-w al-start just-sb w-100 p-10">
+    {# Bloc de gauche #}
     <div class="profile-grid">
       <div class="profile-photo-cell">
         <img id="photo-profil" class="photoProfil"
-          src="{{ asset('media/default-user.png')}}"
+          src="{% if userPhoto %}
+              {{ asset('uploads/users/' ~ userPhoto) }}
+          {% else %}
+              {{ asset('media/default-user.png') }}
+          {% endif %}"
           alt="Photo de profil"
         >
         <div class="action-image-buttons" >
           <button
             type="button"
             class="btn-outline-light"
-            id="open-modal-btn"
+            id="photo-open-modal-btn"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
@@ -24,18 +29,45 @@
           </button>
         </div>
       </div>
-      <p class="secondary bold">{{ "Bonport"|default('Conducteur') }}</p>
+      <div class="profile-name-cell f-row just-start al-center g-5">
+        <p class="secondary bold">{{ userName|default('Utilisateur') }}</p>
+      </div>
 
       {% include 'components/icone/note.html.twig' with {
         starClass: 'infos-voiture__star main f-row g-5 h-25',
-        textClass: 'infos-voiture__text secondary'
+        textClass: 'infos-voiture__text secondary',
+        note : userNote ?? '0'
       } %}
     </div>
-    <div class="profile-note-cell">
+
+    {# Bloc de droite #}
+    <div class="profile-credit-cell maxw-200">
       {% include 'components/covoiturage/prix.html.twig' with {
-        valeur: '20'
+        valeur: userCredit
       } %}
+      <form method="POST" action="{{ path('app_user_space_delete_account') }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?');">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('delete-account') }}">
+        <button type="submit" class="btn btn-annul mh-50 w-100">Supprimer mon compte</button>
+      </form>
     </div>
+  </div>
+
+  {# Information du compte #}
+  <div class="container f-row w-100 g-10 p-10">
+    <div class="f-col al-start w-100">
+      <h2>Informations du compte</h2>
+      <p class="p-10">Adresse mail : {{ userEmail|default('mon-email@mail.com') }}</p>
+      <p class="p-10">Mot de passe : *****</p>
+    </div>
+    <div class="f-col al-start g-5 w-100 just-center maxw-200">
+          <button
+            type="button"
+            class="btn btn-sec mh-50 w-100"
+            id="edit-info-btn"
+          >
+          Modifier mes informations
+          </button>
+        </div>
   </div>
 
   <div class="container f-row w-100 g-10 p-10">
@@ -43,59 +75,67 @@
     <div class="f-col al-start w-100">
       <h2>Vous êtes</h2>
 
-      <div class="f-row al-center g-10 p-10">
-        <input type="radio" id="passage" name="role" value="passage" checked>
-        <label class="textInline" for="passage">Passager</label>
+      <div class="form-group f-row al-center g-10 p-10">
+        <input type="radio" id="passager" name="profil" value="passager">
+        <label class="textInline" for="passager">Passager</label>
       </div>
 
       <div class="f-row al-center g-10 p-10">
-        <input type="radio" id="chauffeur" name="role" value="chauffeur">
+        <input type="radio" id="chauffeur" name="profil" value="chauffeur">
         <label class="textInline" for="chauffeur">Chauffeur</label>
       </div>
 
       <div class="f-row al-center g-10 p-10">
-        <input type="radio" id="les2" name="role" value="les2">
+        <input type="radio" id="les2" name="profil" value="les2">
         <label class="textInline" for="les2">Les deux</label>
       </div>
-
+      <div id="error-alerte" class="hidden">
       {% include 'components/form/error-alerte.html.twig' with {
-        alertMessage: 'Vous devez renseigner au moins 1 véhicule',
-        class: 'hidden'
+        alertMessage: 'Vous devez renseigner au moins 1 véhicule'
       } %}
+      </div>
     </div>
 
     <!-- Boutons classiques -->
-    <div class="f-col al-start w-100 just-sb maxw-200">
+    <div class="f-col al-start g-5 w-100 just-sb maxw-200">
       <a href="#" class="btn btn-main mh-50 w-100">Historique des covoiturages</a>
       <a href="{{ path('app_suggest_trip') }}" class="btn btn-main mh-50 w-100">Proposer un voyage</a>
       <a href="{{ path('app_user_vehicle') }}" class="btn btn-main mh-50 w-100">Gérer mes véhicules</a>
     </div>
   </div>
 
-  <div class="container f-col just-center w-100 g-10 p-10 al-sb">
+  <form id="preferencesForm" class="container f-row al-end w-100 g-10 p-10 hidden">
     <!-- Préférences -->
-    <h2>Vos préférences</h2>
+    <div id="pref-perso" method="post" action="{{ path('app_user_space_preferences') }}" class="f-col al-start w-100">
+      <h2>Vos préférences</h2>
 
-    <p>Autorisez-vous les :</p>
+      <p>Autorisez-vous les :</p>
 
-    <div class="f-row al-center g-10">
-      <input type="checkbox" id="fumeur" name="fumeur" value="fumeur">
-      <label class="textInline" for="fumeur">Fumeurs</label>
+      <div class="f-row al-center g-10 p-10">
+        <input type="checkbox" id="fumeur" name="fumeur" value="fumeur" {{ hasFumeur ? 'checked' : '' }}>
+        <label class="textInline" for="fumeur">Fumeurs</label>
+      </div>
+
+      <div class="f-row al-center g-10 p-10 mb-8">
+        <input type="checkbox" id="animaux" name="animaux" value="animaux" {{ hasAnimaux ? 'checked' : '' }}>
+        <label class="textInline" for="animaux">Animaux</label>
+      </div>
+
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token('profile-change') }}">
+      {% include 'components/form/input-textarea.html.twig' with {
+        inputId: 'preferences',
+        placeholder: 'Indiquez ici vos préférences',
+        label: 'Avez-vous d\'autres préférences à indiquer ?',
+        value: autresPreferences
+      } %}
     </div>
 
-    <div class="f-row al-center g-10">
-      <input type="checkbox" id="animaux" name="animaux" value="animaux">
-      <label class="textInline" for="animaux">Animaux</label>
+    <div class="f-col al-start g-5 w-100 just-sb maxw-200">
+      <button id="valide-pref-btn" type="button" class="btn btn-main mh-50 w-100">Enregistrer mes préférences</button>
     </div>
+  </form>
 
-    {% include 'components/form/input-textarea.html.twig' with {
-      inputId: 'preferences',
-      placeholder: 'Indiquez ici vos préférences',
-      label: 'Avez-vous d\'autres préférences à indiquer ?'
-    } %}
-  </div>
-
-  <div class="container f-col just-center w-100 g-10 p-10 al-sb">
+  <div id="vehicule" class="container f-col just-center w-100 g-10 p-10 al-sb hidden">
     <!-- Véhicules -->
     <h2>Mes véhicules</h2>
 
@@ -116,28 +156,99 @@
     } %}
   </div>
 
+  <!-- Modal modification photo de profil -->
   <div id="modal-edit-photo" class="modal">
     <div class="modal-content">
       <h3>Modifier ma photo de profil</h3>
-
-      <form class="f-col g-15" method="post" enctype="multipart/form-data" action="{{ path('app_user_space_photo') }}">
+      <form class="f-col al-center g-15" method="post" enctype="multipart/form-data" action="{{ path('app_user_space_photo') }}">
         <label for="photo-input" class="btn btn-sec">Choisir une photo</label>
         <img id="modal-photo-profil" class="photoProfil"
-          src="{{ asset(user.photo ?? 'media/default-user.png') }}"
+          src="{% if userPhoto %}
+              {{ asset('uploads/users/' ~ userPhoto) }}
+          {% else %}
+              {{ asset('media/default-user.png') }}
+          {% endif %}"
           alt="Photo de profil du conducteur"
         >
         <input type="file" id="photo-input" name="photo" class="hidden">
-        <span id="file-name" class="file-name">Nom du fichier</span>
+        <span id="file-name" class="file-name">
+          {% if userPhoto %}
+              {{ asset(userPhoto) }}
+          {% else %}
+              {{ asset('default-user.png') }}
+          {% endif %}</span>
         <button class="btn btn-main" type="submit">Enregistrer</button>
       </form>
 
-      <button id="close-modal" class="btn btn-annul">Fermer</button>
+      <button id="close-photo-modal" class="btn btn-annul">Fermer</button>
+    </div>
+  </div>
+  <!-- Modal modification des informations -->
+  <div id="modal-edit-info" class="modal">
+    <div class="modal-content">
+      <h3>Modifier mes informations</h3>
+        <form id="editInfoForm" action="{{ path('app_edit_info_process') }}" method="post" class="f-col g-20 al-center">
+        {# Champ : Pseudo #}
+        {% include 'components/form/input-text.html.twig' with {
+          label: 'Pseudo',
+          inputId: 'pseudo',
+          value: userName,
+          placeholder: 'Entrez votre pseudonyme',
+          required: false,
+          alertMessage: 'Merci de renseigner un Pseudo'
+        } %}
+
+        {# Champ : Email #}
+        {% include 'components/form/input-email.html.twig' with {
+          label: 'Adresse email',
+          inputId: 'email',
+          value: userEmail,
+          placeholder: 'Entrez votre adresse email',
+          required: false,
+          alertMessage: 'Merci de rentrer un email valide'
+        } %}
+
+        {# Champ : Ancien mot de passe #}
+        {% include 'components/form/input-mdp.html.twig' with {
+          label: 'Ancien mot de passe',
+          inputId: 'oldPassword',
+          placeholder: 'Ancien mot de passe',
+          required: false
+        } %}
+
+        {# Champ : Nouveau mot de passe #}
+        {% include 'components/form/input-mdp.html.twig' with {
+          label: 'Nouveau mot de passe',
+          inputId: 'newPassword',
+          placeholder: 'Nouveau mot de passe',
+          required: false
+        } %}
+
+        {# Champ : Validation mot de passe #}
+        {% include 'components/form/input-validate-mdp.html.twig' with {
+          label: 'Confirmer le nouveau mot de passe',
+          inputId: 'confirmNewPassword',
+          required: false
+        } %}
+
+        <div class="f-row g-10 just-center w-100">
+          <button id="close-info-modal" class="btn btn-annul">Fermer</button>
+
+          <button id="btnValidationModif" class="btn btn-main maxw-200" type="submit">Valider</button>
+        </div>
+      </form>
     </div>
   </div>
 {% endblock %}
 
 {% block javascripts %}
   {{ parent() }}
-  <script>window.userPhotoFromDB = "{{ userPhoto }}"</script>
+  <script>
+    window.selectedProfil = "{{ selectedProfil|default('passager') }}";
+    window.csrfProfileToken = "{{ csrf_token('profile-change') }}";
+    window.csrfInfosToken = "{{ csrf_token('infos-change') }}";
+    window.csrfPhotoToken = "{{ csrf_token('profile-photo') }}";
+    window.csrfDeleteToken = "{{ csrf_token('delete-account') }}";
+  </script>
   <script type="module" src="{{ asset('scripts/forms/user-space.js') }}"></script>
 {% endblock %}

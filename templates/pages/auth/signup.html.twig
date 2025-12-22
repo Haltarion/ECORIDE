@@ -8,7 +8,7 @@
   <form id="formulaireInscription" action="{{ path('app_signup_process') }}" method="post" class="f-col g-20 al-center">
     {# Champ : Pseudo #}
     {% include 'components/form/input-text.html.twig' with {
-      label: 'Pseudo',
+      label: 'Pseudo *',
       inputId: 'pseudo',
       placeholder: 'Entrez votre pseudonyme',
       required: true,
@@ -17,8 +17,9 @@
 
     {# Champ : Email #}
     {% include 'components/form/input-email.html.twig' with {
-      label: 'Adresse email',
+      label: 'Adresse email *',
       inputId: 'email',
+      value: '',
       placeholder: 'Entrez votre adresse email',
       required: true,
       alertMessage: 'Merci de rentrer un email valide',

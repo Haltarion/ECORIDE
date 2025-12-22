@@ -47,9 +47,13 @@ class Voiture
   #[ORM\OneToMany(mappedBy: 'voiture', targetEntity: Covoiturage::class)]
   private Collection $covoiturages;
 
+  // -----------------------------
+  // Constructeur
+  // -----------------------------
   public function __construct()
   {
     $this->covoiturages = new ArrayCollection();
+    $this->users = new ArrayCollection();
   }
 
   // -----------------------------

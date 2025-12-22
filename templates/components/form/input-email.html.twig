@@ -1,10 +1,11 @@
 {% set required = required|default(false) %}
 
 <div class="form-group f-col al-start w-100">
-  <label for="{{ inputId }}">{{ label }} *</label>
+  <label for="{{ inputId }}">{{ label ?? 'Adresse email *' }}</label>
   <input
     type="email"
     name="{{ inputId }}"
+    value="{{ value }}"
     id="{{ inputId }}"
     placeholder="Adresse email"
     class="input"

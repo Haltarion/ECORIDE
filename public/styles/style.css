@@ -15,34 +15,40 @@
     --grey-color: #b9b7b7;
     --black-color: #000000;
 }
+
 .profile-grid {
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: auto auto;
     gap: 10px;
+    grid-template-areas:
+        "Photo Pseudo"
+        "Note .";
     align-items: center;
     justify-items: center;
 }
-
 /* Cellule photo + bouton */
 .profile-photo-cell {
-    grid-row: 1;
-    grid-column: 1;
     position: relative;
+    grid-area: Photo;
 }
-
 /* Pseudo */
 .profile-name-cell {
-    grid-row: 1;
-    grid-column: 2;
+    grid-area: Pseudo;
 }
-
 /* Note */
 .profile-note-cell {
-    grid-row: 2;
-    grid-column: 1 / span 2; /* la note sur toute la largeur */
+    grid-area: Note;
 }
 
+.profile-credit-cell {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    align-items: center;
+    justify-items: center;
+}
 .modal {
     display: none;
     position: fixed;
@@ -67,6 +73,10 @@
     background: var(--white-color);
     padding: 120px;
     border-radius: 8px;
+}
+
+.ml li {
+    list-style-type: none;
 }
 
 /* Style pour les écrans mobile ------------------------------------ */
