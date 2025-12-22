@@ -1,0 +1,22 @@
+# VCS
+.git
+.gitignore
+
+# Dépendances et cache (générés dans l'image)
+vendor
+var
+node_modules
+
+# Fichiers Docker non nécessaires à l'image finale
+docker-compose.yml
+docker-compose.override.yml
+
+# Environnement (sécurité)
+.env
+.env.local
+
+# IDE / OS
+.idea
+.vscode
+.DS_Store
+Thumbs.db

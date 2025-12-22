@@ -1,6 +1,6 @@
 services:
     php:
-        build: .
+        image: haltarion/ecoride:php-v1
         container_name: symfony-php
         working_dir: /var/www
         volumes:
@@ -11,15 +11,14 @@ services:
             - ./public:/var/www/public
             - ./src:/var/www/src
             - ./templates:/var/www/templates
-            # VAR & VENDOR PERSISTANTS dans Docker (IMPORTANT)
+            # VAR PERSISTANTS
             - var_data:/var/www/var
-            - vendor_data:/var/www/vendor
             # fichiers spécifiques
             - ./composer.json:/var/www/composer.json
             - ./composer.lock:/var/www/composer.lock
             - ./importmap.php:/var/www/importmap.php
-            - C:/Users/micha/repos/EcoRide/.env:/var/www/.env
-            - C:/Users/micha/repos/EcoRide/.env.local:/var/www/.env.local
+            - ./.env:/var/www/.env
+            - ./.env.local:/var/www/.env.local
         networks:
             - symfony
 
@@ -75,4 +74,3 @@ networks:
 volumes:
     db_data:
     var_data:
-    vendor_data:
