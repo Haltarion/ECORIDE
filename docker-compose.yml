@@ -1,10 +1,22 @@
 services:
     php:
+        # PC1 (DEV) :
+        # build: .   → utile pour reconstruire l’image à partir du Dockerfile
+        #
+        # PC2 (EXECUTION) :
+        # ❌ build: .  (à SUPPRIMER)
+        # ✅ utiliser l’image Docker Hub déjà construite
         build: .
         # image: haltarion/ecoride:php-v1
         container_name: symfony-php
         working_dir: /var/www
         volumes:
+            # PC1 :
+            # Ces volumes permettent le développement (code local monté dans le conteneur)
+            #
+            # PC2 :
+            # ❌ À SUPPRIMER si le code n’est PAS présent sur la machine
+            # (l’image contient déjà le code via COPY . .)
             - ./assets:/var/www/assets
             - ./bin:/var/www/bin
             - ./config:/var/www/config
@@ -12,12 +24,22 @@ services:
             - ./public:/var/www/public
             - ./src:/var/www/src
             - ./templates:/var/www/templates
+
             # VAR PERSISTANTS
             - var_data:/var/www/var
+
             # fichiers spécifiques
+            # PC1 : OK
+            # PC2 :
+            # ❌ à supprimer si ces fichiers n’existent pas sur PC2
             - ./composer.json:/var/www/composer.json
             - ./composer.lock:/var/www/composer.lock
             - ./importmap.php:/var/www/importmap.php
+            # Fichiers d’environnement
+            # PC1 : OK
+            # PC2 :
+            # ❌ à supprimer si .env / .env.local n’existent pas
+            # 👉 Sur PC2, préférer "environment:" ou un .env présent localement
             - ./.env:/var/www/.env
             - ./.env.local:/var/www/.env.local
         networks:
@@ -29,6 +51,11 @@ services:
         ports:
             - "8080:80"
         volumes:
+            # PC1 :
+            # OK pour le développement
+            #
+            # PC2 :
+            # ❌ à supprimer si le code n’est pas présent
             - ./src:/var/www/src
             - ./config:/var/www/config
             - ./templates:/var/www/templates
