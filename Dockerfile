@@ -13,6 +13,10 @@ RUN apt-get update && apt-get install -y \
 # Install PHP extensions
 RUN docker-php-ext-install intl pdo_mysql mbstring zip
 
+# Install GD extension (common for Symfony projects using images)
+RUN docker-php-ext-configure gd \
+    && docker-php-ext-install gd
+
 # Install Composer globally
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
@@ -23,10 +27,7 @@ WORKDIR /var/www
 
 # Install PHP dependencies (vendor) during build
 COPY composer.json composer.lock ./
-RUN composer install --no-interaction --no-progress --prefer-dist
+RUN composer install --no-interaction --no-progress --prefer-dist --no-scripts --optimize-autoloader
 
-# Copy application sources
+# Copy application source code
 COPY . .
-
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
