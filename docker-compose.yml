@@ -1,6 +1,7 @@
 services:
     php:
-        image: haltarion/ecoride:php-v1
+        build: .
+        # image: haltarion/ecoride:php-v1
         container_name: symfony-php
         working_dir: /var/www
         volumes:
