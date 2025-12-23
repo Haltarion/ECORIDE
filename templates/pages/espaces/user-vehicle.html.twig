@@ -65,7 +65,7 @@
 
     <div class="container f-row just-sb g-10 w-100">
       <a href="{{ path('app_user_space') }}" class="btn btn-annul">Retour à mon compte</a>
-      <button class="btn btn-main mh-50" type="submit">Ajouter un nouveau véhicule</button>
+      <button id="addVehicule" class="btn btn-main mh-50" type="submit">Ajouter un nouveau véhicule</button>
     </div>
   </form>
 
@@ -88,4 +88,9 @@
       pencilIconVisibility: 'visible'
     } %}
   </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="module" src="{{ asset('scripts/forms/user-vehicule.js') }}"></script>
 {% endblock %}

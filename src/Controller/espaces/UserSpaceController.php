@@ -41,6 +41,33 @@ class UserSpaceController extends AbstractController
   }
 
   /**
+   * Initialise les profils "Passager" et "Chauffeur" en base de données s'ils n'existent pas
+   */
+  private function ensureProfilsExist(EntityManagerInterface $em): void
+  {
+    $profilRepo = $em->getRepository(Profil::class);
+
+    // Vérifier et créer "Passager" si nécessaire
+    $passager = $profilRepo->findOneBy(['libelle' => 'Passager']);
+    if (!$passager) {
+      $passager = new Profil();
+      $passager->setLibelle('Passager');
+      $em->persist($passager);
+    }
+
+    // Vérifier et créer "Chauffeur" si nécessaire
+    $chauffeur = $profilRepo->findOneBy(['libelle' => 'Chauffeur']);
+    if (!$chauffeur) {
+      $chauffeur = new Profil();
+      $chauffeur->setLibelle('Chauffeur');
+      $em->persist($chauffeur);
+    }
+
+    // Sauvegarder les nouveaux profils si créés
+    $em->flush();
+  }
+
+  /**
   * Enregistrement de la photo dans la base de donnée
   */
   #[Route('/user-space/photo', name: 'app_user_space_photo', methods: ['POST'])]
@@ -101,6 +128,9 @@ class UserSpaceController extends AbstractController
         $data = $request->request->all();
     }
     $user = $this->verifySecurityAndGetUser($data, 'profile-change');
+
+    // S'assurer que les profils existent en base
+    $this->ensureProfilsExist($em);
 
     // Récupération du profil choisi
     $profilValue = $data['profil'] ?? 'Passager';
@@ -237,6 +267,10 @@ class UserSpaceController extends AbstractController
     if (!$user) {
       return $this->redirectToRoute('app_login');
     }
+
+    // S'assurer que les profils existent en base
+    $this->ensureProfilsExist($em);
+
     $extras = $user?->getExtras();
     $profils = $user->getProfils();
     $preferences = $user->getPreferences();
