@@ -2,15 +2,10 @@
 
 <div class="form-group f-col al-start w-100 mb-8">
   <label for="{{ inputId }}">{{ label }}</label>
-  <input
-    type="number"
-    id="{{ inputId }}"
-    value="{{ value }}"
-    min="{{ min }}"
-    max="{{ max }}"
-    class="is-valid"
-    {{ required|default('') }}
-  >
+  <div class="checkbox-wrapper-38">
+    <input class="toggle-input" id="{{ inputId }}" type="checkbox"></input>
+    <label class="toggle-label" for="{{ inputId }}"></label>
+  </div>
   {# Inclusion du message d’alerte si le champ est requis et vide #}
   <div class="error-message hidden">
     {% include 'components/form/error-alerte.html.twig' with { alertMessage: alertMessage } %}

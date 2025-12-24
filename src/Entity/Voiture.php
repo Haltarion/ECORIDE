@@ -25,8 +25,8 @@ class Voiture
   #[ORM\Column(type: 'string', length: 50)]
   private ?string $modele = null;
 
-  #[ORM\Column(type: 'string', length: 50)]
-  private ?string $energie = null;
+  #[ORM\Column(type: 'boolean')]
+  private ?bool $energie = null;
 
   #[ORM\Column(type: 'string', length: 50)]
   private ?string $couleur = null;
@@ -62,6 +62,18 @@ class Voiture
   public function getId(): ?int
   {
     return $this->id;
+  }
+
+  public function getImmatriculation(): ?string
+  {
+    return $this->immatriculation;
+  }
+
+  public function setImmatriculation(string $immatriculation): static
+  {
+    $this->immatriculation = $immatriculation;
+
+    return $this;
   }
 
   public function getDatePremiereImmatriculation(): ?\DateTime
@@ -100,12 +112,12 @@ class Voiture
     return $this;
   }
 
-  public function getEnergie(): ?string
+  public function getEnergie(): ?bool
   {
     return $this->energie;
   }
 
-  public function setEnergie(string $energie): static
+  public function setEnergie(bool $energie): static
   {
     $this->energie = $energie;
 
@@ -132,6 +144,51 @@ class Voiture
   public function setNbPlaceDispo(int $nb_place_dispo): static
   {
     $this->nb_place_dispo = $nb_place_dispo;
+
+    return $this;
+  }
+
+  // -----------------------------
+  // Relations
+  // -----------------------------
+  public function getUser(): ?User
+  {
+    return $this->user;
+  }
+
+  public function setUser(?User $user): static
+  {
+    $this->user = $user;
+
+    return $this;
+  }
+
+  /**
+   * @return Collection<int, Covoiturage>
+   */
+  public function getCovoiturages(): Collection
+  {
+    return $this->covoiturages;
+  }
+
+  public function addCovoiturage(Covoiturage $covoiturage): static
+  {
+    if (!$this->covoiturages->contains($covoiturage)) {
+      $this->covoiturages->add($covoiturage);
+      $covoiturage->setVoiture($this);
+    }
+
+    return $this;
+  }
+
+  public function removeCovoiturage(Covoiturage $covoiturage): static
+  {
+    if ($this->covoiturages->removeElement($covoiturage)) {
+      // set the owning side to null (unless already changed)
+      if ($covoiturage->getVoiture() === $this) {
+        $covoiturage->setVoiture(null);
+      }
+    }
 
     return $this;
   }

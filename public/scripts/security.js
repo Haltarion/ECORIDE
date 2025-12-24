@@ -130,21 +130,26 @@ export function validatePlaque(input) {
     return applyValidationState(input, isValid);
 }
 
-/**
- * Valider une date avec une expression régulière
- * Si la date n'est pas valide, retourne false
- * @param date
- * @return Boolean
- */
-function isDateValid(date) {
-    const dateRegex =
-        /^(000[1-9]|00[1-9]\d|0[1-9]\d\d|100\d|10[1-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[1-9]\d{4}|1\d{5}|2[0-6]\d{4}|27[0-4]\d{3}|275[0-6]\d{2}|2757[0-5]\d|275760)-(0[1-9]|1[012])-(0[1-9]|[12]\d|3[01])$/gm;
-    return dateRegex.test(date);
-}
-
 // Fonction de validation de la date
 export function validateDate(input) {
-    const date = input.value;
-    const isValid = isDateValid(date);
+    const isValid = true;
+    return applyValidationState(input, isValid);
+}
+
+/**
+ * Valider un nombre de place avec une expression régulière
+ * Si le nombre de place n'est pas valide, retourne false
+ * @param nombre
+ * @return Boolean
+ */
+function isNbValid(nombre) {
+    const nombreRegex = /^[0-6]$/;
+    return nombreRegex.test(nombre);
+}
+
+// Fonction de validation du nombre de place
+export function validateNb(input) {
+    const nombre = input.valueAsNumber;
+    const isValid = isNbValid(nombre);
     return applyValidationState(input, isValid);
 }

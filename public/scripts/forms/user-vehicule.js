@@ -1,10 +1,25 @@
-import { validateDate, validatePlaque, validateString } from "../security.js";
+import {
+    validateDate,
+    validateNb,
+    validatePlaque,
+    validateString,
+} from "../security.js";
 
 const plaqueInput = document.getElementById("immatriculation");
 const premiereImmat = document.getElementById("premiereImmatriculation");
 const marqueInput = document.getElementById("marque");
 const modeleInput = document.getElementById("modele");
 const couleurInput = document.getElementById("couleur");
+const nbInput = document.getElementById("placesDispo");
+
+const btnAddVehicule = document.getElementById("addVehicule");
+
+let plaqueOk = false;
+let dateOk = false;
+let marqueOk = false;
+let modeleOk = false;
+let couleurOk = false;
+let nbOk = true;
 
 function formatPlaque(value) {
     const cleaned = value.replace(/[^A-Za-z0-9]/g, "").toUpperCase();
@@ -27,36 +42,77 @@ function verifPlaqueInput() {
     if (plaqueInput.value !== formatted) {
         plaqueInput.value = formatted;
     }
-    validatePlaque(plaqueInput);
+    plaqueOk = validatePlaque(plaqueInput);
 }
 
 function verifDateInput() {
     if (!premiereImmat) return;
-    validateDate(premiereImmat);
+    dateOk = validateDate(premiereImmat);
 }
 
-function verifTextInput(event) {
-    const input = event.target;
-    if (!input) return;
-    validateString(input);
+function verifTextInput(input) {
+    if (!input) return false;
+    return validateString(input);
+}
+
+function verifNbInput(input) {
+    if (!input) return false;
+    return validateNb(input);
 }
 
 if (plaqueInput) {
-    plaqueInput.addEventListener("input", verifPlaqueInput);
+    plaqueInput.addEventListener("input", () => {
+        verifPlaqueInput();
+        validateForm();
+    });
 }
 
 if (premiereImmat) {
-    premiereImmat.addEventListener("input", verifDateInput);
+    premiereImmat.addEventListener("input", () => {
+        verifDateInput();
+        validateForm();
+    });
 }
 
 if (marqueInput) {
-    marqueInput.addEventListener("keyup", verifTextInput);
+    marqueInput.addEventListener("input", () => {
+        marqueOk = verifTextInput(marqueInput);
+        validateForm();
+    });
 }
 
 if (modeleInput) {
-    modeleInput.addEventListener("keyup", verifTextInput);
+    modeleInput.addEventListener("input", () => {
+        modeleOk = verifTextInput(modeleInput);
+        validateForm();
+    });
 }
 
 if (couleurInput) {
-    couleurInput.addEventListener("keyup", verifTextInput);
+    couleurInput.addEventListener("input", () => {
+        couleurOk = verifTextInput(couleurInput);
+        validateForm();
+    });
 }
+
+if (nbInput) {
+    nbInput.addEventListener("input", () => {
+        nbOk = verifNbInput(nbInput);
+        validateForm();
+    });
+}
+
+//Function permettant de valider tout le formulaire et d'activer le bouton si tout est ok
+function validateForm() {
+    if (!btnAddVehicule) return;
+    btnAddVehicule.disabled = !(
+        plaqueOk &&
+        dateOk &&
+        marqueOk &&
+        modeleOk &&
+        couleurOk &&
+        nbOk
+    );
+}
+
+validateForm();
