@@ -3,7 +3,7 @@ import {
     validateNb,
     validatePlaque,
     validateString,
-} from "../security.js";
+} from "/scripts/security.js";
 
 const plaqueInput = document.getElementById("immatriculation");
 const premiereImmat = document.getElementById("premiereImmatriculation");
@@ -13,6 +13,7 @@ const couleurInput = document.getElementById("couleur");
 const nbInput = document.getElementById("placesDispo");
 
 const btnAddVehicule = document.getElementById("addVehicule");
+const form = document.getElementById("new-vehicle-form");
 
 let plaqueOk = false;
 let dateOk = false;
@@ -116,3 +117,29 @@ function validateForm() {
 }
 
 validateForm();
+
+btnAddVehicule.addEventListener("click", async (event) => {
+    event.preventDefault();
+    verifPlaqueInput();
+    if (!plaqueOk) {
+        alert("Veuillez corriger la plaque d'immatriculation");
+        return;
+    }
+    const value = plaqueInput.value.trim();
+    try {
+        const res = await fetch("/user-vehicle/check-immatriculation", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ immatriculation: value }),
+        });
+        const data = await res.json();
+        if (data.exists) {
+            alert("Ce véhicule existe déjà. Modifiez la plaque.");
+            return;
+        }
+        alert("Véhicule ajouté avec succès !");
+        form && form.submit();
+    } catch (e) {
+        alert("Erreur de vérification. Réessayez.");
+    }
+});

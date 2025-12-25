@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\User;
 use App\Entity\Voiture;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\VoitureRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -40,12 +41,29 @@ class UserVehicleController extends AbstractController
     return $this->render('pages/espaces/user-vehicle.html.twig');
   }
 
+  #[Route('/user-vehicle/check-immatriculation', name: 'app_check_immatriculation', methods: ['POST'])]
+  public function checkImmatriculation(Request $request, VoitureRepository $voitureRepository): JsonResponse
+  {
+    $data = json_decode($request->getContent(), true) ?? [];
+    if (empty($data)) {
+      $data = $request->request->all();
+    }
+    $immatriculation = trim($data['immatriculation'] ?? '');
+
+    if ($immatriculation === '') {
+      return new JsonResponse(['exists' => false]);
+    }
+
+    $exists = $voitureRepository->findOneBy(['immatriculation' => $immatriculation]) !== null;
+    return new JsonResponse(['exists' => $exists]);
+  }
+
   /**
    * Récupération des données du nouveau véhicule
    */
   #[Route('/user-vehicle/new', name: 'app_user_vehicle_new', methods: ['POST'])]
 
-  public function newVehicle(Request $request, EntityManagerInterface $entityManager): JsonResponse
+  public function newVehicle(Request $request, EntityManagerInterface $entityManager): Response
   {
     // Vérification token CSRF et authentification
     $data = json_decode($request->getContent(), true) ?? [];
@@ -78,7 +96,10 @@ class UserVehicleController extends AbstractController
     }
     $vehicle->setMarque($data['marque'] ?? '');
     $vehicle->setModele($data['modele'] ?? '');
-    $vehicle->setEnergie($data['energie'] ?? false);
+    // Si la checkbox est cochée, elle aura la valeur "1"
+    // Si elle n'est pas cochée, la clé ne sera pas présente (vous devez utiliser ?? 0)
+    $energie = isset($data['energie']) ? 1 : 0;
+    $vehicle->setEnergie($energie);
     $vehicle->setCouleur($data['couleur'] ?? '');
     // Nombre de places: accepter 'placesDispo' (form) ou 'nb_place_dispo' (JSON), borné 1..6
     $places = (int)($data['placesDispo'] ?? ($data['nb_place_dispo'] ?? 1));
@@ -90,7 +111,7 @@ class UserVehicleController extends AbstractController
     $entityManager->persist($vehicle);
     $entityManager->flush();
 
-    return new JsonResponse(['status' => 'success', 'message' => 'Véhicule ajouté avec succès.']);
+    return $this->redirectToRoute('app_user_vehicle');
   }
 }
 
