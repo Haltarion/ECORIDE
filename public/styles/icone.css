@@ -179,3 +179,11 @@ div.slider-background {
     display: flex;
     gap: 10px;
 }
+
+.is-electric {
+    color: var(--secondary-color);
+}
+
+.is-not-electric {
+    color: var(--grey-color);
+}

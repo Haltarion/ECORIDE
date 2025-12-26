@@ -6,7 +6,9 @@
     <h3>{{ marque|default('Marque') }}</h3>
     <p>{{ model|default('Modèle') }}</p>
   </div>
-  {% include 'components/icone/electricalCar.html.twig' %}
+  {% include 'components/icone/electricalCar.html.twig' with {
+    class: electrique ? 'is-electric' : 'is-not-electric'
+    } %}
   <div class="{{ pencilIconVisibility|default('hidden') }}">
     <a href="{{ path('app_modif_vehicle') }}" class="secondary">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

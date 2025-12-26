@@ -31,7 +31,7 @@ class VehiculeInfoService
                 'datePremiereImmatriculation' => $voiture->getDatePremiereImmatriculation(),
                 'marque' => $voiture->getMarque(),
                 'modele' => $voiture->getModele(),
-                'electrique' => $voiture->getElectrique(),
+                'electrique' => $voiture->getElectrique() ?? false,
                 'couleur' => $voiture->getCouleur(),
                 'nbPlaceDispo' => $voiture->getNbPlaceDispo(),
             ];
