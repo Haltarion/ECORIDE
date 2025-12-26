@@ -48,7 +48,7 @@
 
     {# Champ : Véhicule électrique #}
     {% include 'components/form/input-check.html.twig' with {
-      inputId: 'energie',
+      inputId: 'electrique',
       label: "Véhicule électrique",
       required: true,
       alertMessage: "Merci de renseigner si votre véhicule est électrique ou non"
@@ -66,7 +66,7 @@
     {# Champ : Nombre de places disponibles #}
     {% include 'components/form/input-number.html.twig' with {
       inputId: 'placesDispo',
-      label: "Nombre de places disponibles",
+      label: "Nombre de places maximum disponibles",
       min: 1,
       max: 6,
       value: 2,
@@ -82,22 +82,19 @@
 
   <div class="container f-col just-center w-100 g-10 al-sb">
     <h2>Mes véhicules</h2>
-
-    {% include 'components/covoiturage/recap-vehicule.html.twig' with {
-      immatriculation: 'AB-123-CD',
-      marque: 'Citroën',
-      model: 'C4',
-      class: '',
-      pencilIconVisibility: 'visible'
-    } %}
-
-    {% include 'components/covoiturage/recap-vehicule.html.twig' with {
-      immatriculation: 'EF-456-GH',
-      marque: 'Peugeot',
-      model: '208',
-      class: '',
-      pencilIconVisibility: 'visible'
-    } %}
+    {% if voitures is empty %}
+      <p>Vous n'avez pas encore enregistré de véhicule.</p>
+    {% else %}
+      {% for voiture in voitures %}
+        {% include 'components/covoiturage/recap-vehicule.html.twig' with {
+          immatriculation: voiture.immatriculation,
+          marque: voiture.marque,
+          model: voiture.modele,
+          class: '',
+          pencilIconVisibility: 'visible'
+        } %}
+      {% endfor %}
+    {% endif %}
   </div>
 {% endblock %}
 

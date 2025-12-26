@@ -78,11 +78,11 @@ input[type="file"]:button {
     border-radius: 5px;
     width: 150px;
 }
-.imatriculation {
+.immatriculation {
     text-align: center;
 }
-.imatriculation::before,
-.imatriculation::after {
+.immatriculation::before,
+.immatriculation::after {
     content: "F";
     background-color: #114dbb;
     display: block;
@@ -90,11 +90,11 @@ input[type="file"]:button {
     height: 100%;
     position: absolute;
 }
-.imatriculation::before {
+.immatriculation::before {
     top: 0;
     left: 0;
 }
-.imatriculation::after {
+.immatriculation::after {
     top: 0;
     right: 0;
 }

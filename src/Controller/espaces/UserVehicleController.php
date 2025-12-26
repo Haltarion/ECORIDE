@@ -13,11 +13,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Security\CsrfTokenVerifier;
 use App\Security\UserProvider;
+use App\Service\VehiculeInfoService;
 
 class UserVehicleController extends AbstractController
 {
   private CsrfTokenVerifier $csrfVerifier;
   private UserProvider $userProvider;
+  private VehiculeInfoService $vehiculeInfoService;
 
   public function __construct(CsrfTokenVerifier $csrfVerifier, UserProvider $userProvider)
   {
@@ -36,9 +38,22 @@ class UserVehicleController extends AbstractController
   }
 
   #[Route('/user-vehicle', name: 'app_user_vehicle')]
-  public function index(): Response
+  public function index(VehiculeInfoService $vehiculeInfoService): Response
   {
-    return $this->render('pages/espaces/user-vehicle.html.twig');
+    $user = $this->getUser();
+
+    // Si l'utilisateur n'est pas connecté, on affiche la page avec une liste vide
+    if (!$user) {
+      return $this->render('pages/espaces/user-vehicle.html.twig', [
+        'voitures' => [],
+      ]);
+    }
+
+    $voitures = $vehiculeInfoService->getVoituresInfosByUser($user);
+
+    return $this->render('pages/espaces/user-vehicle.html.twig', [
+      'voitures' => $voitures,
+    ]);
   }
 
   #[Route('/user-vehicle/check-immatriculation', name: 'app_check_immatriculation', methods: ['POST'])]
@@ -98,8 +113,8 @@ class UserVehicleController extends AbstractController
     $vehicle->setModele($data['modele'] ?? '');
     // Si la checkbox est cochée, elle aura la valeur "1"
     // Si elle n'est pas cochée, la clé ne sera pas présente (vous devez utiliser ?? 0)
-    $energie = isset($data['energie']) ? 1 : 0;
-    $vehicle->setEnergie($energie);
+    $electrique = isset($data['electrique']) ? 1 : 0;
+    $vehicle->setElectrique($electrique);
     $vehicle->setCouleur($data['couleur'] ?? '');
     // Nombre de places: accepter 'placesDispo' (form) ou 'nb_place_dispo' (JSON), borné 1..6
     $places = (int)($data['placesDispo'] ?? ($data['nb_place_dispo'] ?? 1));
@@ -112,6 +127,22 @@ class UserVehicleController extends AbstractController
     $entityManager->flush();
 
     return $this->redirectToRoute('app_user_vehicle');
+  }
+
+  #[Route('/profil/vehicules', name: 'profil_vehicules')]
+  public function vehicules(VehiculeInfoService $vehiculeInfoService): Response
+  {
+    $user = $this->getUser();
+
+    if (!$user) {
+      throw $this->createAccessDeniedException('Utilisateur non authentifié.');
+    }
+
+    $voitures = $vehiculeInfoService->getVoituresInfosByUser($user);
+
+    return $this->render('profil/vehicules.html.twig', [
+      'voitures' => $voitures,
+    ]);
   }
 }
 

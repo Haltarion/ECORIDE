@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\UserRepository;
 use App\Repository\VoitureRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -26,7 +27,7 @@ class Voiture
   private ?string $modele = null;
 
   #[ORM\Column(type: 'boolean')]
-  private ?bool $energie = null;
+  private ?bool $electrique = null;
 
   #[ORM\Column(type: 'string', length: 50)]
   private ?string $couleur = null;
@@ -112,14 +113,14 @@ class Voiture
     return $this;
   }
 
-  public function getEnergie(): ?bool
+  public function getElectrique(): ?bool
   {
-    return $this->energie;
+    return $this->electrique;
   }
 
-  public function setEnergie(bool $energie): static
+  public function setElectrique(bool $electrique): static
   {
-    $this->energie = $energie;
+    $this->electrique = $electrique;
 
     return $this;
   }

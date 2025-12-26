@@ -4,6 +4,7 @@ namespace App\Controller\espaces;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\User;
+use App\Entity\Voiture;
 use App\Entity\UserExtras;
 use App\Entity\Profil;
 use App\Entity\Preferences;
@@ -14,6 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Security\CsrfTokenVerifier;
 use App\Security\UserProvider;
+use App\Service\VehiculeInfoService;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
@@ -22,12 +24,14 @@ class UserSpaceController extends AbstractController
   private CsrfTokenVerifier $csrfVerifier;
   private UserProvider $userProvider;
   private UserPasswordHasherInterface $hasher;
+  private VehiculeInfoService $vehiculeInfoService;
 
-  public function __construct(CsrfTokenVerifier $csrfVerifier, UserProvider $userProvider, UserPasswordHasherInterface $hasher)
+  public function __construct(CsrfTokenVerifier $csrfVerifier, UserProvider $userProvider, UserPasswordHasherInterface $hasher, VehiculeInfoService $vehiculeInfoService)
   {
     $this->csrfVerifier = $csrfVerifier;
     $this->userProvider = $userProvider;
     $this->hasher = $hasher;
+    $this->vehiculeInfoService = $vehiculeInfoService;
   }
 
   /**
@@ -312,6 +316,9 @@ class UserSpaceController extends AbstractController
     $hasAnimaux = $preferences?->isAnimal() ?? false;
     $autresPreferences = $preferences?->getPerso() ?? '';
 
+    // Récupérer les véhicules de l'utilisateur pour l'affichage
+    $voitures = $this->vehiculeInfoService->getVoituresInfosByUser($user);
+
     return $this->render('pages/espaces/user-space.html.twig', [
       'userName' => $pseudo,
       'userPhoto' => $photo,
@@ -322,6 +329,7 @@ class UserSpaceController extends AbstractController
       'hasFumeur' => $hasFumeur,
       'hasAnimaux' => $hasAnimaux,
       'autresPreferences' => $autresPreferences,
+      'voitures' => $voitures,
     ]);
   }
 
@@ -367,5 +375,21 @@ class UserSpaceController extends AbstractController
 
     // Redirection vers la page d'accueil
     return $this->redirectToRoute('app_home');
+  }
+
+  #[Route('/profil/vehicules', name: 'profil_vehicules')]
+  public function vehicules(VehiculeInfoService $vehiculeInfoService): Response
+  {
+    $user = $this->getUser();
+
+    if (!$user) {
+      throw $this->createAccessDeniedException('Utilisateur non authentifié.');
+    }
+
+    $voitures = $vehiculeInfoService->getVoituresInfosByUser($user);
+
+    return $this->render('profil/vehicules.html.twig', [
+      'voitures' => $voitures,
+    ]);
   }
 }

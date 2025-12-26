@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Voiture;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -16,7 +17,19 @@ class VoitureRepository extends ServiceEntityRepository
         parent::__construct($registry, Voiture::class);
     }
 
-    //    /**
+    /**
+    * @return Voiture[] Returns an array of Voiture objects
+    */
+    public function findByUser(User $user): array
+    {
+        return $this->createQueryBuilder('v')
+        ->andWhere('v.user = :user')
+        ->setParameter('user', $user)
+        ->orderBy('v.id', 'DESC')
+        ->getQuery()
+        ->getResult()
+    ;
+}
     //     * @return Voiture[] Returns an array of Voiture objects
     //     */
     //    public function findByExampleField($value): array

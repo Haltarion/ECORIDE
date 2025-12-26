@@ -139,21 +139,19 @@
     <!-- Véhicules -->
     <h2>Mes véhicules</h2>
 
-    {% include 'components/covoiturage/recap-vehicule.html.twig' with {
-      imatriculation: 'AB-123-CD',
-      marque: 'Citroën',
-      model: 'C4',
-      class: '',
-      pencilIconVisibility: 'hidden'
-    } %}
-
-    {% include 'components/covoiturage/recap-vehicule.html.twig' with {
-      imatriculation: 'EF-456-GH',
-      marque: 'Peugeot',
-      model: '208',
-      class: '',
-      pencilIconVisibility: 'hidden'
-    } %}
+    {% if voitures is empty %}
+      <p>Vous n'avez pas encore enregistré de véhicule.</p>
+    {% else %}
+      {% for voiture in voitures %}
+        {% include 'components/covoiturage/recap-vehicule.html.twig' with {
+          immatriculation: voiture.immatriculation,
+          marque: voiture.marque,
+          model: voiture.modele,
+          class: '',
+          pencilIconVisibility: 'visible'
+        } %}
+      {% endfor %}
+    {% endif %}
   </div>
 
   <!-- Modal modification photo de profil -->
