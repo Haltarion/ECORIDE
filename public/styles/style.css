@@ -83,6 +83,21 @@
     list-style-type: none;
 }
 
+.vehicles-dropdown {
+    display: none;
+    position: absolute;
+    bottom: 56px;
+    left: 0;
+    right: 0;
+    background: var(--white-color);
+    border: 1px solid var(--grey-color);
+    border-radius: 15px;
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.6);
+}
+
 /* Style pour les écrans mobile ------------------------------------ */
 @media screen and (max-width: 749px) {
     :root {

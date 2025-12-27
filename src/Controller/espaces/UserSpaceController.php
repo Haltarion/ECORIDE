@@ -35,9 +35,11 @@ class UserSpaceController extends AbstractController
   }
 
   /**
-   * Vérification centralisée : token CSRF + authentification
-   * @return User L'utilisateur authentifié
-   */
+  * Vérification centralisée : token CSRF + authentification
+  * @param array $data
+  * @param string $tokenId
+  * @return User L'utilisateur authentifié
+  */
   private function verifySecurityAndGetUser(array $data, string $tokenId = 'profile-change')
   {
     $this->csrfVerifier->assertTokenValid($tokenId, $data['_csrf_token'] ?? '');
@@ -45,8 +47,10 @@ class UserSpaceController extends AbstractController
   }
 
   /**
-   * Initialise les profils "Passager" et "Chauffeur" en base de données s'ils n'existent pas
-   */
+  * Initialise les profils "Passager" et "Chauffeur" en base de données s'ils n'existent pas
+  * @param EntityManagerInterface $em
+  * @return void
+  */
   private function ensureProfilsExist(EntityManagerInterface $em): void
   {
     $profilRepo = $em->getRepository(Profil::class);
@@ -73,6 +77,9 @@ class UserSpaceController extends AbstractController
 
   /**
   * Enregistrement de la photo dans la base de donnée
+  * @param Request $request
+  * @param EntityManagerInterface $entityManager
+  * @return JsonResponse
   */
   #[Route('/user-space/photo', name: 'app_user_space_photo', methods: ['POST'])]
   public function uploadPhoto(Request $request, EntityManagerInterface $entityManager): JsonResponse
@@ -121,6 +128,9 @@ class UserSpaceController extends AbstractController
 
   /**
   * Mise à jour du profil utilisateur (chauffeur/passager)
+  * @param Request $request
+  * @param EntityManagerInterface $em
+  * @return JsonResponse
   */
   #[Route('/user-space/profil', name: 'app_user_space_profil', methods: ['POST'])]
   public function updateProfil(Request $request, EntityManagerInterface $em): JsonResponse
@@ -166,6 +176,9 @@ class UserSpaceController extends AbstractController
 
   /**
   * Mise a jour des préférences utilisateur
+  * @param Request $request
+  * @param EntityManagerInterface $em
+  * @return JsonResponse
   */
   #[Route('/user-space/preferences', name: 'app_user_space_preferences', methods: ['POST'])]
   public function updatePreferences(Request $request, EntityManagerInterface $em): JsonResponse
@@ -199,6 +212,9 @@ class UserSpaceController extends AbstractController
 
   /**
   * Mise a jour des informations utilisateur
+  * @param Request $request
+  * @param EntityManagerInterface $em
+  * @return JsonResponse
   */
   #[Route('/user-space/infos', name: 'app_edit_info_process', methods: ['POST'])]
   public function updateInfos(Request $request, EntityManagerInterface $em): JsonResponse
@@ -261,7 +277,9 @@ class UserSpaceController extends AbstractController
   }
 
   /**
-  * Affichage de l'espace utilisateur
+  * Affichage de l'espace Utilisateur
+  * @param EntityManagerInterface $em
+  * @return Response
   */
   #[Route('/user-space', name: 'app_user_space')]
   public function index(EntityManagerInterface $em): Response
@@ -335,6 +353,9 @@ class UserSpaceController extends AbstractController
 
   /**
   * Suppression du compte utilisateur
+  * @param Request $request
+  * @param EntityManagerInterface $em
+  * @return Response
   */
   #[Route('/user-space/supprimer-compte', name: 'app_user_space_delete_account', methods: ['POST'])]
   public function deleteAccount(Request $request, EntityManagerInterface $em): Response
@@ -377,6 +398,11 @@ class UserSpaceController extends AbstractController
     return $this->redirectToRoute('app_home');
   }
 
+  /**
+   * Affichage de la page des véhicules de l'utilisateur
+   * @param VehiculeInfoService $vehiculeInfoService
+   * @return Response
+   */
   #[Route('/profil/vehicules', name: 'profil_vehicules')]
   public function vehicules(VehiculeInfoService $vehiculeInfoService): Response
   {

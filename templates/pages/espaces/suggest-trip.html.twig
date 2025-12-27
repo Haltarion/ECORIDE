@@ -3,88 +3,101 @@
 {% block title %}Proposer un voyage{% endblock %}
 
 {% block body %}
-  <h1>Proposer un voyage</h1>
+<h1>Proposer un voyage</h1>
 
+<form id="newTripForm" {# action="{{ path('app_new_trip') }}" #} method="post">
   <div class="covoiturageForm w-100 g-15 p-15 container">
     <fieldset>
       <legend>Départ</legend>
-      {%
-      $label = "*Quelle est votre adresse de départ ?";
-      $placeholder = "Adresse de départ";
-      $alertMessage = "Veuillez entrer une adresse de départ valide.";
-      $inputId = "adresseDepart";
-      $required = "required";
-      include 'components/form/input-text.html.twig';
-      %}
 
-      {%
-      $labelDate = "*Quelle est votre date de départ ?";
-      $inputDateId = "dateDepart";
-      $inputDateName = "DateDepart";
-      $alertMessage = "Merci de sélectionner une date de départ";
-      include 'components/form/input-date.html.twig';
-      %}
+      {% include 'components/form/input-text.html.twig' with {
+        label : "Quelle est votre adresse de départ ? *",
+        placeholder : "Adresse de départ",
+        alertMessage : "Veuillez entrer une adresse de départ valide.",
+        inputId : "adresseDepart",
+        required : "required",
+      } %}
+
+      {% include 'components/form/input-date.html.twig' with {
+        labelDate : "Quelle est votre date de départ ? *",
+        inputDateId : "dateDepart",
+        inputDateName : "DateDepart",
+        alertMessage : "Merci de sélectionner une date de départ",
+      } %}
     </fieldset>
+
     <fieldset class="covoiturage__arrivee">
       <legend>Arrivée</legend>
-      {%
-      $label = "*Quelle est votre adresse d'arrivée ?";
-      $placeholder = "Adresse d'arrivée";
-      $alertMessage = "Veuillez entrer une adresse d'arrivée valide.";
-      $inputId = "adresseArrivee";
-      $required = "required";
-      // $value = htmlspecialchars($_GET['searchTextDestination']);
-      include 'components/form/input-text.html.twig';
-      %}
 
-      {%
-      $labelDate = "*Quelle est votre date d'arrivée ?";
-      $inputDateId = "dateArrivee";
-      $inputDateName = "DateArrivee";
-      $alertMessage = "Merci de sélectionner une date d'arrivée";
-      include 'components/form/input-date.html.twig';
-      %}
+      {% include 'components/form/input-text.html.twig' with {
+        label : "Quelle est votre adresse d'arrivée ? *",
+        placeholder : "Adresse d'arrivée",
+        alertMessage : "Veuillez entrer une adresse d'arrivée valide.",
+        inputId : "adresseArrivee",
+        required : "required",
+      } %}
+
+      {% include 'components/form/input-date.html.twig' with {
+        labelDate : "Quelle est votre date d'arrivée ? *",
+        inputDateId : "dateArrivee",
+        inputDateName : "DateArrivee",
+        alertMessage : "Merci de sélectionner une date d'arrivée",
+      } %}
     </fieldset>
   </div>
+
   <div class="covoiturageComplement w-100 g-15 p-15 container">
     <h2>Complément</h2>
     <p>Nous vous rappelons que nous prélevons 2 crédits afin de garantir le bon fonctionnement la plateforme.</p>
-    {%
-    $inputId = "prixParPassager";
-    $label = "*Prix (en crédit) par passager :";
-    $value = "10";
-    $min = "3";
-    $max = "500";
-    $required = "required";
-    $alertMessage = "Veuillez entrer un prix valide.";
-    include 'components/form/input-number.html.twig';
-    %}
-    <div class="w-100">
-      <label>Sélectionnez un véhicule :</label>
-      <div class="vehicleSelection f-row f-w al-center just-sb g-10 b-1 b-secondary r-15 ">
-        <div class="plaque relative">
-          <p class="imatriculation">AB-123-CD</p>
-        </div>
-        <div class="f-col g-5 just-center al-start">
-          <h3>Citroën</h3>
-          <p>C4</p>
-        </div>
-        {%
-        $class = "";
-        include "components/icone/electricalCar.html.twig"
-        %}
-        <div class="f-col just-center h-100">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-          </svg>
-        </div>
-      </div>
-    </div>
+    {% include 'components/form/input-number.html.twig' with {
+      inputId : "prixParPassager",
+      label : "Prix (en crédit) par passager * :",
+      value : "10",
+      min : "3",
+      max : "500",
+      required : "required",
+      alertMessage : "Veuillez entrer un prix valide.",
+    } %}
 
+    <div class="w-100">
+      <!-- Zone de sélection du véhicule -->
+      <label>Sélectionnez un véhicule :</label>
+      <div class="vehicle-container" style="position: relative;">
+        <div id="vehicleSelection" class="vehicleSelection f-row f-w al-center just-sb g-10 b-1 b-secondary r-15" style="cursor: pointer;">
+          <div class="plaque relative">
+            <p class="immatriculation" id="vehicleImmatriculation">--</p>
+          </div>
+
+          <div class="f-col g-5 just-center al-start">
+            <h3 id="vehicleMarque">Marque</h3>
+            <p id="vehicleModele">Modèle</p>
+          </div>
+
+          {% include "components/icone/electricalCar.html.twig" with {
+          class : "",
+          } %}
+
+          <div id="vehicleDropdownIcon" class="f-col just-center h-100">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+            </svg>
+          </div>
+        </div>
+        <!-- Liste déroulante des véhicules -->
+        <div id="vehiclesList" class="vehicles-dropdown"></div>
+      </div>
+      <input type="hidden" id="selectedVehicleId" name="vehicleId" />
+    </div>
   </div>
 
   <div class="covoiturage__container__button w-100 f-row just-sb container">
     <a href="user.html.twig" class="btn btn-annul">Annuler</a>
-    <button class="btn btn-main">Valider</button>
+    <button type="submit" class="btn btn-main">Valider</button>
   </div>
+</form>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="module" src="{{ asset('scripts/forms/suggest-trip.js') }}"></script>
 {% endblock %}

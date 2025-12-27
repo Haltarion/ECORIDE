@@ -28,9 +28,11 @@ class UserVehicleController extends AbstractController
   }
 
   /**
-   * Vérification centralisée : token CSRF + authentification
-   * @return User L'utilisateur authentifié
-   */
+  * Vérification centralisée : token CSRF + authentification
+  * @param array $data
+  * @param string $tokenId
+  * @return User L'utilisateur authentifié
+  */
   private function verifySecurityAndGetUser(array $data, string $tokenId = 'profile-change')
   {
     $this->csrfVerifier->assertTokenValid($tokenId, $data['_csrf_token'] ?? '');
@@ -38,8 +40,10 @@ class UserVehicleController extends AbstractController
   }
 
   /**
-   * Affichage des véhicules de l'utilisateur
-   */
+  * Affichage des véhicules de l'utilisateur
+  * @param VehiculeInfoService $vehiculeInfoService
+  * @return Response
+  */
   #[Route('/user-vehicle', name: 'app_user_vehicle')]
   public function index(VehiculeInfoService $vehiculeInfoService): Response
   {
@@ -60,8 +64,11 @@ class UserVehicleController extends AbstractController
   }
 
   /**
-   * Vérification de l'existence d'une immatriculation
-   */
+  * Vérification de l'existence d'une immatriculation
+  * @param Request $request
+  * @param VoitureRepository $voitureRepository
+  * @return JsonResponse
+  */
   #[Route('/user-vehicle/check-immatriculation', name: 'app_check_immatriculation', methods: ['POST'])]
   public function checkImmatriculation(Request $request, VoitureRepository $voitureRepository): JsonResponse
   {
@@ -80,9 +87,12 @@ class UserVehicleController extends AbstractController
   }
 
   /**
-   * Récupération des données du nouveau véhicule
-   * et enregristrement en base de données
-   */
+  * Récupération des données du nouveau véhicule
+  * et enregristrement en base de données
+  * @param Request $request
+  * @param EntityManagerInterface $entityManager
+  * @return Response
+  */
   #[Route('/user-vehicle/new', name: 'app_user_vehicle_new', methods: ['POST'])]
 
   public function newVehicle(Request $request, EntityManagerInterface $entityManager): Response
@@ -136,6 +146,11 @@ class UserVehicleController extends AbstractController
     return $this->redirectToRoute('app_user_vehicle');
   }
 
+  /**
+  * Affichage des véhicules dans le profil utilisateur
+  * @param VehiculeInfoService $vehiculeInfoService
+  * @return Response
+  */
   #[Route('/profil/vehicules', name: 'profil_vehicules')]
   public function vehicules(VehiculeInfoService $vehiculeInfoService): Response
   {
