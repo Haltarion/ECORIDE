@@ -143,3 +143,17 @@ btnAddVehicule.addEventListener("click", async (event) => {
         alert("Erreur de vérification. Réessayez.");
     }
 });
+
+// Script pour la modal d'ajout de véhicule
+const vehiculeModal = document.getElementById("modal-new-vehicule");
+const openModalVehicule = document.getElementById("openModalVehicule");
+const closeModalVehicule = document.getElementById("closeModalVehicule");
+
+openModalVehicule.addEventListener("click", () => {
+    vehiculeModal.classList.add("open");
+});
+
+closeModalVehicule.addEventListener("click", (e) => {
+    e.preventDefault(); // Empêcher la soumission du formulaire
+    vehiculeModal.classList.remove("open");
+});

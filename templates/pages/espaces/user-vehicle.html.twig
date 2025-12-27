@@ -5,80 +5,11 @@
 {% block body %}
   <h1>Gestion de mes véhicules</h1>
 
-  <form id="new-vehicle-form" class="container f-col just-start w-100 g-10 p-20 al-sb" enctype="multipart/form-data" action="{{ path('app_user_vehicle_new') }}" method="post">
-    <h2>Nouveau véhicule</h2>
+  <div class="container f-row just-sb g-10 w-100">
+    <a href="{{ path('app_user_space') }}" class="btn btn-annul">Retour à mon compte</a>
+    <button id="openModalVehicule" class="btn btn-main mh-50" type="button">Ajouter un nouveau véhicule</button>
+  </div>
 
-    {# Token CSRF #}
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token('new-vehicle') }}">
-
-    {# Champ : Immatriculation #}
-    {% include 'components/form/input-text.html.twig' with {
-      inputId: 'immatriculation',
-      label: "Plaque d'immatriculation",
-      placeholder: "AA-111-BB",
-      required: true,
-      alertMessage: "Le format de la plaque d'immatriculation n'est pas valide"
-    } %}
-
-    {# Champ : Date de première immatriculation #}
-    {% include 'components/form/input-date.html.twig' with {
-      inputDateId: 'premiereImmatriculation',
-      labelDate: "Date de première immatriculation",
-      inputDateName: 'premiereImmatriculation',
-      alertMessage: "Merci de renseigner la date de première immatriculation"
-    } %}
-
-    {# Champ : Marque du véhicule #}
-    {% include 'components/form/input-text.html.twig' with {
-      inputId: 'marque',
-      label: "Marque du véhicule",
-      placeholder: "Marque du véhicule",
-      required: true,
-      alertMessage: "Merci de renseigner la marque de votre véhicule"
-    } %}
-
-    {# Champ : Modèle du véhicule #}
-    {% include 'components/form/input-text.html.twig' with {
-      inputId: 'modele',
-      label: "Modèle du véhicule",
-      placeholder: "Modèle du véhicule",
-      required: true,
-      alertMessage: "Merci de renseigner le modèle de votre véhicule"
-    } %}
-
-    {# Champ : Véhicule électrique #}
-    {% include 'components/form/input-check.html.twig' with {
-      inputId: 'electrique',
-      label: "Véhicule électrique",
-      required: true,
-      alertMessage: "Merci de renseigner si votre véhicule est électrique ou non"
-    } %}
-
-    {# Champ : Couleur du véhicule #}
-    {% include 'components/form/input-text.html.twig' with {
-      inputId: 'couleur',
-      label: "Couleur du véhicule",
-      placeholder: "Couleur du véhicule",
-      required: true,
-      alertMessage: "Merci de renseigner la couleur de votre véhicule"
-    } %}
-
-    {# Champ : Nombre de places disponibles #}
-    {% include 'components/form/input-number.html.twig' with {
-      inputId: 'placesDispo',
-      label: "Nombre de places maximum disponibles",
-      min: 1,
-      max: 6,
-      value: 2,
-      required: true,
-      alertMessage: "Merci de renseigner le nombre de places disponibles"
-    } %}
-
-    <div class="container f-row just-sb g-10 w-100">
-      <a href="{{ path('app_user_space') }}" class="btn btn-annul">Retour à mon compte</a>
-      <button id="addVehicule" class="btn btn-main mh-50" type="button">Ajouter un nouveau véhicule</button>
-    </div>
-  </form>
 
   <div class="container f-col just-center w-100 g-10 al-sb">
     <h2>Mes véhicules</h2>
@@ -96,6 +27,86 @@
         } %}
       {% endfor %}
     {% endif %}
+  </div>
+
+  <!-- Modal modification des informations d'un véhicule -->
+  <div id="modal-new-vehicule" class="modal">
+    <div class="modal-content">
+        <form id="new-vehicle-form" class="f-col just-start w-100 g-10 p-20 al-sb" enctype="multipart/form-data" action="{{ path('app_user_vehicle_new') }}" method="post">
+          <h2>Nouveau véhicule</h2>
+
+          {# Token CSRF #}
+          <input type="hidden" name="_csrf_token" value="{{ csrf_token('new-vehicle') }}">
+
+          {# Champ : Immatriculation #}
+          {% include 'components/form/input-text.html.twig' with {
+            inputId: 'immatriculation',
+            label: "Plaque d'immatriculation",
+            placeholder: "AA-111-BB",
+            required: true,
+            alertMessage: "Le format de la plaque d'immatriculation n'est pas valide"
+          } %}
+
+          {# Champ : Date de première immatriculation #}
+          {% include 'components/form/input-date.html.twig' with {
+            inputDateId: 'premiereImmatriculation',
+            labelDate: "Date de première immatriculation",
+            inputDateName: 'premiereImmatriculation',
+            alertMessage: "Merci de renseigner la date de première immatriculation"
+          } %}
+
+          {# Champ : Marque du véhicule #}
+          {% include 'components/form/input-text.html.twig' with {
+            inputId: 'marque',
+            label: "Marque du véhicule",
+            placeholder: "Marque du véhicule",
+            required: true,
+            alertMessage: "Merci de renseigner la marque de votre véhicule"
+          } %}
+
+          {# Champ : Modèle du véhicule #}
+          {% include 'components/form/input-text.html.twig' with {
+            inputId: 'modele',
+            label: "Modèle du véhicule",
+            placeholder: "Modèle du véhicule",
+            required: true,
+            alertMessage: "Merci de renseigner le modèle de votre véhicule"
+          } %}
+
+          {# Champ : Véhicule électrique #}
+          {% include 'components/form/input-check.html.twig' with {
+            inputId: 'electrique',
+            label: "Véhicule électrique",
+            required: true,
+            alertMessage: "Merci de renseigner si votre véhicule est électrique ou non"
+          } %}
+
+          {# Champ : Couleur du véhicule #}
+          {% include 'components/form/input-text.html.twig' with {
+            inputId: 'couleur',
+            label: "Couleur du véhicule",
+            placeholder: "Couleur du véhicule",
+            required: true,
+            alertMessage: "Merci de renseigner la couleur de votre véhicule"
+          } %}
+
+          {# Champ : Nombre de places disponibles #}
+          {% include 'components/form/input-number.html.twig' with {
+            inputId: 'placesDispo',
+            label: "Nombre de places maximum disponibles",
+            min: 1,
+            max: 6,
+            value: 2,
+            required: true,
+            alertMessage: "Merci de renseigner le nombre de places disponibles"
+          } %}
+
+          <div class="container f-row just-sb g-10 w-100">
+            <button id="closeModalVehicule" class="btn btn-annul">Annuler</button>
+            <button id="addVehicule" class="btn btn-main mh-50" type="button">Ajouter</button>
+          </div>
+        </form>
+    </div>
   </div>
 {% endblock %}
 

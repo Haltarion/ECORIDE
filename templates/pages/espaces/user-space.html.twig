@@ -90,9 +90,11 @@
         <label class="textInline" for="les2">Les deux</label>
       </div>
       <div id="error-alerte" class="hidden">
-      {% include 'components/form/error-alerte.html.twig' with {
-        alertMessage: 'Vous devez renseigner au moins 1 véhicule'
-      } %}
+      {% if voitures is not defined or voitures is empty %}
+        {% include 'components/form/error-alerte.html.twig' with {
+          alertMessage: 'Vous devez renseigner au moins 1 véhicule'
+        } %}
+      {% endif %}
       </div>
     </div>
 
@@ -149,7 +151,7 @@
           model: voiture.modele,
           electrique: voiture.electrique,
           class: '',
-          pencilIconVisibility: 'visible'
+          pencilIconVisibility: 'hidden'
         } %}
       {% endfor %}
     {% endif %}
@@ -182,6 +184,7 @@
       <button id="close-photo-modal" class="btn btn-annul">Fermer</button>
     </div>
   </div>
+
   <!-- Modal modification des informations -->
   <div id="modal-edit-info" class="modal">
     <div class="modal-content">
@@ -219,6 +222,7 @@
         {% include 'components/form/input-mdp.html.twig' with {
           label: 'Nouveau mot de passe',
           inputId: 'newPassword',
+          autocomplete: 'new-password',
           placeholder: 'Nouveau mot de passe',
           required: false
         } %}

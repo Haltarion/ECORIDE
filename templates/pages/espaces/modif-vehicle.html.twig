@@ -6,44 +6,72 @@
   <h1>Modifier mes véhicules</h1>
   <div class="container f-col just-start w-100 g-10 p-20 al-sb">
     <h2>Modification du véhicule</h2>
-    {%
-    $inputId = "imatriculation";
-    $label = "Plaque d'immatriculation*";
-    $placeholder = "AA-111-BB";
-    $required = "required";
-    $alertMessage = "Le format de la plaque d'immatriculation n'est pas valide";
-    include 'components/form/input-text.html.twig';
-    %}
-    {%
-    $inputDateId = "premiereImatriculation";
-    $labelDate = "Date de première immatriculation*";
-    $inputDateName = "premiereImatriculation";
-    include 'components/form/input-date.html.twig';
-    %}
-    {%
-    $inputId = "marque";
-    $label = "Marque du véhicule*";
-    $placeholder = "Marque du véhicule";
-    $required = "required";
-    $alertMessage = "Merci de renseigner la marque de votre véhicule";
-    include 'components/form/input-text.html.twig';
-    %}
-    {%
-    $inputId = "couleur";
-    $label = "Couleur du véhicule*";
-    $placeholder = "Couleur du véhicule";
-    $required = "required";
-    $alertMessage = "Merci de renseigner la couleur de votre véhicule";
-    include 'components/form/input-text.html.twig';
-    %}
-    {%
-    $inputId = "placesDispo";
-    $label = "Nombre de places disponibles*";
-    $value = "2";
-    $required = "required";
-    $alertMessage = "Merci de renseigner le nombre de places disponibles";
-    include 'components/form/input-number.html.twig';
-    %}
+    {# Token CSRF #}
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('new-vehicle') }}">
+
+    {# Champ : Immatriculation #}
+    {% include 'components/form/input-text.html.twig' with {
+      inputId: 'immatriculation',
+      label: "Plaque d'immatriculation",
+      placeholder: "AA-111-BB",
+      required: true,
+      alertMessage: "Le format de la plaque d'immatriculation n'est pas valide"
+    } %}
+
+    {# Champ : Date de première immatriculation #}
+    {% include 'components/form/input-date.html.twig' with {
+      inputDateId: 'premiereImmatriculation',
+      labelDate: "Date de première immatriculation",
+      inputDateName: 'premiereImmatriculation',
+      alertMessage: "Merci de renseigner la date de première immatriculation"
+    } %}
+
+    {# Champ : Marque du véhicule #}
+    {% include 'components/form/input-text.html.twig' with {
+      inputId: 'marque',
+      label: "Marque du véhicule",
+      placeholder: "Marque du véhicule",
+      required: true,
+      alertMessage: "Merci de renseigner la marque de votre véhicule"
+    } %}
+
+    {# Champ : Modèle du véhicule #}
+    {% include 'components/form/input-text.html.twig' with {
+      inputId: 'modele',
+      label: "Modèle du véhicule",
+      placeholder: "Modèle du véhicule",
+      required: true,
+      alertMessage: "Merci de renseigner le modèle de votre véhicule"
+    } %}
+
+    {# Champ : Véhicule électrique #}
+    {% include 'components/form/input-check.html.twig' with {
+      inputId: 'electrique',
+      label: "Véhicule électrique",
+      required: true,
+      alertMessage: "Merci de renseigner si votre véhicule est électrique ou non"
+    } %}
+
+    {# Champ : Couleur du véhicule #}
+    {% include 'components/form/input-text.html.twig' with {
+      inputId: 'couleur',
+      label: "Couleur du véhicule",
+      placeholder: "Couleur du véhicule",
+      required: true,
+      alertMessage: "Merci de renseigner la couleur de votre véhicule"
+    } %}
+
+    {# Champ : Nombre de places disponibles #}
+    {% include 'components/form/input-number.html.twig' with {
+      inputId: 'placesDispo',
+      label: "Nombre de places maximum disponibles",
+      min: 1,
+      max: 6,
+      value: 2,
+      required: true,
+      alertMessage: "Merci de renseigner le nombre de places disponibles"
+    } %}
+
     <div class="container f-row just-sb g-10 w-100 ">
       <a href="pages/espaces/user-vehicle.html.twig" class="btn btn-annul">Annuler</a>
       <button class="btn btn-main mh-50">Modifier</button>

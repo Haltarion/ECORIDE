@@ -29,6 +29,7 @@
     {# Champ : Mot de passe #}
     {% include 'components/form/input-mdp.html.twig' with {
         inputId: 'password',
+        autocomplete: 'new-password',
         required: true
       }
       %}
