@@ -18,6 +18,7 @@
     {% else %}
       {% for voiture in voitures %}
         {% include 'components/covoiturage/recap-vehicule.html.twig' with {
+          voitureId: voiture.id,
           immatriculation: voiture.immatriculation,
           marque: voiture.marque,
           model: voiture.modele,

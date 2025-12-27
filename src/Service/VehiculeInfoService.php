@@ -27,6 +27,7 @@ class VehiculeInfoService
 
         foreach ($voitures as $voiture) {
             $voituresInfos[] = [
+                'id' => $voiture->getId(),
                 'immatriculation' => $voiture->getImmatriculation(),
                 'datePremiereImmatriculation' => $voiture->getDatePremiereImmatriculation(),
                 'marque' => $voiture->getMarque(),

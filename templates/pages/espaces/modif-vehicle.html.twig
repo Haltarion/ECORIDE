@@ -4,17 +4,19 @@
 
 {% block body %}
   <h1>Modifier mes véhicules</h1>
-  <div class="container f-col just-start w-100 g-10 p-20 al-sb">
+  <form method="post" action="{{ path('app_user_vehicle_edit', {id: voiture.id}) }}" class="container f-col just-start w-100 g-10 p-20 al-sb">
     <h2>Modification du véhicule</h2>
     {# Token CSRF #}
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token('new-vehicle') }}">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('update-vehicle') }}">
 
     {# Champ : Immatriculation #}
     {% include 'components/form/input-text.html.twig' with {
       inputId: 'immatriculation',
       label: "Plaque d'immatriculation",
       placeholder: "AA-111-BB",
+      value: voiture.immatriculation|default(''),
       required: true,
+      disabled: true,
       alertMessage: "Le format de la plaque d'immatriculation n'est pas valide"
     } %}
 
@@ -23,6 +25,7 @@
       inputDateId: 'premiereImmatriculation',
       labelDate: "Date de première immatriculation",
       inputDateName: 'premiereImmatriculation',
+      value: voiture.datePremiereImmatriculation ? voiture.datePremiereImmatriculation|date('Y-m-d') : '',
       alertMessage: "Merci de renseigner la date de première immatriculation"
     } %}
 
@@ -31,6 +34,7 @@
       inputId: 'marque',
       label: "Marque du véhicule",
       placeholder: "Marque du véhicule",
+      value: voiture.marque|default(''),
       required: true,
       alertMessage: "Merci de renseigner la marque de votre véhicule"
     } %}
@@ -40,6 +44,7 @@
       inputId: 'modele',
       label: "Modèle du véhicule",
       placeholder: "Modèle du véhicule",
+      value: voiture.modele|default(''),
       required: true,
       alertMessage: "Merci de renseigner le modèle de votre véhicule"
     } %}
@@ -48,6 +53,7 @@
     {% include 'components/form/input-check.html.twig' with {
       inputId: 'electrique',
       label: "Véhicule électrique",
+      checked: voiture.electrique|default(false),
       required: true,
       alertMessage: "Merci de renseigner si votre véhicule est électrique ou non"
     } %}
@@ -57,6 +63,7 @@
       inputId: 'couleur',
       label: "Couleur du véhicule",
       placeholder: "Couleur du véhicule",
+      value: voiture.couleur|default(''),
       required: true,
       alertMessage: "Merci de renseigner la couleur de votre véhicule"
     } %}
@@ -67,14 +74,14 @@
       label: "Nombre de places maximum disponibles",
       min: 1,
       max: 6,
-      value: 2,
+      value: voiture.nbPlaceDispo|default(2),
       required: true,
       alertMessage: "Merci de renseigner le nombre de places disponibles"
     } %}
 
     <div class="container f-row just-sb g-10 w-100 ">
-      <a href="pages/espaces/user-vehicle.html.twig" class="btn btn-annul">Annuler</a>
-      <button class="btn btn-main mh-50">Modifier</button>
+      <a href="{{ path('app_user_vehicle') }}" class="btn btn-annul">Annuler</a>
+      <button type="submit" class="btn btn-main mh-50">Modifier</button>
     </div>
-  </div>
+  </form>
 {% endblock %}

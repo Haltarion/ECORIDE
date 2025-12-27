@@ -9,7 +9,8 @@
     placeholder="{{ placeholder }}"
     value="{{value|default('')}}"
     class="input"
-    {% if required %} required {% endif %}
+    {% if disabled is defined and disabled %} disabled {% endif %}
+    {% if required is defined and required %} required {% endif %}
   >
   {# Inclusion du message d’alerte si le champ est requis et vide #}
   <div class="error-message hidden">

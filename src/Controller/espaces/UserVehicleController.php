@@ -37,6 +37,9 @@ class UserVehicleController extends AbstractController
     return $this->userProvider->getAuthenticatedUser();
   }
 
+  /**
+   * Affichage des véhicules de l'utilisateur
+   */
   #[Route('/user-vehicle', name: 'app_user_vehicle')]
   public function index(VehiculeInfoService $vehiculeInfoService): Response
   {
@@ -56,6 +59,9 @@ class UserVehicleController extends AbstractController
     ]);
   }
 
+  /**
+   * Vérification de l'existence d'une immatriculation
+   */
   #[Route('/user-vehicle/check-immatriculation', name: 'app_check_immatriculation', methods: ['POST'])]
   public function checkImmatriculation(Request $request, VoitureRepository $voitureRepository): JsonResponse
   {
@@ -75,6 +81,7 @@ class UserVehicleController extends AbstractController
 
   /**
    * Récupération des données du nouveau véhicule
+   * et enregristrement en base de données
    */
   #[Route('/user-vehicle/new', name: 'app_user_vehicle_new', methods: ['POST'])]
 
