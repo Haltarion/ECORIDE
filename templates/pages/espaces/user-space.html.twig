@@ -137,27 +137,6 @@
     </div>
   </form>
 
-  <div id="vehicule" class="container f-col just-center w-100 g-10 p-10 al-sb hidden">
-    <!-- Véhicules -->
-    <h2>Mes véhicules</h2>
-
-    {% if voitures is empty %}
-      <p>Vous n'avez pas encore enregistré de véhicule.</p>
-    {% else %}
-      {% for voiture in voitures %}
-        {% include 'components/covoiturage/recap-vehicule.html.twig' with {
-          voitureId: voiture.id,
-          immatriculation: voiture.immatriculation,
-          marque: voiture.marque,
-          model: voiture.modele,
-          electrique: voiture.electrique,
-          class: '',
-          pencilIconVisibility: 'hidden'
-        } %}
-      {% endfor %}
-    {% endif %}
-  </div>
-
   <!-- Modal modification photo de profil -->
   <div id="modal-edit-photo" class="modal">
     <div class="modal-content">

@@ -21,12 +21,14 @@ class UserVehicleController extends AbstractController
   private CsrfTokenVerifier $csrfVerifier;
   private UserProvider $userProvider;
   private TextNormalizerService $textNormalizer;
+  private EntityManagerInterface $entityManager;
 
-  public function __construct(CsrfTokenVerifier $csrfVerifier, UserProvider $userProvider, TextNormalizerService $textNormalizer)
+  public function __construct(CsrfTokenVerifier $csrfVerifier, UserProvider $userProvider, TextNormalizerService $textNormalizer, EntityManagerInterface $entityManager)
   {
     $this->csrfVerifier = $csrfVerifier;
     $this->userProvider = $userProvider;
     $this->textNormalizer = $textNormalizer;
+    $this->entityManager = $entityManager;
   }
 
   /**
@@ -167,6 +169,32 @@ class UserVehicleController extends AbstractController
     return $this->render('profil/vehicules.html.twig', [
       'voitures' => $voitures,
     ]);
+  }
+
+  /**
+  * Suppression d'un véhicule utilisateur
+  * @param Request $request
+  * @param VoitureRepository $voitureRepository
+  */
+  #[Route('/user-vehicle/delete/{id}', name: 'app_delete_vehicle', methods: ['GET', 'POST'])]
+  public function deleteVehicle(Request $request, VoitureRepository $voitureRepository, int $id): Response
+  {
+    $user = $this->getUser();
+
+    if (!$user) {
+      throw $this->createAccessDeniedException('Utilisateur non authentifié.');
+    }
+
+    $vehicle = $voitureRepository->find($id);
+
+    if (!$vehicle || $vehicle->getUser()->getId() !== $user->getId()) {
+      throw $this->createNotFoundException('Véhicule non trouvé ou accès refusé.');
+    }
+
+    $this->entityManager->remove($vehicle);
+    $this->entityManager->flush();
+
+    return $this->redirectToRoute('app_user_vehicle');
   }
 }
 
