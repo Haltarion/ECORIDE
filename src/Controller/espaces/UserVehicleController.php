@@ -5,6 +5,7 @@ namespace App\Controller\espaces;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\User;
 use App\Entity\Voiture;
+use App\Service\TextNormalizerService;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\VoitureRepository;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,12 +20,13 @@ class UserVehicleController extends AbstractController
 {
   private CsrfTokenVerifier $csrfVerifier;
   private UserProvider $userProvider;
-  private VehiculeInfoService $vehiculeInfoService;
+  private TextNormalizerService $textNormalizer;
 
-  public function __construct(CsrfTokenVerifier $csrfVerifier, UserProvider $userProvider)
+  public function __construct(CsrfTokenVerifier $csrfVerifier, UserProvider $userProvider, TextNormalizerService $textNormalizer)
   {
     $this->csrfVerifier = $csrfVerifier;
     $this->userProvider = $userProvider;
+    $this->textNormalizer = $textNormalizer;
   }
 
   /**
@@ -126,13 +128,13 @@ class UserVehicleController extends AbstractController
         'message' => 'Date de première immatriculation manquante.',
       ], 422);
     }
-    $vehicle->setMarque($data['marque'] ?? '');
-    $vehicle->setModele($data['modele'] ?? '');
+    $vehicle->setMarque($this->textNormalizer->removeAccents($data['marque'] ?? ''));
+    $vehicle->setModele($this->textNormalizer->removeAccents($data['modele'] ?? ''));
     // Si la checkbox est cochée, elle aura la valeur "1"
     // Si elle n'est pas cochée, la clé ne sera pas présente (vous devez utiliser ?? 0)
     $electrique = isset($data['electrique']) ? 1 : 0;
     $vehicle->setElectrique($electrique);
-    $vehicle->setCouleur($data['couleur'] ?? '');
+    $vehicle->setCouleur($this->textNormalizer->removeAccents($data['couleur'] ?? ''));
     // Nombre de places: accepter 'placesDispo' (form) ou 'nb_place_dispo' (JSON), borné 1..6
     $places = (int)($data['placesDispo'] ?? ($data['nb_place_dispo'] ?? 1));
     if ($places < 1) { $places = 1; }
