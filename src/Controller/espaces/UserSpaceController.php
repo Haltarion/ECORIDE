@@ -35,6 +35,81 @@ class UserSpaceController extends AbstractController
   }
 
   /**
+  * Affichage de l'espace Utilisateur
+  * @param EntityManagerInterface $em
+  * @return Response
+  */
+  #[Route('/user-space', name: 'app_user_space')]
+  public function index(EntityManagerInterface $em): Response
+  {
+    // Récupération de l'utilisateur connecté et de ses extras
+    $user = $this->getUser();
+    if (!$user) {
+      return $this->redirectToRoute('app_login');
+    }
+
+    // S'assurer que les profils existent en base
+    $this->ensureProfilsExist($em);
+
+    $extras = $user?->getExtras();
+    $profils = $user->getProfils();
+    $preferences = $user->getPreferences();
+
+    // Déterminer le profil sélectionné ; si vide, mettre "Passager" par défaut et persister
+    $selectedProfil = 'passager';
+
+    if ($profils->isEmpty()) {
+      $profilRepo = $em->getRepository(Profil::class);
+      $passager = $profilRepo->findOneBy(['libelle' => 'Passager']);
+      if ($passager) {
+        $user->addProfil($passager);
+        $em->persist($user);
+        $em->flush();
+      }
+      $selectedProfil = 'passager';
+    } else {
+      // construire liste de libellés existants
+      $labels = array_map(fn($p) => $p->getLibelle(), $profils->toArray());
+      $hasPass = in_array('Passager', $labels, true);
+      $hasChauf = in_array('Chauffeur', $labels, true);
+
+      if ($hasPass && $hasChauf) {
+        $selectedProfil = 'les2';
+      } elseif ($hasChauf) {
+        $selectedProfil = 'chauffeur';
+      } else {
+        $selectedProfil = 'passager';
+      }
+    }
+
+    // Récupération des informations de l'utilisateur
+    $pseudo = $user?->getPseudo() ?? 'Utilisateur';
+    $email = $user?->getEmail() ?? '';
+    $photo = $extras?->getPhoto() ?? '';
+    $credit = $extras?->getCredit();
+    $note = $extras?->getNote();
+    $hasFumeur = $preferences?->isFumeur() ?? false;
+    $hasAnimaux = $preferences?->isAnimal() ?? false;
+    $autresPreferences = $preferences?->getPerso() ?? '';
+
+    // Récupérer les véhicules de l'utilisateur pour l'affichage
+    $voitures = $this->vehiculeInfoService->getVoituresInfosByUser($user);
+
+    return $this->render('pages/espaces/user-space.html.twig', [
+      'userName' => $pseudo,
+      'userPhoto' => $photo,
+      'userCredit' => $credit,
+      'userNote' => $note,
+      'userEmail' => $email,
+      'selectedProfil' => $selectedProfil,
+      'hasFumeur' => $hasFumeur,
+      'hasAnimaux' => $hasAnimaux,
+      'autresPreferences' => $autresPreferences,
+      'voitures' => $voitures,
+    ]);
+  }
+
+  /**
   * Vérification centralisée : token CSRF + authentification
   * @param array $data
   * @param string $tokenId
@@ -274,81 +349,6 @@ class UserSpaceController extends AbstractController
     } catch (\Exception $e) {
       return new JsonResponse(['success' => false, 'message' => 'Erreur serveur: ' . $e->getMessage()], 500);
     }
-  }
-
-  /**
-  * Affichage de l'espace Utilisateur
-  * @param EntityManagerInterface $em
-  * @return Response
-  */
-  #[Route('/user-space', name: 'app_user_space')]
-  public function index(EntityManagerInterface $em): Response
-  {
-    // Récupération de l'utilisateur connecté et de ses extras
-    $user = $this->getUser();
-    if (!$user) {
-      return $this->redirectToRoute('app_login');
-    }
-
-    // S'assurer que les profils existent en base
-    $this->ensureProfilsExist($em);
-
-    $extras = $user?->getExtras();
-    $profils = $user->getProfils();
-    $preferences = $user->getPreferences();
-
-    // Déterminer le profil sélectionné ; si vide, mettre "Passager" par défaut et persister
-    $selectedProfil = 'passager';
-
-    if ($profils->isEmpty()) {
-      $profilRepo = $em->getRepository(Profil::class);
-      $passager = $profilRepo->findOneBy(['libelle' => 'Passager']);
-      if ($passager) {
-        $user->addProfil($passager);
-        $em->persist($user);
-        $em->flush();
-      }
-      $selectedProfil = 'passager';
-    } else {
-      // construire liste de libellés existants
-      $labels = array_map(fn($p) => $p->getLibelle(), $profils->toArray());
-      $hasPass = in_array('Passager', $labels, true);
-      $hasChauf = in_array('Chauffeur', $labels, true);
-
-      if ($hasPass && $hasChauf) {
-        $selectedProfil = 'les2';
-      } elseif ($hasChauf) {
-        $selectedProfil = 'chauffeur';
-      } else {
-        $selectedProfil = 'passager';
-      }
-    }
-
-    // Récupération des informations de l'utilisateur
-    $pseudo = $user?->getPseudo() ?? 'Utilisateur';
-    $email = $user?->getEmail() ?? '';
-    $photo = $extras?->getPhoto() ?? '';
-    $credit = $extras?->getCredit();
-    $note = $extras?->getNote();
-    $hasFumeur = $preferences?->isFumeur() ?? false;
-    $hasAnimaux = $preferences?->isAnimal() ?? false;
-    $autresPreferences = $preferences?->getPerso() ?? '';
-
-    // Récupérer les véhicules de l'utilisateur pour l'affichage
-    $voitures = $this->vehiculeInfoService->getVoituresInfosByUser($user);
-
-    return $this->render('pages/espaces/user-space.html.twig', [
-      'userName' => $pseudo,
-      'userPhoto' => $photo,
-      'userCredit' => $credit,
-      'userNote' => $note,
-      'userEmail' => $email,
-      'selectedProfil' => $selectedProfil,
-      'hasFumeur' => $hasFumeur,
-      'hasAnimaux' => $hasAnimaux,
-      'autresPreferences' => $autresPreferences,
-      'voitures' => $voitures,
-    ]);
   }
 
   /**

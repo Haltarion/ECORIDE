@@ -11,12 +11,26 @@ class SuggestTripController extends AbstractController
 {
   /**
   * Affiche la page de suggestion de trajet.
+  * @param VehiculeInfoService $vehiculeInfoService
   * @return Response
   */
   #[Route('/suggest-trip', name: 'app_suggest_trip')]
-  public function index(): Response
+  public function index(VehiculeInfoService $vehiculeInfoService): Response
   {
-    return $this->render('pages/espaces/suggest-trip.html.twig');
+    $user = $this->getUser();
+    $voitures = [];
+    $voiture = null;
+
+    if ($user) {
+      $voitures = $vehiculeInfoService->getVoituresInfosByUser($user);
+      // Utiliser la première voiture s'il y en a, sinon utiliser des valeurs par défaut
+      $voiture = !empty($voitures) ? $voitures[0] : null;
+    }
+
+    return $this->render('pages/espaces/suggest-trip.html.twig', [
+      'voiture' => $voiture,
+      'voitures' => $voitures,
+    ]);
   }
 
   /**

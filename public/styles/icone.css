@@ -187,3 +187,12 @@ div.slider-background {
 .is-not-electric {
     color: var(--grey-color);
 }
+
+/* Style pour la sélection de véhicule -------------------------- */
+.vehicleDropdownIcon {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}

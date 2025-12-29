@@ -62,8 +62,8 @@
     <div class="w-100">
       <!-- Zone de sélection du véhicule -->
       <label>Sélectionnez un véhicule :</label>
-      <div class="vehicle-container" style="position: relative;">
-        <div id="vehicleSelection" class="vehicleSelection f-row f-w al-center just-sb g-10 b-1 b-secondary r-15" style="cursor: pointer;">
+      <div class="vehicle-container">
+        <div id="vehicleSelection" class="vehicleSelection">
           <div class="plaque relative">
             <p class="immatriculation" id="vehicleImmatriculation">--</p>
           </div>
@@ -73,11 +73,17 @@
             <p id="vehicleModele">Modèle</p>
           </div>
 
-          {% include "components/icone/electricalCar.html.twig" with {
-          class : "",
-          } %}
+          <div class="nbPlaces">
+            <p id="vehicleNbPlaces">2<span class="smaller-text"> places</span></p>
+          </div>
 
-          <div id="vehicleDropdownIcon" class="f-col just-center h-100">
+          <div id="vehicleSelectionEnergieIcon" class="is-not-electric">
+            {% include "components/icone/electricalCar.html.twig" with {
+              class : "",
+            } %}
+          </div>
+
+          <div id="vehicleDropdownIcon" class="vehicleDropdownIcon">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
             </svg>
@@ -91,7 +97,7 @@
   </div>
 
   <div class="covoiturage__container__button w-100 f-row just-sb container">
-    <a href="user.html.twig" class="btn btn-annul">Annuler</a>
+    <a href="{{ path('app_user_space') }}" class="btn btn-annul">Annuler</a>
     <button type="submit" class="btn btn-main">Valider</button>
   </div>
 </form>

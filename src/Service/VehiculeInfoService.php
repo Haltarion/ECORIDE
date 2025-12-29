@@ -16,8 +16,10 @@ class VehiculeInfoService
     }
 
     /**
-     * Retourne une liste d'infos véhicules (liste vide si aucun véhicule).
-     */
+    * Retourne une liste d'infos véhicules (liste vide si aucun véhicule).
+    * @param User $user
+    * @return array
+    */
     public function getVoituresInfosByUser(User $user): array
     {
         $voitures = $this->voitureRepository->findByUser($user);
@@ -39,5 +41,21 @@ class VehiculeInfoService
         }
 
         return $voituresInfos;
+    }
+
+    /**
+    * Vérifie si une immatriculation existe déjà en base de données
+    * @param string $immatriculation
+    * @return bool
+    */
+    public function immatriculationExists(string $immatriculation): bool
+    {
+        $immatriculation = trim($immatriculation);
+
+        if ($immatriculation === '') {
+            return false;
+        }
+
+        return $this->voitureRepository->findOneBy(['immatriculation' => $immatriculation]) !== null;
     }
 }

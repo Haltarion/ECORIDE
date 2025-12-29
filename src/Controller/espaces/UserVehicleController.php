@@ -70,23 +70,20 @@ class UserVehicleController extends AbstractController
   /**
   * Vérification de l'existence d'une immatriculation
   * @param Request $request
-  * @param VoitureRepository $voitureRepository
+  * @param VehiculeInfoService $vehiculeInfoService
   * @return JsonResponse
   */
   #[Route('/user-vehicle/check-immatriculation', name: 'app_check_immatriculation', methods: ['POST'])]
-  public function checkImmatriculation(Request $request, VoitureRepository $voitureRepository): JsonResponse
+  public function checkImmatriculation(Request $request, VehiculeInfoService $vehiculeInfoService): JsonResponse
   {
     $data = json_decode($request->getContent(), true) ?? [];
     if (empty($data)) {
       $data = $request->request->all();
     }
-    $immatriculation = trim($data['immatriculation'] ?? '');
 
-    if ($immatriculation === '') {
-      return new JsonResponse(['exists' => false]);
-    }
+    $immatriculation = $data['immatriculation'] ?? '';
+    $exists = $vehiculeInfoService->immatriculationExists($immatriculation);
 
-    $exists = $voitureRepository->findOneBy(['immatriculation' => $immatriculation]) !== null;
     return new JsonResponse(['exists' => $exists]);
   }
 
@@ -151,7 +148,7 @@ class UserVehicleController extends AbstractController
   }
 
   /**
-  * Affichage des véhicules dans le profil utilisateur
+  * Affichage des véhicules
   * @param VehiculeInfoService $vehiculeInfoService
   * @return Response
   */

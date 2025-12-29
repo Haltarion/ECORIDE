@@ -29,10 +29,7 @@ function populateVehiclesList() {
 
     allVehicles.forEach((vehicle) => {
         const vehicleItem = document.createElement("div");
-        vehicleItem.className =
-            "vehicle-item f-row f-w al-center just-sb g-10 p-15 b-1 b-secondary r-15";
-        vehicleItem.style.cursor = "pointer";
-        vehicleItem.style.marginBottom = "8px";
+        vehicleItem.className = "vehicle-item";
 
         const plaque = document.createElement("div");
         plaque.className = "plaque relative";
@@ -50,17 +47,28 @@ function populateVehiclesList() {
         info.appendChild(marque);
         info.appendChild(modele);
 
-        const electricWrapper = document.createElement("div");
-        electricWrapper.className = vehicle.isElectric
-            ? "energy-indicator is-electric"
-            : "energy-indicator is-not-electric";
-        electricWrapper.appendChild(createEnergyIcon(vehicle.isElectric));
+        const nbPlaces = document.createElement("div");
+        nbPlaces.className = "nbPlaces";
+        const placesText = document.createElement("p");
+        placesText.textContent = vehicle.nbPlaceDispo || "2";
+        const smallerText = document.createElement("span");
+        smallerText.className = "smaller-text";
+        smallerText.textContent = " places";
+        placesText.appendChild(smallerText);
+        nbPlaces.appendChild(placesText);
+
+        const electricIcone = document.createElement("div");
+        electricIcone.className = vehicle.electrique
+            ? "is-electric"
+            : "is-not-electric";
+        electricIcone.appendChild(createEnergyIcon(!!vehicle.electrique));
 
         const spacer = document.createElement("div");
 
         vehicleItem.appendChild(plaque);
         vehicleItem.appendChild(info);
-        vehicleItem.appendChild(electricWrapper);
+        vehicleItem.appendChild(nbPlaces);
+        vehicleItem.appendChild(electricIcone);
         vehicleItem.appendChild(spacer);
 
         vehicleItem.addEventListener("click", (e) => {
@@ -73,8 +81,8 @@ function populateVehiclesList() {
     });
 }
 
-// Icône énergie dynamique selon isElectric (pas de données utilisateur injectées)
-function createEnergyIcon(isElectric) {
+// Création de l'icône d'énergie
+function createEnergyIcon() {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     svg.setAttribute("viewBox", "0 0 24 24");
@@ -85,9 +93,7 @@ function createEnergyIcon(isElectric) {
     path.setAttribute("fill-rule", "evenodd");
     path.setAttribute(
         "d",
-        isElectric
-            ? "M9.11 3.564a.75.75 0 0 1 .832-.224l9 3a.75.75 0 0 1 .115 1.384l-4.484 2.69 2.987 6.27a.75.75 0 0 1-1.172.888l-9-7a.75.75 0 0 1 .118-1.243l4.5-2.7-2.996-2.405a.75.75 0 0 1-.2-.66Z"
-            : "M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z"
+        "M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z"
     );
     path.setAttribute("clip-rule", "evenodd");
 
@@ -95,8 +101,11 @@ function createEnergyIcon(isElectric) {
     return svg;
 }
 
-// Sélectionner un véhicule
+// Générer la liste déroulante des véhicules
 function selectVehicle(vehicle) {
+    const smallerText = document.createElement("span");
+    smallerText.className = "smaller-text";
+    smallerText.textContent = " places";
     selectedVehicle = vehicle;
     document.getElementById("vehicleImmatriculation").textContent =
         vehicle.immatriculation || "--";
@@ -104,14 +113,16 @@ function selectVehicle(vehicle) {
         vehicle.marque || "Marque";
     document.getElementById("vehicleModele").textContent =
         vehicle.modele || "Modèle";
+    document.getElementById("vehicleNbPlaces").firstChild.textContent =
+        vehicle.nbPlaceDispo || "2";
     document.getElementById("selectedVehicleId").value = vehicle.id || "";
 
-    const energySlot = document.getElementById("vehicleEnergy");
-    if (energySlot) {
-        energySlot.className = `f-col just-center h-100 ${
-            vehicle.isElectric ? "is-electric" : "is-not-electric"
-        }`;
-        energySlot.replaceChildren(createEnergyIcon(!!vehicle.isElectric));
+    // Changer la classe de l'icône électrique
+    const energyIcon = document.getElementById("vehicleSelectionEnergieIcon");
+    if (energyIcon) {
+        energyIcon.className = vehicle.electrique
+            ? "is-electric"
+            : "is-not-electric";
     }
 }
 
@@ -124,10 +135,8 @@ function toggleDropdown() {
     const icon = document
         .getElementById("vehicleDropdownIcon")
         .querySelector("svg");
-    if (dropdownOpen) {
-        icon.style.transform = "rotate(180deg)";
-    } else {
-        icon.style.transform = "rotate(0deg)";
+    if (icon) {
+        icon.style.transform = dropdownOpen ? "rotate(180deg)" : "rotate(0deg)";
     }
 }
 
